@@ -1,6 +1,4 @@
-# My actionhero Project
-
-*visit www.actionherojs.com for more information*
+# GameHero
 
 ## To install:
 (assuming you have [node](http://nodejs.org/) and NPM installed)
@@ -12,5 +10,4 @@
 
 ## To Test:
 `npm test`
-# GameHero 
-# GameHero 
+
