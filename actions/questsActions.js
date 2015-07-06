@@ -64,7 +64,7 @@ exports.questsForMission = {
     }
 };
 
-exports.questsForMission = {
+exports.questsForApp = {
     name: 'questsForApp',
     description: 'List possible quests for a application',
     inputs: {

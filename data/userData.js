@@ -34,6 +34,17 @@
         });
     };//getuser
     
+    data.deleteById = function (userId, next) {
+        database.getDb(function (err, db) {
+            if (err) {
+                next(err);
+            } else {
+                db.users.remove({ _id: userId }, next);
+            }
+        });
+    };//getuser
+
+    
     data.getAll = function (next) {
         database.getDb(function (err, db) {
             if (err) {

@@ -26,11 +26,16 @@ exports.tictacView = {
     name: "tictacView",
     category: "tictac toe game",
     description: "I view the game board",
-    inputs: {},
+    inputs: {
+        gameId: {
+            required: true,
+            validator: function (s) { return s.indexOf("tic") == 0 }
+        }},
     outputExample: {},
     version: 1.0,
-    run: function (api, data, next) {
-        api.tictac.loadGame(data, function (error, game) {
+    run: function (api, action, next) {
+        var gameId = action.params.gameId;
+        api.tictac.loadGame(gameId, function (error, game) {
             data.error = error;
             data.response.game = game;
             next();
@@ -75,23 +80,23 @@ exports.tictacMove = {
     
     outputExample: {},
     version: 1.0,
-    run: function (api, connection, next) {
-        var gameId = connection.params.gameId;
-        var x = parseInt(connection.params.x);
-        var y = parseInt(connection.params.y);
+    run: function (api, action, next) {
+        var gameId = action.params.gameId;
+        var x = parseInt(action.params.x);
+        var y = parseInt(action.params.y);
         api.tictac.loadGame(gameId, function (error, game) {
             if (error != null) {
-                connection.response.error = "404: Game not found" ;
+                action.response.error = "404: Game not found" ;
                 
                 next(error);
             } else if (game.state != "playing") {
-                connection.response.error = "fin: This game is over";
+                action.response.error = "fin: This game is over";
                 
-                connection.response.game = game;
+                action.response.game = game;
                 next();
             } else if (game.board[y][x] != null) {
-                connection.response.error=  "move: you can only draw a new shape on a blank tile";
-                 connection.response.game = game;
+                action.response.error=  "move: you can only draw a new shape on a blank tile";
+                action.response.game = game;
                 next();
             } else {
                 game.board[y][x] = game.playerMarker;
@@ -100,7 +105,7 @@ exports.tictacMove = {
                 game.state = api.tictac.determineGameState(game);
                 game.turn++;
                 api.tictac.saveGame(game, function () {
-                    connection.response.game = game;
+                    action.response.game = game;
                     next();
                 });
             }

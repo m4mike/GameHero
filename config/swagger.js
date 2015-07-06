@@ -7,16 +7,20 @@
             ignoreRoutes: ['/swagger'],
             // Specify how routes are grouped 
             routeTags : {
-                'basics' : ['showDocumentation', 'status']
+                'testing' : ['/status'],
+                'users' : ['/users'],
+                'quests' : ['/quests'],
+                'games' : ['/tictac']
             },
-            // Generate documentation for simple actions specified by action-name 
-            documentSimpleRoutes: true,
+           
             // Generate documentation for actions specified under config/routes.js 
             documentConfigRoutes: true,
             // Set true if you want to organize actions by version 
             groupByVersionTag: true,
+            // Generate documentation for simple actions specified by action-name 
+            documentSimpleRoutes: false,
             // For simple routes, groups all actions under a single category 
-            groupBySimpleActionTag: true
+            groupBySimpleActionTag: false
         }
     }
 }

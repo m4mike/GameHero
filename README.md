@@ -1,7 +1,7 @@
 # GameHero
 
 ## To install:
-(assuming you have [node](http://nodejs.org/) and NPM installed)
+Have a local instance of redis and mongodb running.
 
 `npm install`
 

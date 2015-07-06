@@ -4,14 +4,25 @@ exports.default = {
       
             get: [
                 { path: '/status', action: 'status' }, // (GET) /api/users
-                { path: '/cacheTest/:key/:value', action: 'cacheTest' }, 
-                { path: '/random', action: 'randomNumber' }, // (GET) /api/users
-                { path: '/sleep', action: 'sleepTest' }, // (GET) /api/users
-                { path: '/quests', action: 'questsActions' }, 
-                { path: '/quests/forMission/:missionId', action: 'questsForMission' }, 
+               // { path: '/cacheTest/:key/:value', action: 'cacheTest' }, 
+               //{ path: '/random', action: 'randomNumber' }, // (GET) /api/users
+               // { path: '/sleep', action: 'sleepTest' }, // (GET) /api/users
+                
                 { path: '/tictac/start', action: 'gameCreate' }, // (GET) /api/quests
                 { path: '/tictac/view', action: 'tictacView' },
-                { path: '/tictac/play/:gameId/:x/:y', action: 'tictacMove' } 
+                { path: '/tictac/play/:gameId/:x/:y', action: 'tictacMove' },
+                { path: '/users/byId/:userId', action: 'userById' },
+                { path: "/users/delete/:userId", action: "userDelete" }, 
+                { path: '/users', action: 'userActions' }, 
+                { path: '/quests', action: 'questsActions' }, 
+                { path: '/quests/forMission/:missionId', action: 'questsForMission' },
+                { path: '/quests/forApp/:appId', action: 'questsForApp' },
+                { path: '/missions', action: 'questsActions' }
+
+
+            ],
+            delete: [
+                { path: "/users/:userId", action: "userDelete" }, 
             ]
 
       /* ---------------------
