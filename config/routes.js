@@ -3,26 +3,28 @@ exports.default = {
     return {
       
             get: [
-                { path: '/status', action: 'status' }, // (GET) /api/users
+                { path: '/status', action: 'status' }, // (GET) /api/players
                // { path: '/cacheTest/:key/:value', action: 'cacheTest' }, 
-               //{ path: '/random', action: 'randomNumber' }, // (GET) /api/users
-               // { path: '/sleep', action: 'sleepTest' }, // (GET) /api/users
+               //{ path: '/random', action: 'randomNumber' }, // (GET) /api/players
+               // { path: '/sleep', action: 'sleepTest' }, // (GET) /api/players
                 
                 { path: '/tictac/start', action: 'gameCreate' }, // (GET) /api/quests
                 { path: '/tictac/view', action: 'tictacView' },
                 { path: '/tictac/play/:gameId/:x/:y', action: 'tictacMove' },
-                { path: '/users/byId/:userId', action: 'userById' },
-                { path: "/users/delete/:userId", action: "userDelete" }, 
-                { path: '/users', action: 'userActions' }, 
+                { path: '/players/byId/:playerId', action: 'playerById' },
+                { path: "/players/delete/:playerId", action: "playerDelete" }, 
+                { path: '/players', action: 'playerActions' }, 
                 { path: '/quests', action: 'questsActions' }, 
                 { path: '/quests/forMission/:missionId', action: 'questsForMission' },
                 { path: '/quests/forApp/:appId', action: 'questsForApp' },
-                { path: '/missions', action: 'questsActions' }
+                { path: '/missions', action: 'missionsList' },
+                { path: '/missions/forApp', action: 'missionsForApp' },
+                { path: '/swagger', action: 'swagger' }
 
 
             ],
             delete: [
-                { path: "/users/:userId", action: "userDelete" }, 
+                { path: "/players/:playerId", action: "playerDelete" }, 
             ]
 
       /* ---------------------
@@ -36,16 +38,16 @@ exports.default = {
       examples:
       
       get: [
-        { path: '/users', action: 'usersList' }, // (GET) /api/users
+        { path: '/players', action: 'playersList' }, // (GET) /api/players
         { path: '/search/:term/limit/:limit/offset/:offset', action: 'search' }, // (GET) /api/search/car/limit/10/offset/100
       ],
 
       post: [
-        { path: '/login/:userID(^\\d{3}$)', action: 'login' } // (POST) /api/login/123
+        { path: '/login/:playerID(^\\d{3}$)', action: 'login' } // (POST) /api/login/123
       ],
 
       all: [
-        { path: '/user/:userID', action: 'user' } // (*) / /api/user/123
+        { path: '/player/:playerID', action: 'player' } // (*) / /api/player/123
       ]
       
       ---------------------- */

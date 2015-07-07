@@ -1,6 +1,6 @@
 ﻿var should = require('should');
-var actionheroPrototype = require('actionhero').actionheroPrototype;
-var actionhero = new actionheroPrototype();
+var ActionheroPrototype = require('actionhero').actionheroPrototype;
+var actionhero = new ActionheroPrototype();
 var api;
 
 describe('Action: TicTac', function () {

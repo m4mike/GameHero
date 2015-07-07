@@ -1,7 +1,9 @@
 ﻿(function (seedData) {
-    seedData.users = [
+    seedData.users = [];
+
+    seedData.players = [
         {
-            "_id": "u1",
+            "_id": "p1",
             "id_external": "an external id,ex authentication",
             "counters": {
                 "diamonds": 10,

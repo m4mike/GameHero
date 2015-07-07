@@ -1,5 +1,6 @@
 var HyperJson = function (source) {
     source = source == null? {}:source;
+    
     if (!(this instanceof HyperJson)) {
         return new HyperJson(source);
     }

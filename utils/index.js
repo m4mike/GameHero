@@ -26,7 +26,7 @@ var _ = require('lodash');
     utils.collectionBuilder = {};
     
     
-    utils.hyperJson = require("./HyperJson.js");
+    utils.HyperJson = require("./HyperJson.js");
     
     
     utils.responses = {}

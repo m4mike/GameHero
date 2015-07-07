@@ -1,5 +1,5 @@
 ﻿(function (logic) {
     
     require("./questLogic").init(logic);
-    require("./userLogic").init(logic);
+    require("./playerLogic").init(logic);
 })(module.exports);

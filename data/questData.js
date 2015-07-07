@@ -48,7 +48,7 @@
     };
     
       
-    // gets a user profile, calls getQuestsFromUserProfile(userprofile, next);
+    // gets a player profile, calls getQuestsFromplayerProfile(playerprofile, next);
     data.getQuestsForApp = function (appId, next) {
         database.getDb(function (err, db) {
             if (err) {

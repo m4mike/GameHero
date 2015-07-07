@@ -1,7 +1,9 @@
-# GameHero
+# My actionhero Project
+
+*visit www.actionherojs.com for more information*
 
 ## To install:
-Have a local instance of redis and mongodb running.
+(assuming you have [node](http://nodejs.org/) and NPM installed)
 
 `npm install`
 
@@ -10,4 +12,5 @@ Have a local instance of redis and mongodb running.
 
 ## To Test:
 `npm test`
-
+# GameHero 
+# GameHero 

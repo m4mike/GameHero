@@ -17,7 +17,7 @@
             db: db,
             quests: db.collection("quests"),
             missions : db.collection("missions"),
-            users: db.collection("users")
+            players: db.collection("players")
           };
           next(null, theDb);
         }

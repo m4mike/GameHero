@@ -6,7 +6,7 @@
     
     data.missions = require("./missionData");
     data.quests = require("./questData.js");
-    data.users = require("./userData.js");
+    data.players = require("./playerData.js");
     
    
     
@@ -50,16 +50,16 @@
                
                 console.log("Seeding the Database...");
                 async.parallel([
-                //insert users
+                //insert players
                     function (callback) {
-                        seedData.users.forEach(function (item) {
-                            seedresult.db.users.insert(item, function (err) {
+                        seedData.players.forEach(function (item) {
+                            seedresult.db.players.insert(item, function (err) {
                                 if (err)
-                                    console.log("Failed to insert user into database: " + err);
+                                    console.log("Failed to insert player into database: " + err);
                                 
                             });
                         });
-                        console.log("users seeded");
+                        console.log("players seeded");
                         callback();
                     
                     },

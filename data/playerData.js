@@ -4,42 +4,53 @@
     var database = require("./database");
     var utils = require("../utils");
     
-    data.add = function (user, next) {
+    data.add = function (player, next) {
         database.getDb(function (err, db) {
             if (err) {
                 console.log("Failed to seed database: " + err);
             } else {
-                db.users.insert(user, next);
+                db.players.insert(player, next);
             }
         });
-    }; //adduser
+    }; //addplayer
     
-    data.getByUserName = function (username, next) {
+    data.getByplayerName = function (playername, next) {
         database.getDb(function (err, db) {
             if (err) {
                 next(err);
             } else {
-                db.users.findOne({ username: username }, next);
+                db.players.findOne({ playername: playername }, next);
             }
         });
-    };//getuser
+    };//getplayer
     
-    data.getById = function (userId, next) {
+    data.getById = function (playerId, next) {
         database.getDb(function (err, db) {
             if (err) {
                 next(err);
             } else {
-                db.users.findOne({ _id: userId }, next);
+                db.players.findOne({ _id: playerId }, next);
             }
         });
-    };//getuser
+    };//getplayer
+    
+    data.deleteById = function (playerId, next) {
+        database.getDb(function (err, db) {
+            if (err) {
+                next(err);
+            } else {
+                db.players.remove({ _id: playerId }, next);
+            }
+        });
+    };//getplayer
+
     
     data.getAll = function (next) {
         database.getDb(function (err, db) {
             if (err) {
                 next(err, null);
             } else {
-                db.users.find().toArray(function (err, results) {
+                db.players.find().toArray(function (err, results) {
                     if (err) {
                         next(err, null);
                     } else {
@@ -55,7 +66,7 @@
             if (err) {
                 next(err, null);
             } else {
-                db.users.find().toArray(function (err, results) {
+                db.players.find().toArray(function (err, results) {
                     if (err) {
                         next(err, null);
                     } else {
@@ -66,17 +77,17 @@
         });
     };
     
-    data.save = function (user,next){
+    data.save = function (player,next){
         database.getDb(function (err, db) {
             if (err) {
                 next(err, null);
             } else {
-                db.users.save(user, { w: 1 }, next);
+                db.players.save(player, { w: 1 }, next);
             }
         });
     }
 
-    data.newUser = function () {
+    data.newplayer = function () {
         return {
             _id : utils.randomId(),
             id_external:null,

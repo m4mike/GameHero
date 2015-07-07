@@ -76,7 +76,6 @@
     <Content Include="public\o2c.html" />
     <Content Include="public\swagger.html" />
     <Content Include="README.md" />
-    <Compile Include="actions\usersActions.js" />
     <Compile Include="actions\swagger.js" />
     <Compile Include="actions\tictacMp.js" />
     <Compile Include="actions\tictacActions.js" />
@@ -118,6 +117,7 @@
     <Compile Include="logic\questLogic.js" />
     <Compile Include="logic\userLogic.js" />
     <Compile Include="node_modules\ah-swagger-plugin\actions\swagger.js" />
+    <Compile Include="node_modules\ah-swagger-plugin\config\swagger.js" />
     <Compile Include="node_modules\ah-swagger-plugin\initializers\swagger.js" />
     <Compile Include="node_modules\ah-swagger-plugin\public\lib\backbone-min.js" />
     <Compile Include="node_modules\ah-swagger-plugin\public\lib\handlebars-2.0.0.js" />
