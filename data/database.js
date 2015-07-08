@@ -15,6 +15,7 @@
 
           theDb = {
             db: db,
+            apps: db.collection("apps"),
             quests: db.collection("quests"),
             missions : db.collection("missions"),
             players: db.collection("players")

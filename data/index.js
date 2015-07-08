@@ -50,6 +50,19 @@
                
                 console.log("Seeding the Database...");
                 async.parallel([
+                    //insert users
+                      function (callback) {
+                        seedData.users.forEach(function (item) {
+                            seedresult.db.users.insert(item, function (err) {
+                                if (err)
+                                    console.log("Failed to insert user into database: " + err);
+                                
+                            });
+                        });
+                        console.log("users seeded");
+                        callback();
+                    
+                    },
                 //insert players
                     function (callback) {
                         seedData.players.forEach(function (item) {
@@ -77,6 +90,20 @@
                         callback();
                     
                     },
+                    //insert apps
+                    function (callback) {
+                        seedData.apps.forEach(function (item) {
+                            seedresult.db.apps.insert(item, function (err) {
+                                if (err)
+                                    console.log("Failed to insert app into database: " + err);
+                               
+                            });
+                            
+                        });
+                        console.log("missions seeded");
+                        callback();
+                    
+                    },
                 //insert quests
                     function (callback) {
                         seedData.quests.forEach(function (item) {
@@ -85,7 +112,7 @@
                                 
                             });
                         });
-                        console.log("QUESTS seeded");
+                        console.log("Quests seeded");
                         callback();
                     }
                 ],
