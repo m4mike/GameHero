@@ -8,9 +8,11 @@ exports.default = {
                //{ path: '/random', action: 'randomNumber' }, // (GET) /api/players
                // { path: '/sleep', action: 'sleepTest' }, // (GET) /api/players
                 
-                { path: '/tictac/start', action: 'gameCreate' }, // (GET) /api/quests
+                { path: '/tictac/start', action: 'tictacCreate' }, 
+                { path: '/tictac/start/:x/:y', action: 'tictacCreateAndStart' },
                 { path: '/tictac/view', action: 'tictacView' },
                 { path: '/tictac/play/:gameId/:x/:y', action: 'tictacMove' },
+                
                 { path: '/players/byId/:playerId', action: 'playerById' },
                 { path: "/players/delete/:playerId", action: "playerDelete" }, 
                 { path: '/players', action: 'playerActions' }, 

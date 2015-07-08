@@ -2,135 +2,165 @@
     seedData.users = [];
 
     seedData.players = [
-        {
-            "_id": "p1",
-            "id_external": "an external id,ex authentication",
-            "counters": {
-                "diamonds": 10,
-                "exp": 100,
-                "level": 1,
-                "energy": 0,
-                "money": 0,
-                "health": 0
-            },
-            "apps": ["app_mlb", "app_follow","app_tictac"],
-            "items": [
-                {
-                    "app": "app_mlb",
-                    "item_id": 1,
-                    "amount": 1
-                }
-            ],
-            "badges": [
-                {
-                    "app": "app_mlb",
-                    "badge_id": 1,
-                    "display": "Starter"
-                },
-                {
-                    "app": "app_mlb",
-                    "badge_id": 3,
-                    "display": "Starter"
-                }
-            ],
-            "quests": [
-                {
-                    "app": "app_follow",
-                    "quest_id": "qfollow1",
-                    "display": "follow1",
-                    "mastering": null
-                }
-            ]
-        }, {
-            "_id": "u2",
-            "id_external": "an external id,ex authentication",
-            "counters": {
-                "diamonds": 10,
-                "exp": 2100,
-                "level": 1,
-                "energy": 0,
-                "money": 0,
-                "health": 0
-            },
-            "apps": ["app_mlb", "app_follow", "app_tictac"],
-            "items": [
-                {
-                    "app": "app_mlb",
-                    "item_id": 1,
-                    "amount": 1
-                }
-            ],
-            "badges": [
-                {
-                    "app": "app_mlb",
-                    "badge_id": 1,
-                    "display": "Starter"
-                },
-                {
-                    "app": "app_mlb",
-                    "badge_id": 3,
-                    "display": "Starter"
-                }
-            ],
-            "quests": [
-                {
-                    "app": "app_follow",
-                    "quest_id": "qfollow1",
-                    "display": "follow1",
-                    "mastering": null
-                }, {
-                    "app": "app_follow",
-                    "quest_id": "qfollow2",
-                    "display": "follow2",
-                    "mastering": null
-                }
-            ]
-        }, {
-            "_id": "u3",
-            "id_external": "an external id,ex authentication",
-            "counters": {
-                "diamonds": 10,
-                "exp": 3100,
-                "level": 3,
-                "energy": 0,
-                "money": 0,
-                "health": 0
-            },
-            "apps": ["app_mlb", "app_follow", "app_tictac"],
-            "items": [
-                {
-                    "app": "app_mlb",
-                    "item_id": 1,
-                    "amount": 1
-                }
-            ],
-            "badges": [
-                {
-                    "app": "app_mlb",
-                    "badge_id": 1,
-                    "display": "Starter"
-                },
-                {
-                    "app": "app_mlb",
-                    "badge_id": 3,
-                    "display": "Starter"
-                }
-            ],
-            "quests": [
-                {
-                    "app": "app_follow",
-                    "quest_id": "qfollow1",
-                    "display": "follow1",
-                    "mastering": null
-                }, {
-                    "app": "app_follow",
-                    "quest_id": "qfollow2",
-                    "display": "follow2",
-                    "mastering": null
-                }
-            ]
-        }
-
+  {
+    "_id": "p1",
+    "id_user": "u1",
+    "id_external": "an external id,ex authentication",
+    "counters": {
+      "exp": 100,
+      "level": 1
+    },
+    "profile": {},
+    "app": "app_follow",
+    "items": [
+      {
+        "id_item": 1,
+        "amount": 1
+      }
+    ],
+    "badges": [
+      {
+        "id_badge": 1,
+        "display": "Starter"
+      },
+      {
+        "id_badge": 3,
+        "display": "Starter"
+      }
+    ],
+    "quests": [
+      {
+        "id_quest": "qfollow1",
+        "display": "follow1",
+        "mastering": null
+      }
+    ]
+  },
+  {
+    "_id": "p2",
+    "id_user": "u2",
+    "id_external": "an external id,ex authentication",
+    "counters": {
+      "exp": 2100,
+      "level": 1
+    },
+    "profile": {},
+    "apps": "app_follow",
+    "items": [
+      {
+        "id_item": 1,
+        "amount": 1
+      }
+    ],
+    "badges": [
+      {
+        "id_badge": 1,
+        "display": "Starter"
+      },
+      {
+        "id_badge": 3,
+        "display": "Starter"
+      }
+    ],
+    "quests": [
+      {
+        "display": "follow1",
+        "mastering": null
+      },
+      {
+        "id_quest": "qfollow2",
+        "display": "follow2",
+        "mastering": null
+      }
+    ]
+  },
+  {
+    "_id": "p3",
+    "id_user": "u1",
+    "id_external": "an external id,ex authentication",
+    "counters": {
+      "exp": 3100,
+      "level": 3
+    },
+    "profile": {},
+    "apps": "app_follow",
+    "items": [
+      {
+        "id_item": 1,
+        "amount": 1
+      }
+    ],
+    "badges": [
+      {
+        "id_badge": 1,
+        "display": "Starter"
+      },
+      {
+        "id_badge": 3,
+        "display": "Starter"
+      }
+    ],
+    "quests": [
+      {
+        "id_quest": "qfollow1",
+        "display": "follow1",
+        "mastering": null
+      },
+      {
+        "id_quest": "qfollow2",
+        "display": "follow2",
+        "mastering": null
+      }
+    ]
+  },
+  {
+    "_id": "p10",
+    "id_user": "u1",
+    "id_external": "an external id,ex authentication",
+    "counters": {
+      "diamonds": 10,
+      "exp": 100,
+      "level": 1,
+      "energy": 0,
+      "money": 0,
+      "health": 0
+    },
+    "profile": {
+      "energy": 20,
+      "health": 100,
+      "skillpoints": 1,
+      "attack": 0,
+      "defence": 0
+    },
+    "app": "app_mlb",
+    "items": [],
+    "badges": [],
+    "quests": []
+  },
+  {
+    "_id": "p12",
+    "id_user": "u2",
+    "id_external": "an external id,ex authentication",
+    "counters": {
+      "diamonds": 10,
+      "exp": 2100,
+      "level": 1,
+      "energy": 0,
+      "money": 0,
+      "health": 0
+    },
+    "profile": {
+      "energy": 20,
+      "health": 110,
+      "skillpoints": 0,
+      "attack": 0,
+      "defence": 0
+    },
+    "apps": "app_mlb",
+    "items": [],
+    "badges": [],
+    "quests": []
+  }
 ];
     seedData.missions = [
         {
