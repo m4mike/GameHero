@@ -1,6 +1,5 @@
 var utils = require("../utils")
-var data = require("../data");
-var logic = require("../logic");
+
 
 
 exports.quests = {
@@ -11,7 +10,7 @@ exports.quests = {
     run: function (api, action, next) {
 
         var collection = new utils.HyperJson();
-        collection.link("All Quests", utils.host + "/api/quests/all")
+        collection
             .link("For Mission", utils.host + "/api/quests/forMission/missionId")
             .link("For App", utils.host + "/api/quests/forApp/appId");
 
@@ -34,9 +33,12 @@ exports.questsForMission = {
     },
 
     run: function (api, connection, next) {
+        var data = require("../data").init(api);
+       
+
         var missionId = connection.params.missionId;
 
-        data.quests.getQuestsForMissionId(missionId, function (err, result) {
+        data.quests.getQuestsForMission(missionId, function (err, result) {
             if (err) {
                 next(err);
             } else {
@@ -74,6 +76,9 @@ exports.questsForApp = {
     },
 
     run: function (api, action, next) {
+        var data = require("../data").init(api);
+        
+
         var appId = action.params.appId;
 
         data.quests.getQuestsForApp(appId, function (err, result) {
@@ -98,5 +103,39 @@ exports.questsForApp = {
     }
 };
 
+
+exports.questSearch = {
+    name: 'questsSearch',
+    description: 'Searches quests based on mongo search condition',
+    inputs: {
+        search: {
+            required: true,
+            validator: null
+        }
+    },
+    
+    run: function (api, action, next) {
+        var data = require("../data").init(api);
+        data.quests.getQuests(action.params.search, function (err, result) {
+            if (err) {
+                next(err);
+            } else {
+                if (result == null) {
+                    action.connection.rawConnection.responseHttpCode = "404";
+                    next(new Error("not found"));
+                } else {
+                    var collection = new utils.HyperJson({
+                        _items: result
+
+                    });
+                    collection.addSelfIdsToItems(utils.host + "/api/quests/", "_id");
+                    action.response = collection.toObject();
+                    next();
+                }
+            }
+        });
+
+    }
+};
 
 

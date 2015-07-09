@@ -29,7 +29,8 @@ exports.status = {
       "serverName":"actionhero API",
       "apiVersion":"0.0.1",
       "requestDuration":12,
-      "currentTime":1420953679624
+            "currentTime": 1420953679624,
+      "environment": "development"
     }
   },
 
@@ -42,7 +43,7 @@ exports.status = {
         data.response.stats             = stats;
         data.response.queues            = details.queues;
         data.response.workers           = details.workers;
-        
+        data.response.environment = "hello";
         next(err);
       });
     });

@@ -1,7 +1,5 @@
 var utils = require("../utils")
-var data = require("../data");
-var logic = require("../logic");
-var utils = require("../utils")
+
 
 exports.players = {
     name: 'playerActions',
@@ -10,7 +8,7 @@ exports.players = {
     outputExample: null,
     
     run: function (api, action, next) {
-        
+      
         var collection = new utils.HyperJson();
         collection.link("Find player by id", utils.host + "/api/players/byId/:playerId")
             .link("Delete player", utils.host + "-delete-/api/players/:playerId");
@@ -34,6 +32,7 @@ exports.playerById = {
     },
     
     run: function (api, action, next) {
+        var data = new require("../data").init(api);
         var id = action.params.playerId;
         
         data.players.getById(id, function (err, result) {
@@ -74,6 +73,7 @@ exports.playerDelete = {
     },
     
     run: function (api, action, next) {
+        var data = new require("../data").init(api);
         var id = action.params.playerId;
         
         data.players.deleteById(id, function (err, result) {
@@ -89,11 +89,6 @@ exports.playerDelete = {
                         next(new Error("not found: " + id));
                         return;
                     }
-                    //var collection = new utils.HyperJson({
-                    //    _items : result
-                    
-                    //});
-                    //collection.addSelfIdsToItems(utils.host + "/api/players/getById/" , "_id");
                     action.response = result.result;
                     next();
                 }

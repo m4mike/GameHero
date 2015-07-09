@@ -1397,7 +1397,6 @@ module.exports.interests =
       "Spaghetti",
       "Louis Vuitton",
       "Billard",
-      "DÃ®ners",
       "Livres",
       "Romance",
       "Disco",

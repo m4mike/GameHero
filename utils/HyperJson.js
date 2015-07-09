@@ -66,15 +66,18 @@ HyperJson.prototype.link = function (rel, href, options) {
 
 
 HyperJson.prototype.addSelfIdsToItems = function (host , itemId) {
-    for (var index in this.obj._items) {
-        var item = this.obj._items[index];
-        item._links = {
-            self : {
-                href : host + item[itemId]
-            }
-        };
-    }
+   
+        for (var index in this.obj._items) {
+            var item = this.obj._items[index];
+            
+            item._links = {
+                self : {
+                    href : host + item[itemId]
+                }
+            };
+        }
 }
+
 
 module.exports = HyperJson;
 

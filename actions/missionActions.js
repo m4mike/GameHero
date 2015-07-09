@@ -1,6 +1,4 @@
-﻿var utils = require("../utils")
-var data = require("../data");
-var utils = require("../utils")
+﻿var utils = require("../ils")
 
 exports.missions = {
     name: 'missionsList',
@@ -8,7 +6,8 @@ exports.missions = {
     outputExample: null,
     
     run: function (api, action, next) {
-        
+        var data = new require("../data").init(api);
+
         data.missions.getMissions(function (err, result) {
             if (err) {
                 next(err);
@@ -22,7 +21,7 @@ exports.missions = {
                     _items : result
                             
                 });
-                collection.addSelfIdsToItems(utils.host + "/api/mission/byId" , "_id");
+                collection.addSelfIdsToItems(utils.host + "/api/mission/byId/" , "_id");
                 action.response = collection.toObject();
                 next();
             }
@@ -44,6 +43,7 @@ exports.missionsForApp = {
     
     run: function (api, action, next) {
         var id = action.params.appId;
+        var data = require('../data').init(api);
         data.missions.getMissionsForApp(id, function (err, result) {
             if (err) {
                 next(err);
@@ -53,11 +53,12 @@ exports.missionsForApp = {
                     next(new Error("not found"));
                     return;
                 }
+                if (typeof result == 'object') result = [result];
                 var collection = new utils.HyperJson({
                     _items : result
                             
                 });
-                collection.addSelfIdsToItems(utils.host + "/api/mission/byId" , "_id");
+                collection.addSelfIdsToItems(utils.host + "/api/mission/byId/" , "_id");
                 action.response = collection.toObject();
                 next();
             }

@@ -19,6 +19,8 @@ exports.default = {
                 { path: '/quests', action: 'questsActions' }, 
                 { path: '/quests/forMission/:missionId', action: 'questsForMission' },
                 { path: '/quests/forApp/:appId', action: 'questsForApp' },
+                { path: '/quests/search/:search', action: 'questsSearch' },
+                
                 { path: '/missions', action: 'missionsList' },
                 { path: '/missions/forApp', action: 'missionsForApp' },
                 { path: '/swagger', action: 'swagger' }
@@ -26,8 +28,9 @@ exports.default = {
 
             ],
             delete: [
-                { path: "/players/:playerId", action: "playerDelete" }, 
+                { path: "/players/:playerId", action: "playerDelete" },
             ]
+             
 
       /* ---------------------
       routes.js 

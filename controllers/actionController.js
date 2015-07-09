@@ -1,6 +1,6 @@
 ﻿(function (myController) {
     
-    var data = require("../data");
+    var data = require("../data")(api);
     //var auth = require("../auth");
     var _ = require("lodash");
     

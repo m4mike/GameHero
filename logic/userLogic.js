@@ -2,21 +2,21 @@
 {
     
     var async = require("async");
-    var data = require("../data");
+    var data = new require("../data")(api);
     var users = require("../data/seedData.js").users;
     var _ = require("lodash");
     
       
     
-    expo.init = function (logic) {
+    expo.init = function (api) {
         
              
        
-        logic.user = {};
-        logic.user.getCounterValue = function (user,counter) {
+        expo.user = {};
+        expo.user.getCounterValue = function (user,counter) {
             return user.counters[counter];
         };
-
+        expo.something = {};
         
 
     

@@ -11,9 +11,9 @@ exports.default = {
       // The welcome message seen by TCP and webSocket clients upon connection
       welcomeMessage: 'Welcome to GameHero api',
       // the redis prefix for actionhero's cache objects
-      cachePrefix: 'actionhero:cache:',
+      cachePrefix: 'ah:cache:',
       // the redis prefix for actionhero's cache/lock objects
-      lockPrefix: 'actionhero:lock:',
+      lockPrefix: 'ah:lock:',
       // how long will a lock last before it exipres (ms)?
       lockDuration: 1000 * 10, // 10 seconds
       // Watch for changes in actions and tasks, and reload/restart them on the fly

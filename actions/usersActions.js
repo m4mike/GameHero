@@ -1,8 +1,4 @@
 var utils = require("../utils")
-var data = require("../data");
-var logic = require("../logic");
-//var auth = require("../auth");
-var utils = require("../utils")
 
 exports.players = {
     name: 'userActions',
@@ -11,7 +7,8 @@ exports.players = {
     outputExample: null,
     
     run: function (api, action, next) {
-        
+       
+
         var collection = new utils.hyperJson();
         collection.link("Find User by id", utils.host + "/api/users/byId/:userId")
             .link("Delete user", utils.host + "-delete-/api/users/:userId");
@@ -36,7 +33,8 @@ exports.userById = {
     
     run: function (api, action, next) {
         var id = action.params.userId;
-        
+        var data = require("../data")(api);
+       
         data.users.getById(id, function (err, result) {
             if (err) {
                 next(err);
@@ -76,6 +74,7 @@ exports.userDelete = {
     
     run: function (api, action, next) {
         var id = action.params.userId;
+        var data = require("../data")(api);
         
         data.users.deleteById(id, function (err, result) {
             if (err) {

@@ -2,7 +2,7 @@
   "author": "Michael Bentein",
   "name": "GameHero",
   "description": "my actionhero project",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "engines": {
     "node": ">=0.10.0"
   },
@@ -13,6 +13,7 @@
     "grunt": "latest",
     "lodash": "^3.10.0",
     "mongodb": "^2.0.35",
+    "redis": "^0.12.1",
     "ws": "latest"
   },
   "devDependencies": {
@@ -24,6 +25,6 @@
     "start": "actionhero start",
     "actionhero": "actionhero",
     "startCluster": "actionhero startCluster",
-    "test": "mocha --debug-brk"
+    "test": "mocha"
   }
 }

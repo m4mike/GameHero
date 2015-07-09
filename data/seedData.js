@@ -2,11 +2,11 @@
 
     seedData.apps = [
         {
-            "app": "app_follow",
+            "_id": "app_follow",
             "profile": {}
         },
         {
-            "app": "app_mlb",
+            "_id": "app_mlb",
             "profile": {
                 "energy": 20,
                 "health": 100,
@@ -31,7 +31,7 @@
                 "level": 1
             },
             "profile": {},
-            "app": "app_follow",
+            "id_app": "app_follow",
             "items": [
                 {
                     "id_item": 1,
@@ -152,7 +152,7 @@
                 "attack": 0,
                 "defence": 0
             },
-            "app": "app_mlb",
+            "id_app": "app_mlb",
             "items": [],
             "badges": [],
             "quests": []
@@ -185,7 +185,7 @@
     seedData.missions = [
         {
             "_id": "mmacarons",
-            "app": "app_mlb",
+            "id_app": "app_mlb",
             "name": "Visitéz 5 lieux de macarons de Paris",
             "slug": ",mmacarons,",
             "timing": "10d",
@@ -199,7 +199,7 @@
         },
         {
             "_id": "mfollowers",
-            "app": "app_follow",
+            "id_app": "app_follow",
             "name": "3 quests 1 after another",
             "slug": ",mfollowers,",
             "timing": null,
@@ -209,7 +209,7 @@
     seedData.quests = [
         {
             "_id": "qmacarons1",
-            "app": "app_mlb",
+            "id_app": "app_mlb",
             "display": "Les macarons de Dalloyau",
             "data": {
                 "adress": "Dalloyau. 101, rue du Faubourg Saint-Honoré, VIIIe.",
@@ -238,7 +238,7 @@
         },
         {
             "_id": "qmacarons2",
-            "app": "app_mlb",
+            "id_app": "app_mlb",
             "display": "Les macarons de Pierre Hermé",
             "data": {
                 "adress": "Jean-Paul Hévin. 231, rue Saint-Honoré, Ier",
@@ -267,7 +267,7 @@
         },
         {
             "_id": "qfollow1",
-            "app": "app_follow",
+            "id_app": "app_follow",
             "display": "quest1",
             "id_mission": "mfollowers",
             "slug": ",mfollowers,qfollow1,",
@@ -286,7 +286,7 @@
         },
         {
             "_id": "qfollow2",
-            "app": "app_follow",
+            "id_app": "app_follow",
             "display": "quest2",
             "id_mission": "mfollowers",
             "slug": ",mfollowers,qfollow2,",
@@ -309,7 +309,7 @@
         },
         {
             "_id": "qfollow3",
-            "app": "app_follow",
+            "id_app": "app_follow",
             "display": "quest3",
             "id_mission": "mfollowers",
             "slug": ",mfollowers,qfollow3,",
@@ -332,7 +332,7 @@
         },
         {
             "_id": "qfollow4",
-            "app": "app_follow",
+            "id_app": "app_follow",
             "display": "quest4",
             "id_mission": "mfollowers",
             "slug": ",mfollowers,qfollow4,",

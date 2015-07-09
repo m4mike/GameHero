@@ -1,7 +1,7 @@
 ﻿// missionController.js
 (function (myController) {
     
-    var data = require("../data");
+    var data = require("../data")(api);
     var logic = require("../logic");
     //var auth = require("../auth");
     var utils = require("../utils");
