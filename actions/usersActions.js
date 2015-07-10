@@ -32,10 +32,8 @@ exports.userById = {
     },
     
     run: function (api, action, next) {
-        var id = action.params.userId;
-        var data = require("../data")(api);
-       
-        data.users.getById(id, function (err, result) {
+        
+        api.data.users.getById(action.params.userId, function (err, result) {
             if (err) {
                 next(err);
             } else {
@@ -73,10 +71,7 @@ exports.userDelete = {
     },
     
     run: function (api, action, next) {
-        var id = action.params.userId;
-        var data = require("../data")(api);
-        
-        data.users.deleteById(id, function (err, result) {
+         api.data.users.deleteById(action.params.userId, function (err, result) {
             if (err) {
                 next(err);
             } else {

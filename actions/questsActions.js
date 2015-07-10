@@ -33,12 +33,7 @@ exports.questsForMission = {
     },
 
     run: function (api, connection, next) {
-        var data = require("../data").init(api);
-       
-
-        var missionId = connection.params.missionId;
-
-        data.quests.getQuestsForMission(missionId, function (err, result) {
+         api.data.quests.forMission(connection.params.missionId, function (err, result) {
             if (err) {
                 next(err);
             } else {
@@ -76,12 +71,7 @@ exports.questsForApp = {
     },
 
     run: function (api, action, next) {
-        var data = require("../data").init(api);
-        
-
-        var appId = action.params.appId;
-
-        data.quests.getQuestsForApp(appId, function (err, result) {
+        api.data.quests.forApp(action.params.appId, function (err, result) {
             if (err) {
                 next(err);
             } else {
@@ -115,8 +105,7 @@ exports.questSearch = {
     },
     
     run: function (api, action, next) {
-        var data = require("../data").init(api);
-        data.quests.getQuests(action.params.search, function (err, result) {
+        api.data.quests.search(action.params.search, function (err, result) {
             if (err) {
                 next(err);
             } else {

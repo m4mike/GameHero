@@ -32,10 +32,9 @@ exports.playerById = {
     },
     
     run: function (api, action, next) {
-        var data = new require("../data").init(api);
         var id = action.params.playerId;
         
-        data.players.getById(id, function (err, result) {
+        api.data.players.getById(id, function (err, result) {
             if (err) {
                 next(err);
             } else {
@@ -73,10 +72,10 @@ exports.playerDelete = {
     },
     
     run: function (api, action, next) {
-        var data = new require("../data").init(api);
+        
         var id = action.params.playerId;
         
-        data.players.deleteById(id, function (err, result) {
+        api.data.players.deleteById(id, function (err, result) {
             if (err) {
                 next(err);
             } else {

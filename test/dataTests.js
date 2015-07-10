@@ -3,19 +3,64 @@ var should = require('should');
 var actionheroPrototype = require('actionhero').actionheroPrototype;
 var actionhero = new actionheroPrototype();
 var api;
-var data = require('./../data');
 
-describe('data tests', function(){
 
-  
-  describe('Connecting to mongo',function(){
-	  it('should work',function(done){
-		   data.getMongo().then(function(err,db){
-         console.log(db);
-         db.db.should.not.be.null();
-         done();
-       })
-	  })
+describe('data tests', function () {
+
+  before(function (done) {
+    actionhero.start(function (err, a) {
+      api = a;
+      done();
+    })
+  });
+
+  after(function (done) {
+    actionhero.stop(function (err) {
+      done();
+    });
   })
+  describe('Data should be seeded', function () {
+    describe('Connecting to mongo', function () {
+      it('inside an api', function (done) {
+        api.should.not.be.null();
+        done();
+      });
 
+      it('should work', function (done) {
+        api.data.getDb(function (err, db) {
+          //console.log(db);
+          db.db.should.not.be.null();
+          done();
+        });
+      });
+    });
+    
+    describe("There should be users",function(){
+      it("i can find u1",function(done){
+        api.data.users.getById("u1",function(err,user){
+          user.should.not.be.null();
+          done();
+        })
+      });
+      it("i can find p1",function(done){
+                api.data.players.getById("p1",function(err,user){
+          user.should.not.be.null();
+          done();
+        })
+      });
+      it("i can find followers mission",function(done){
+                api.data.missions.getById("mfollowers",function(err,res){
+          res.should.not.be.null();
+          done();
+        })
+      });
+      it("i can find quests for followers mission",function(done){
+        api.data.quests.forMission("mfollowers",function(err,res){
+          res.should.not.be.null();
+          done();
+        })
+      })
+     
+    });
+  });
 });

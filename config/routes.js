@@ -23,6 +23,8 @@ exports.default = {
                 
                 { path: '/missions', action: 'missionsList' },
                 { path: '/missions/forApp', action: 'missionsForApp' },
+                { path: '/missions/byId', action: 'missionById' },
+              
                 { path: '/swagger', action: 'swagger' }
 
 

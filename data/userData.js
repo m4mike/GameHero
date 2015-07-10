@@ -1,10 +1,9 @@
 ﻿var database = null;
 
-module.exports.init = function (api) {
-    database = require("./database").init(api);
+module.exports.init = function (db) {
+    database = db;
     return module.exports;
 }
-
 
 
 module.exports.add = function (user, next) {

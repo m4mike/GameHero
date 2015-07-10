@@ -1,48 +1,73 @@
-﻿module.exports.database = null;
-module.exports.missions = null;
+﻿module.exports.missions = null;
 module.exports.quests = null;
 module.exports.players = null;
 module.exports.users = null;
+module.exports.database = this;
 
 var cachedApi = null;
 var database = null;
 var isSeeded = false;
 
+var bluebird = require('bluebird');
+var theDb = null; //singleton
+var url = "";
+
+module.exports.getDb = function (next) {
+    if (theDb == null) {
+        return initDb(next);
+    }
+    return next(null, theDb)
+}
+
+module.exports.getDbPromise = function () { //returns theDb
+    
+    return bluebird.promisify(initDb);
+}
+
+var initDb = function (next) {
+    if (theDb == null) {
+        // connect to the database
+        cachedApi.mongo.getDb(function (err, db) {
+            
+            if (err) {
+                return next(err);
+            } else {
+                
+                theDb = {
+                    db: db,
+                    url : url, 
+                    apps: db.collection("apps"),
+                    quests: db.collection("quests"),
+                    missions : db.collection("missions"),
+                    players: db.collection("players"),
+                    users: db.collection("users")
+                };
+                
+                return next(null, theDb);
+            }
+        });
+    }
+}
+
+
 module.exports.init = function (api) {
     
     if (cachedApi == null) {
         cachedApi = api; // save the reference once
-        if (module.exports.database == null) {
-            database = require('./database').init(api);
-            module.exports.database = database;
-            module.exports.missions = require("./missionData").init(api);
-            module.exports.quests = require("./questData.js").init(api);
-            module.exports.players = require("./playerData.js").init(api);
-            module.exports.users = require("./userData.js").init(api);
-        }
+        
+        module.exports.missions = require("./missionData").init(this);
+        module.exports.quests = require("./questData.js").init(this);
+        module.exports.players = require("./playerData.js").init(this);
+        module.exports.users = require("./userData.js").init(this);
+        
     }
     
     return module.exports;
 }
 
-module.exports.seed = function (){
+module.exports.seed = function () {
     seedDatabase();
 }
-
-
-
-////module.exports.init = function (api) {
-
-//    var database = require("./database");
-//    database.init(api);
-//    return;
-
-//    module.exports.data = this;
-//    module.exports.data.missions = require("./missionData")(api);
-//    module.exports.data.quests = require("./questData.js")(api);
-//    module.exports.data.players = require("./playerData.js")(api);
-
-
 
 var async = require("async");
 var seedData = require("./seedData");
@@ -52,7 +77,7 @@ var seedDatabase = function () {
     async.series([
             // 
         function (callback) {
-            database.getDb(function (err, db) {
+            module.exports.getDb(function (err, db) {
                 if (err) {
                     console.log("Failed to seed database: " + err);
                 } else {

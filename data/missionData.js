@@ -1,7 +1,7 @@
 ﻿var database = null;
 
-module.exports.init = function (api) {
-    database = require("./database").init(api);
+module.exports.init = function (db) {
+    database = db;
     return module.exports;
 }
 
@@ -22,7 +22,7 @@ module.exports.getMissions = function (next) {
     });
 };
 
-module.exports.getMission = function (missionid, next) {
+module.exports.getById = function (missionid, next) {
     database.getDb(function (err, db) {
         if (err) {
             next(err);

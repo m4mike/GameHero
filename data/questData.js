@@ -1,10 +1,9 @@
 ﻿var database = null;
 
-module.exports.init = function (api) {
-    database = require("./database").init(api);
+module.exports.init = function (db) {
+    database = db;
     return module.exports;
 }
-
 
 
 module.exports.getById = function (questId, next) {
@@ -17,7 +16,7 @@ module.exports.getById = function (questId, next) {
     });
 };
 
-module.exports.getQuestsForMission = function (missionid, next) {
+module.exports.forMission = function (missionid, next) {
     database.getDb(function (err, db) {
         if (err) {
             next(err, null);
@@ -34,7 +33,7 @@ module.exports.getQuestsForMission = function (missionid, next) {
 };
 
 
-module.exports.getQuestsForApp = function (id, next) {
+module.exports.forApp = function (id, next) {
     database.getDb(function (err, db) {
         if (err) {
             next(err, null);
@@ -51,7 +50,7 @@ module.exports.getQuestsForApp = function (id, next) {
 };
 
 
-module.exports.getQuests = function (search, next) {
+module.exports.search = function (search, next) {
     database.getDb(function (err, db) {
         if (err) {
             next(err, null);

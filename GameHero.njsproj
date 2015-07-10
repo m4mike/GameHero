@@ -48,6 +48,7 @@
     <Compile Include="actions\missionActions.js" />
     <Compile Include="actions\playerActions.js" />
     <Compile Include="actions\swagger.js" />
+    <Compile Include="actions\testActions\showDocumentation.js" />
     <Compile Include="actions\tictacMp.js" />
     <Compile Include="actions\tictacActions.js" />
     <Compile Include="actions\questsActions.js" />
@@ -66,7 +67,6 @@
     <Compile Include="controllers\userController.js" />
     <Compile Include="data\playerData.js" />
     <Compile Include="gruntfile.js" />
-    <Compile Include="actions\showDocumentation.js" />
     <Compile Include="actions\status.js" />
     <Compile Include="config\api.js" />
     <Compile Include="config\errors.js" />
@@ -79,12 +79,13 @@
     <Content Include="public\chat.html" />
     <Content Include="public\index.html" />
     <Compile Include="data\actionData.js" />
-    <Compile Include="data\database.js" />
     <Compile Include="data\index.js" />
     <Compile Include="data\missionData.js" />
     <Compile Include="data\questData.js" />
     <Compile Include="data\seedData.js" />
     <Compile Include="data\userData.js" />
+    <Compile Include="initializers\data.js" />
+    <Compile Include="initializers\mongo.js" />
     <Compile Include="initializers\tictacMpInitialiser.js" />
     <Compile Include="initializers\tictacInitializer.js" />
     <Compile Include="logic\index.js" />
