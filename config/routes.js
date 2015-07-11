@@ -25,12 +25,20 @@ exports.default = {
                 { path: '/missions/forApp', action: 'missionsForApp' },
                 { path: '/missions/byId', action: 'missionById' },
               
+                { path: '/interests', action: 'interestActions' },
+                { path: '/interests/add/:lang/:cat/:interest', action: 'addInterest' },
+                { path: '/interests/byId', action: 'missionById' },
+                { path: '/interestsForCat/:lang/:cat', action: 'interestsForCat' },
+
+
                 { path: '/swagger', action: 'swagger' }
 
 
             ],
             delete: [
                 { path: "/players/:playerId", action: "playerDelete" },
+                { path: "/interests/:lang/:cat/:interest", action: "deleteInterest" },
+        
             ]
              
 

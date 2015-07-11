@@ -9,10 +9,7 @@
       
     
     expo.init = function (api) {
-        
-             
-       
-        expo.user = {};
+     expo.user = {};
         expo.user.getCounterValue = function (user,counter) {
             return user.counters[counter];
         };

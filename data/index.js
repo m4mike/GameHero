@@ -3,6 +3,7 @@ module.exports.quests = null;
 module.exports.players = null;
 module.exports.users = null;
 module.exports.database = this;
+module.exports.interests = require("./interestData.js");
 
 var cachedApi = null;
 var database = null;
@@ -54,11 +55,12 @@ module.exports.init = function (api) {
     
     if (cachedApi == null) {
         cachedApi = api; // save the reference once
-        
+        console.log("initialising data");
         module.exports.missions = require("./missionData").init(this);
         module.exports.quests = require("./questData.js").init(this);
         module.exports.players = require("./playerData.js").init(this);
         module.exports.users = require("./userData.js").init(this);
+        module.exports.interests = require("./interestData.js").init(cachedApi);
         
     }
     
@@ -97,7 +99,7 @@ var seedDatabase = function () {
                         seedresult.toSeed = true;
                         console.log("Database needs seeding");
                     } else {
-                        console.log("Database already seeded");
+                        //console.log("Database already seeded");
                         seedresult.toSeed = false;
                     }
                     return callback();

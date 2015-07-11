@@ -1,0 +1,141 @@
+var utils = require("../utils")
+
+
+exports.interests = {
+    name: 'interestActions',
+    description: 'List possible actions on interests',
+    domain:"player",
+    outputExample: null,
+    
+    run: function (api, action, next) {
+      
+        var collection = new utils.HyperJson();
+        collection.link("Add interest to system", utils.host + "/api/interests/add/:lang/:cat/:interest")
+            .link("Delete interest", utils.host + "-delete-/api/interests/:cat/:interest")
+          //  .link("Add interest to player", utils.host + "/api/interests/addtoplayer/:cat/:interest/:player")
+            .link("Add interest to user", utils.host + "/api/interests/addtoplayer/:lang/:cat/:interest/:user");
+        
+        
+        action.response = collection.toObject();
+        action.response.error = null;
+        
+        next();
+    }
+    
+};
+
+exports.interestsForCat = {
+    name: 'interestsForCat',
+    description: 'List interests for an Category',
+    outputExample: null,
+    inputs: {
+        lang: {
+            required: true,
+            validator: null
+        },
+        cat: {
+            required: true,
+            validator: null
+        }
+    },
+    
+    run: function (api, action, next) {
+        api.data.interests.getInterestsForCat(action.params.lang,
+                                       action.params.cat,
+                                       function (err, result) {
+            if (err) return next(err);
+            
+            if (result == null) {
+                action.connection.rawConnection.responseHttpCode = "404";
+                return next(new Error("not found"));
+            }
+            
+            
+            action.response = result;
+            next();
+        })
+            
+    }   
+};
+
+
+exports.addInterest = {
+    name: 'addInterest',
+    description: 'Add interest to system',
+    inputs: {
+        lang: {
+            required: true,
+            validator: null
+        },
+        cat: {
+            required: true,
+            validator: null
+        },
+        interest: {
+            required: true,
+            validator: null
+        }
+    },
+    
+    run: function (api, action, next) {
+        
+        
+        api.data.interests.addInterest(action.params.lang,
+                                       action.params.cat,
+                                       action.params.interest,  function (err, result) {
+                if (err) return next(err);
+            
+                if (result == null) {
+                    action.connection.rawConnection.responseHttpCode = "404";
+                    return next(new Error("not found"));
+                }
+            
+            
+                action.response = result;
+                next();
+        })
+            
+    }   
+
+};
+        
+    
+exports.deleteInterest = {
+    name: 'deleteInterest',
+    description: 'Delete interest from system',
+    inputs: {
+        lang: {
+            required: true,
+            validator: null
+        },
+        cat: {
+            required: true,
+            validator: null
+        },
+        interest: {
+            required: true,
+            validator: null
+        }
+    },
+    
+    run: function (api, action, next) {
+        
+        
+        api.data.interests.removeInterest(action.params.lang,
+                                       action.params.cat,
+                                       action.params.interest,  function (err, result) {
+            if (err) return next(err);
+            
+            if (result == null) {
+                action.connection.rawConnection.responseHttpCode = "404";
+                return next(new Error("not found"));
+            }
+            
+            
+            action.response = result;
+            next();
+        })
+            
+    }
+
+};

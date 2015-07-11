@@ -7,14 +7,14 @@ exports.default = {
   redis: function(api){
     var redisDetails = {
       // Which channel to use on redis pub/sub for RPC communication
-      channel: 'gamehero',
+      channel: 'gh:rpc',
       // How long to wait for an RPC call before considering it a failure 
       rpcTimeout: 5000, 
       // which redis package should you ise?
-      package: 'fakeredis'
+      package: 'redis'
     }
 
-    if( process.env.FAKEREDIS === 'false' || process.env.REDIS_HOST !== undefined ){
+    
       // You can opt to use a real redis DB
       // This is required for multi-server deployments
 
@@ -33,7 +33,7 @@ exports.default = {
       //   master_auth_pass: null,
       //   masterName: 'BUS',
       // };
-    }
+  
 
     return redisDetails;
   }
@@ -41,7 +41,7 @@ exports.default = {
 
 exports.test = { 
   redis: function(api){
-    var package = 'fakeredis';
+    var package = 'redis';
     if(process.env.FAKEREDIS === 'false'){
       package = 'redis';
     }
