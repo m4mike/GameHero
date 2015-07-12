@@ -44,7 +44,7 @@ exports.tictacMpMove = {
     name: "tictacMpMove",
     description: "a move by a human player of tic-tac-toe",
     inputs: {
-        gameId: {
+        idGame: {
             required: true,
             validator: function (s) { return s.indexOf("tic") == 0 }
             ,description:"the game Id, returned by game start in game.Id"
@@ -82,10 +82,10 @@ exports.tictacMpMove = {
     outputExample: {},
     version: 1.0,
     run: function (api, connection, next) {
-        var gameId = connection.params.gameId;
+        var idGame = connection.params.idGame;
         var x = parseInt(connection.params.x);
         var y = parseInt(connection.params.y);
-        api.tictac.loadGame(gameId, function (error, game) {
+        api.tictac.loadGame(idGame, function (error, game) {
             if (error != null) {
                 connection.response.error = { id : "404", desc : "Game not found" };
                 

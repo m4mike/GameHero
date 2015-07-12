@@ -7,11 +7,11 @@
             ignoreRoutes: ['/swagger'],
             // Specify how routes are grouped 
             routeTags : {
-                
+                'apps' : ['apps'],
                 'players' : ['players'],
-                'quests' : ['quests'],
-                'games' : ['tictac']
-
+                'quests' : ['quests','missions'],
+                'games' : ['tictac'],
+                'users' : ['users', 'interests']
             },
             // Generate documentation for simple actions specified by action-name 
             documentSimpleRoutes: false,

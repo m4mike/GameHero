@@ -22,22 +22,22 @@ module.exports.getMissions = function (next) {
     });
 };
 
-module.exports.getById = function (missionid, next) {
+module.exports.getById = function (idMission, next) {
     database.getDb(function (err, db) {
         if (err) {
             next(err);
         } else {
-            db.missions.findOne({ _id: missionid }, next);
+            db.missions.findOne({ _id: idMission }, next);
         }
     });
 }
 
-module.exports.getMissionsForApp = function (appId, next) {
+module.exports.getMissionsForApp = function (idApp, next) {
     database.getDb(function (err, db) {
         if (err) {
             next(err);
         } else {
-            db.missions.findOne({ id_app: appId }, next);
+            db.missions.findOne({ id_app: idApp }, next);
         }
     });
 };

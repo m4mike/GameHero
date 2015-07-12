@@ -35,14 +35,14 @@ exports.missionsForApp = {
     description: 'List all missions for an Application',
     outputExample: null,
     inputs: {
-        appId: {
+        idApp: {
             required: true,
             validator: null
         }
     },
     
     run: function (api, action, next) {
-        var id = action.params.appId;
+        var id = action.params.idApp;
          api.data.missions.getMissionsForApp(id, function (err, result) {
             if (err) {
                 next(err);
@@ -71,7 +71,7 @@ exports.missionById = {
     description: 'Get mision by Id',
     outputExample: null,
     inputs: {
-        id: {
+        idMission: {
             required: true,
             validator: null
         }
@@ -79,7 +79,7 @@ exports.missionById = {
     
     run: function (api, action, next) {
         
-        api.data.missions.getById(id, function (err, result) {
+        api.data.missions.getById(action.params.idMission, function (err, result) {
             if (err) {
                 next(err);
             } else {

@@ -1,4 +1,5 @@
 ﻿var database = null;
+var utils = require("../utils");
 
 module.exports.init = function (db) {
     database = db;
@@ -6,8 +7,18 @@ module.exports.init = function (db) {
 }
 
 
+module.exports.add = function (idUser, idApp, next) {
+    //todo
+    database.getDb(function (err, db) {
+        if (err) {
+            console.log("Failed to seed database: " + err);
+        } else {
+            db.players.insert(player, next);
+        }
+    });
+}; //addplayer
 
-module.exports.add = function (player, next) {
+module.exports.addPlayer = function (player, next) {
     database.getDb(function (err, db) {
         if (err) {
             console.log("Failed to seed database: " + err);
@@ -85,25 +96,28 @@ module.exports.save = function (player, next) {
         if (err) {
             next(err, null);
         } else {
-            db.players.save(player, { w: 1 }, next);
+            return db.players.save(player, { w: 1 }, function (err, data) {
+                if (err) return next(new Error("unable to save player"))
+                return next(data);
+            });
         }
+       
     });
 }
 
-var utils = require("../utils");
-module.exports.newplayer = function () {
+
+
+module.exports.getProto = function () {
     return {
-        _id : utils.randomId(),
+        _id : "p"+utils.randomId(7),
         id_external: null,
         counters: {
-            "diamonds": 10,
+           
             "exp": 0,
             "level": 1,
-            "energy": 0,
-            "money": 0,
-            "health": 0
+         
         }, 
-        "apps": [],
+        "id_app": null,
         "items": [],
         "badges": [],
         "quests": []

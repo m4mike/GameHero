@@ -68,13 +68,13 @@ exports.tictacView = {
     category: "tictac toe game",
     description: "I view the game board",
     inputs: {
-        gameId: inputGame
+        idGame: inputGame
     },
     outputExample: moveOutputExample,
     version: 1.0,
     run: function (api, action, next) {
-        var gameId = action.params.gameId;
-        api.tictac.loadGame(gameId, function (error, game) {
+        var idGame = action.params.idGame;
+        api.tictac.loadGame(idGame, function (error, game) {
             action.error = error;
             action.response.game = game;
             next();
@@ -86,15 +86,15 @@ exports.tictacMove = {
     name: "tictacMove",
     category: "tictac toe game",
     description: "a move by a human player of tic-tac-toe",
-    inputs: {gameId:inputGame,x:inputx,y:inputy},
+    inputs: {idGame:inputGame,x:inputx,y:inputy},
     
     outputExample: moveOutputExample,
     version: 1.0,
     run: function (api, action, next) {
-        var gameId = action.params.gameId;
+        var idGame = action.params.idGame;
         var x = parseInt(action.params.x);
         var y = parseInt(action.params.y);
-        api.tictac.loadGame(gameId, function (error, game) {
+        api.tictac.loadGame(idGame, function (error, game) {
             if (error != null) {
                 action.response.error = "404: Game not found" ;
                 

@@ -6,22 +6,22 @@ module.exports.init = function (db) {
 }
 
 
-module.exports.getById = function (questId, next) {
+module.exports.getById = function (iqQuest, next) {
     database.getDb(function (err, db) {
         if (err) {
             next(err);
         } else {
-            db.quests.findOne({ _id: questId }, next);
+            db.quests.findOne({ _id: iqQuest }, next);
         }
     });
 };
 
-module.exports.forMission = function (missionid, next) {
+module.exports.forMission = function (idMission, next) {
     database.getDb(function (err, db) {
         if (err) {
             next(err, null);
         } else {
-            db.quests.find({ id_missiond: missionid }).toArray(function (err, results) {
+            db.quests.find({ id_mission: idMission }).toArray(function (err, results) {
                 if (err) {
                     next(err, null);
                 } else {

@@ -18,7 +18,7 @@
                        
             });
             collection.link("All Users", utils.host + "/api/users/all")
-            .link("Create User", utils.host + "/api/users/new/:externaluserId");
+            .link("Create User", utils.host + "/api/users/new/:externalidUser");
             res.send(collection.toObject());
             
         });
@@ -46,9 +46,9 @@
             });
         });
         
-        app.get("/api/users/byId/:userId",
+        app.get("/api/users/byId/:idUser",
             function (req, res) {
-            data.users.getById(req.params.userId, function (err, user) {
+            data.users.getById(req.params.idUser, function (err, user) {
                 if (err) {
                     res.send(400, err);
                 } else {

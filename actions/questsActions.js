@@ -11,8 +11,8 @@ exports.quests = {
 
         var collection = new utils.HyperJson();
         collection
-            .link("For Mission", utils.host + "/api/quests/forMission/missionId")
-            .link("For App", utils.host + "/api/quests/forApp/appId");
+            .link("For Mission", utils.host + "/api/quests/forMission/idMission")
+            .link("For App", utils.host + "/api/quests/forApp/idApp");
 
         action.response = collection.toObject();
         action.response.error = null;
@@ -26,24 +26,24 @@ exports.questsForMission = {
     name: 'questsForMission',
     description: 'List possible quests for a mission',
     inputs: {
-        missionId: {
+        idMission: {
             required: true,
             validator: null
         }
     },
 
-    run: function (api, connection, next) {
-         api.data.quests.forMission(connection.params.missionId, function (err, result) {
+    run: function (api, action, next) {
+         api.data.quests.forMission(action.params.idMission, function (err, result) {
             if (err) {
                 next(err);
             } else {
                 if (result == null) {
-                    connection.rawConnection.responseHttpCode = "404";
+                    action.connection.rawConnection.responseHttpCode = "404";
                     next(new Error("not found"));
                 } else {
                     if (result.length == 0) {
-                        connection.rawConnection.responseHttpCode = "404";
-                        next(new Error("Mission not found: " + missionId));
+                        action.connection.rawConnection.responseHttpCode = "404";
+                        next(new Error("Mission not found: " + action.params.idMission));
                         return;
                     }
                     var collection = new utils.HyperJson({
@@ -51,7 +51,7 @@ exports.questsForMission = {
 
                     });
                     collection.addSelfIdsToItems(utils.host + "/api/quests/", "_id");
-                    connection.response = collection.toObject();
+                    action.response = collection.toObject();
                     next();
                 }
             }
@@ -64,14 +64,14 @@ exports.questsForApp = {
     name: 'questsForApp',
     description: 'List possible quests for a application',
     inputs: {
-        appId: {
+        idApp: {
             required: true,
             validator: null
         }
     },
 
     run: function (api, action, next) {
-        api.data.quests.forApp(action.params.appId, function (err, result) {
+        api.data.quests.forApp(action.params.idApp, function (err, result) {
             if (err) {
                 next(err);
             } else {

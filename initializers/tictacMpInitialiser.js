@@ -26,9 +26,9 @@ module.exports = {
                 }
             },
             
-            loadGame: function (gameId, callback) {
+            loadGame: function (idGame, callback) {
                
-                api.cache.load(gameId, function (error, data) {
+                api.cache.load(idGame, function (error, data) {
                     callback(error, new api.tictac.gamePrototype(data));
                 });
             },

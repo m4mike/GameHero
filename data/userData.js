@@ -1,10 +1,17 @@
 ﻿var database = null;
+var utils = require("../utils");
 
 module.exports.init = function (db) {
     database = db;
     return module.exports;
 }
 
+
+module.exports.searchOne = function (search, projection, next) {
+    database.getDb(function (err, db) {
+        db.users.findOne(search, projection, next);
+    });
+};
 
 module.exports.add = function (user, next) {
     database.getDb(function (err, db) {
@@ -16,22 +23,13 @@ module.exports.add = function (user, next) {
     });
 }; //adduser
 
-module.exports.getByUserName = function (username, next) {
-    database.getDb(function (err, db) {
-        if (err) {
-            next(err);
-        } else {
-            db.users.findOne({ username: username }, next);
-        }
-    });
-};//getuser
 
-module.exports.getById = function (userId, next) {
+module.exports.getById = function (idUser, next) {
     database.getDb(function (err, db) {
         if (err) {
             next(err);
         } else {
-            db.users.findOne({ _id: userId }, next);
+            db.users.findOne({ _id: idUser }, next);
         }
     });
 };//getuser
@@ -73,30 +71,34 @@ module.exports.save = function (user, next) {
         if (err) {
             next(err, null);
         } else {
-            db.users.save(user, { w: 1 }, next);
+            db.users.save(user, function (err, res) {
+                if (err)
+                    next(new Error('unable to save user'))
+                else
+                    next(null,user);
+            
+            })
         }
-    });
+    })
 }
 
-var utils = require("../utils");
-module.exports.newUser = function () {
+
+module.exports.createAndSaveUserFromPlayerAndApp = function (idApp, player, next){
+    if (id_app == null) return next(new Error("idApp was null"));
+    if (player == null) return next(new Error("player was null"));
+    var u = module.exports.getProto();
+    u._id = "u" + player._id.str.slice(1);
+    u.apps.push({ "id_app": idApp, "id_player": player._id });
+    api.data.users.save(u, next);
+}
+
+module.exports.getProto = function () {
     return {
-        _id : utils.randomId(),
-        id_external: null,
-        counters: {
-            "diamonds": 10,
-            "exp": 0,
-            "level": 1,
-            "energy": 0,
-            "money": 0,
-            "health": 0
-        }, 
-        "apps": [],
-        "items": [],
-        "badges": [],
-        "quests": []
+        "_id" : "u" + utils.randomId(7),
+        "apps" :[]
     }
 }
+
 
 
 

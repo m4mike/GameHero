@@ -4,21 +4,24 @@ exports.default = {
       
             get: [
                 { path: '/status', action: 'status' }, // (GET) /api/players
-               // { path: '/cacheTest/:key/:value', action: 'cacheTest' }, 
-               //{ path: '/random', action: 'randomNumber' }, // (GET) /api/players
-               // { path: '/sleep', action: 'sleepTest' }, // (GET) /api/players
                 
-                { path: '/tictac/start', action: 'tictacCreate' }, 
-                { path: '/tictac/start/:x/:y', action: 'tictacCreateAndStart' },
-                { path: '/tictac/view', action: 'tictacView' },
-                { path: '/tictac/play/:gameId/:x/:y', action: 'tictacMove' },
-                
+                { path: '/apps', action: 'appActions' },
+
+                { path: '/apps/:idApp/createPlayerForUser/:idUser', action: 'appCreatePlayer' },
+                { path: '/apps/list', action: 'appList' },
+               
+               
+                { path: '/users', action: 'userActions' },
+                { path: '/users/byId/:idUser', action: 'userById' },
+               
+                { path: '/players', action: 'playerActions' },
                 { path: '/players/byId/:playerId', action: 'playerById' },
                 { path: "/players/delete/:playerId", action: "playerDelete" }, 
-                { path: '/players', action: 'playerActions' }, 
+            
+                 
                 { path: '/quests', action: 'questsActions' }, 
-                { path: '/quests/forMission/:missionId', action: 'questsForMission' },
-                { path: '/quests/forApp/:appId', action: 'questsForApp' },
+                { path: '/quests/forMission/:idMission', action: 'questsForMission' },
+                { path: '/quests/forApp/:idApp', action: 'questsForApp' },
                 { path: '/quests/search/:search', action: 'questsSearch' },
                 
                 { path: '/missions', action: 'missionsList' },
@@ -27,8 +30,13 @@ exports.default = {
               
                 { path: '/interests', action: 'interestActions' },
                 { path: '/interests/add/:lang/:cat/:interest', action: 'addInterest' },
-                { path: '/interests/byId', action: 'missionById' },
+          //      { path: '/interests/byId', action: 'missionById' },
                 { path: '/interestsForCat/:lang/:cat', action: 'interestsForCat' },
+                
+                 { path: '/tictac/start', action: 'tictacCreate' }, 
+                { path: '/tictac/start/:x/:y', action: 'tictacCreateAndStart' },
+                { path: '/tictac/view', action: 'tictacView' },
+                { path: '/tictac/play/:idGame/:x/:y', action: 'tictacMove' },
 
 
                 { path: '/swagger', action: 'swagger' }

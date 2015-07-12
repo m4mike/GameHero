@@ -17,21 +17,21 @@
                        
             });
             collection.link("All Quests", utils.host + "/api/quests/all")
-            .link("For Mission", utils.host + "/api/quests/forMission/missionId")
-            .link("For App", utils.host + "/api/quests/forApp/appId");
+            .link("For Mission", utils.host + "/api/quests/forMission/idMission")
+            .link("For App", utils.host + "/api/quests/forApp/idApp");
             res.send(collection.toObject());
             
         });
 
         
 
-        app.get("/api/quests/formission/:missionId",
+        app.get("/api/quests/formission/:idMission",
             //auth.ensureApiAuthenticated,
             function (req, res) {
             
-            var missionId = req.params.missionId;
+            var idMission = req.params.idMission;
             
-            data.quests.getQuestsForMissionId(missionId, function (err, result) {
+            data.quests.getQuestsForidMission(idMission, function (err, result) {
                 if (err) {
                     res.send(400, err);
                 } else {
@@ -39,7 +39,7 @@
                         res.send(400, "not found");
                     } else {
                         if (result.length == 0) {
-                            utils.responses.notFoundError(req, res, "Mission not found: " + missionId);
+                            utils.responses.notFoundError(req, res, "Mission not found: " + idMission);
                             return;
                         }
                         var collection = new utils.hyperJson({
@@ -54,22 +54,22 @@
             
         });
         
-        app.get("/api/quests/forapp/:appId",
+        app.get("/api/quests/forapp/:idApp",
             //auth.ensureApiAuthenticated,
             function (req, res) {
             
         });
         
-        app.get("/api/quests/foruser/:userId",
+        app.get("/api/quests/foruser/:idUser",
             //auth.ensureApiAuthenticated,
             function (req, res) {
-            logic.quests.getValidQuestsForUser(req.params.userId, function (err, result) {
+            logic.quests.getValidQuestsForUser(req.params.idUser, function (err, result) {
                 if (err) {
                     res.send(400, err);
                 } else {
                     if (result == null) {
                        
-                            utils.responses.notFoundError(req, res, "Quests not found for user: " + req.params.userId);
+                            utils.responses.notFoundError(req, res, "Quests not found for user: " + req.params.idUser);
                             return;
                         
                     } else {
@@ -84,10 +84,10 @@
             });
         });
         
-        app.get("/api/quests/byId/:questId",
+        app.get("/api/quests/byId/:iqQuest",
             //auth.ensureApiAuthenticated,
             function (req, res) {
-            data.quests.getById(req.params.questId, function (err, result) {
+            data.quests.getById(req.params.iqQuest, function (err, result) {
                 if (err) {
                     res.send(400, err);
                 } else {

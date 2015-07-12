@@ -44,6 +44,7 @@
     <Content Include="public\o2c.html" />
     <Content Include="public\swagger.html" />
     <Content Include="README.md" />
+    <Compile Include="actions\appActions.js" />
     <Compile Include="actions\missionActions.js" />
     <Compile Include="actions\interestActions.js" />
     <Compile Include="actions\playerActions.js" />
@@ -65,6 +66,7 @@
     <Compile Include="controllers\missionController.js" />
     <Compile Include="controllers\questController.js" />
     <Compile Include="controllers\userController.js" />
+    <Compile Include="data\appData.js" />
     <Compile Include="data\interestData.js" />
     <Compile Include="data\playerData.js" />
     <Compile Include="gruntfile.js" />
@@ -86,6 +88,7 @@
     <Compile Include="data\seedData.js" />
     <Compile Include="data\userData.js" />
     <Compile Include="initializers\data.js" />
+    <Compile Include="initializers\dataSeed.js" />
     <Compile Include="initializers\mongo.js" />
     <Compile Include="initializers\tictacMpInitialiser.js" />
     <Compile Include="initializers\tictacInitializer.js" />
@@ -106,8 +109,9 @@
     <Compile Include="public\lib\underscore-min.js" />
     <Compile Include="public\swagger-ui.js" />
     <Compile Include="public\swagger-ui.min.js" />
+    <Compile Include="test\appDataTests.js" />
     <Compile Include="tt\dataTests.js" />
-    <Compile Include="test\interestTests.js" />
+    <Compile Include="tt\interestTests.js" />
     <Compile Include="tt\missionTests.js" />
     <Compile Include="tt\extractInterestsFromRedis.js" />
     <Compile Include="tt\tictacTest.js" />

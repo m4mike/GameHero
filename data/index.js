@@ -1,11 +1,7 @@
-﻿module.exports.missions = null;
-module.exports.quests = null;
-module.exports.players = null;
-module.exports.users = null;
-module.exports.database = this;
+﻿module.exports.database = this;
 module.exports.interests = require("./interestData.js");
 
-var cachedApi = null;
+var api = null;
 var database = null;
 var isSeeded = false;
 
@@ -20,15 +16,11 @@ module.exports.getDb = function (next) {
     return next(null, theDb)
 }
 
-module.exports.getDbPromise = function () { //returns theDb
-    
-    return bluebird.promisify(initDb);
-}
 
 var initDb = function (next) {
     if (theDb == null) {
         // connect to the database
-        cachedApi.mongo.getDb(function (err, db) {
+        api.mongo.getDb(function (err, db) {
             
             if (err) {
                 return next(err);
@@ -51,37 +43,42 @@ var initDb = function (next) {
 }
 
 
-module.exports.init = function (api) {
+module.exports.init = function (a) {
     
-    if (cachedApi == null) {
-        cachedApi = api; // save the reference once
-        console.log("initialising data");
+    if (api == null) {
+        api = a; // save the reference once
+        
+        module.exports.apps = require("./appData").init(this);
         module.exports.missions = require("./missionData").init(this);
         module.exports.quests = require("./questData.js").init(this);
         module.exports.players = require("./playerData.js").init(this);
         module.exports.users = require("./userData.js").init(this);
-        module.exports.interests = require("./interestData.js").init(cachedApi);
-        
+        module.exports.interests = require("./interestData.js").init(api);
     }
-    
     return module.exports;
 }
 
 module.exports.seed = function () {
-    seedDatabase();
+    async.parallel(
+        [function(cb){seedMongo(cb)},
+            function(cb){seedRedis(cb)}],function(err){
+        api.log("seed done");
+    })
+  
 }
 
 var async = require("async");
 var seedData = require("./seedData");
 var seedresult = { db: null, toSeed: false };
 
-var seedDatabase = function () {
+var seedMongo = function (next) {
+    api.log('Mong Seed check');
     async.series([
             // 
         function (callback) {
             module.exports.getDb(function (err, db) {
                 if (err) {
-                    console.log("Failed to seed database: " + err);
+                    api.log("Failed to seed database: " + err);
                 } else {
                     seedresult.db = db;
                     return callback();
@@ -91,15 +88,15 @@ var seedDatabase = function () {
         },
             //count missions
         function (callback) {
-            seedresult.db.missions.count(function (err, count) {
+            seedresult.db.users.count(function (err, count) {
                 if (err) {
-                    console.log("Failed to retrieve database count");
+                    api.log("Failed to retrieve database count");
                 } else {
                     if (count == 0) {
                         seedresult.toSeed = true;
-                        console.log("Database needs seeding");
+                        api.log("Database needs seeding");
                     } else {
-                        //console.log("Database already seeded");
+                       api.log("Mongo already seeded");
                         seedresult.toSeed = false;
                     }
                     return callback();
@@ -111,18 +108,18 @@ var seedDatabase = function () {
         if (err) return next(err);
         if (seedresult.toSeed) {
             
-            console.log("Seeding the Database...");
+            api.log("Seeding the Database...");
             async.parallel([
                     //insert users
                 function (callback) {
                     seedData.users.forEach(function (item) {
                         seedresult.db.users.insert(item, function (err) {
                             if (err)
-                                console.log("Failed to insert user into database: " + err);
+                                api.log("Failed to insert user into database: " + err);
                                 
                         });
                     });
-                    console.log("users seeded");
+                    api.log("users seeded");
                     callback();
                     
                 },
@@ -131,11 +128,11 @@ var seedDatabase = function () {
                     seedData.players.forEach(function (item) {
                         seedresult.db.players.insert(item, function (err) {
                             if (err)
-                                console.log("Failed to insert player into database: " + err);
+                                api.log("Failed to insert player into database: " + err);
                                 
                         });
                     });
-                    console.log("players seeded");
+                    api.log("players seeded");
                     callback();
                     
                 },
@@ -144,12 +141,12 @@ var seedDatabase = function () {
                     seedData.missions.forEach(function (item) {
                         seedresult.db.missions.insert(item, function (err) {
                             if (err)
-                                console.log("Failed to insert mission into database: " + err);
+                                api.log("Failed to insert mission into database: " + err);
                                
                         });
                             
                     });
-                    console.log("missions seeded");
+                    api.log("missions seeded");
                     callback();
                     
                 },
@@ -158,12 +155,12 @@ var seedDatabase = function () {
                     seedData.apps.forEach(function (item) {
                         seedresult.db.apps.insert(item, function (err) {
                             if (err)
-                                console.log("Failed to insert app into database: " + err);
+                                api.log("Failed to insert app into database: " + err);
                                
                         });
                             
                     });
-                    console.log("missions seeded");
+                    api.log("missions seeded");
                     callback();
                     
                 },
@@ -171,21 +168,31 @@ var seedDatabase = function () {
                 function (callback) {
                     seedData.quests.forEach(function (item) {
                         seedresult.db.quests.insert(item, function (err) {
-                            if (err) console.log("Failed to insert quests into database");
+                            if (err) api.log("Failed to insert quests into database");
                                 
                         });
                     });
-                    console.log("Quests seeded");
+                    api.log("Quests seeded");
                     callback();
                 }
             ],
-                function (err) { //This function gets called after the two tasks have called their "task callbacks"
-                return;
+                function (err) { 
+                    
+                    if(next)                     return next();
+                    return;
+            
             });
         }//if
     });//err
-}//seeddatabase
+}//seedMongo
 
+
+var seedRedis = function(next){
+    api.log("redis seed check");
+    if(next) return next();
+    return;
+    
+}
 
 
 

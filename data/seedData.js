@@ -3,10 +3,18 @@
     seedData.apps = [
         {
             "_id": "app_follow",
+            "counters": {
+                "exp": 0,
+                "level": 1
+            },
             "profile": {}
         },
         {
             "_id": "app_mlb",
+            "counters": {
+                "exp": 0,
+                "level": 1
+            },
             "profile": {
                 "energy": 20,
                 "health": 100,
@@ -18,8 +26,52 @@
     ];
 
     seedData.users = [
-        { _id: "u1" }, { _id: "u2" }
-    ];
+  {
+    "_id": "u1",
+    "apps": [
+      {
+        "id_app": "app_follow",
+        "id_player": "p1"
+                },
+                {
+                    "id_app": "app_mlb",
+                    "id_player": "p10"
+                }
+    ],
+    "interests_fr": {
+      "cats": [
+        {
+          "cat": "Autres",
+          "items": [
+            "Ferrari"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "_id": "u2",
+    "apps": [
+      {
+        "id_app": "app_follow",
+        "id_player": "p2"
+                },
+                {
+                    "id_app": "app_mlb",
+                    "id_player": "p12"
+                }
+    ]
+  },
+  {
+    "_id": "u3",
+    "apps": [
+      {
+        "id_app": "app_follow",
+        "id_player": "p3"
+      }
+    ]
+  }
+];
 
     seedData.players = [
         {
@@ -96,7 +148,7 @@
         },
         {
             "_id": "p3",
-            "id_user": "u1",
+            "id_user": "u3",
             "id_external": "an external id,ex authentication",
             "counters": {
                 "exp": 3100,

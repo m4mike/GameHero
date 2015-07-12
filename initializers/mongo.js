@@ -8,11 +8,12 @@ module.exports = {
         api.mongo.status = { open: false };
         
         
-        api.mongo.url = "mongodb://localhost:27017";
+        api.mongo.url = "mongodb://localhost:27017/gami";
         if (api.config.mongo != null) {
             if (api.config.mongo.url != null)
                 api.mongo.url = api.config.mongo.url;
         }
+        api.log('Mongo setup on ' + api.mongo.url);
         if (process.env.MONGOLAB_URI !=  null ) {
             // You can opt to use a real redis DB
             // This is required for multi-server deployments
@@ -26,26 +27,33 @@ module.exports = {
         
         
         api.mongo.getDb = function (next) {
-            api.mongo.MongoClient.connect(api.mongo.url, function (err, db) {
-                if (err) {
-                    return next(err);
-                } else {
-                    api.mongo.status.open = true;
-                    api.log('Mongo connection open', 'info');
-                    db.on('close', api.mongo.onClose);
-                    db.on('open', api.mongo.onOpen);
-                    return next(null, db);
-                }
-            });
+            try {
+                api.mongo.MongoClient.connect(api.mongo.url, function (err, db) {
+                    if (err) {
+                        api.log("unable to connect to mongo", 'critical');
+                        return next(err);
+                    } else {
+                        api.mongo.status.open = true;
+                        api.log('Mongo connection open', 'info');
+                        db.on('close', api.mongo.onClose);
+                        db.on('open', api.mongo.onOpen);
+                        return next(null, db);
+                    }
+                });
+            } catch (err) {
+                api.log("unable to open mongo", 'error');
+                next(err);
+            }
         }
         
         api.mongo.onClose = function () {
             api.mongo.status.open = false;
             api.log("Mongo connection closed", 'warn');
+            //todo : reconnect to mongo
         }
 
         api.mongo.onOpen = function () {
-            api.mongo.status.open = trur;
+            api.mongo.status.open = true;
             api.log("Mongo connection open", 'info');
         }
         next();

@@ -2,7 +2,7 @@
 var client;
 
 module.exports.init = function (api) {
-    api.log("initialising interests");
+    //api.log("initialising interests");
     client = api.redis.client;
     return module.exports;
 }
@@ -35,7 +35,7 @@ module.exports.existInterest = function (lang, cat, interest, next) {
 
 
 module.exports.getInterestsForCat = function (lang, cat, next) {
-    var catUrn = "urn:Cat:" +  cat.trim(); //todo add fr again
+    var catUrn = "urn:Cat:" + lang + ":" +  cat.trim();
     return client.smembers(catUrn, next);
 }
 

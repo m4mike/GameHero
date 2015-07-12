@@ -7,7 +7,8 @@ var api;
 
 describe('data tests', function () {
 
-  before(function (done) {
+    before(function (done) {
+        this.timeout(10000);
     actionhero.start(function (err, a) {
       api = a;
       done();
