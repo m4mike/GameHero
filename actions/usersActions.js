@@ -5,24 +5,121 @@ var async = require('async');
 exports.users = {
     name: 'userActions',
     description: 'List possible actions on users',
-    domain:"User",
+    domain: "User",
     outputExample: null,
-    
+
     run: function (api, action, next) {
-       
+
 
         var collection = new utils.HyperJson();
         collection.link("Find User by id", utils.host + "/api/users/byId/:idUser")
             .link(" DELETE Delete user, will delete its players", utils.host + "-delete-/api/users/:idUser")
             .link("Create player for App", utils.host + "/api/users/:idUser/addPlayer/:idPlayer/:app")
-        
+            .link("Add interest to user", utils.host + "/api/users/:idUser/addInterest/:lang/:cat/:interest")
+            .link("Remove interest from user", utils.host + "/api/users/:idUser/removeInterest/:lang/:cat/:interest")
+            .link("check if user has interest", utils.host + "/api/users/:idUser/hasInterest/:lang/:cat/:interest")
+
+
         action.response = collection.toObject();
         action.response.error = null;
-        
+
         next();
     }
-    
+
 };
+
+exports.userAddInterest = {
+    name: 'userAddInterest',
+    description: 'Add an interest to the user',
+    inputs: {
+        idUser: {
+            required: true,
+            validator: null
+        },
+        lang: {
+            required: true,
+            validator: null
+        },
+        cat: {
+            required: true,
+            validator: null
+        }, interest: {
+            required: true,
+            validator: null
+        }
+    },
+
+    run: function (api, action, next) {
+
+        api.data.users.addInterest("u3", "fr", "test", "iii", function (err, data) {
+            action.response = data;
+            next();
+        });
+    }
+};
+
+
+exports.userRemoveInterest = {
+    name: 'userRemoveInterest',
+    description: 'Remove an interest from the user',
+    inputs: {
+        idUser: {
+            required: true,
+            validator: null
+        },
+        lang: {
+            required: true,
+            validator: null
+        },
+        cat: {
+            required: true,
+            validator: null
+        }, interest: {
+            required: true,
+            validator: null
+        }
+    },
+
+    run: function (api, action, next) {
+
+        api.data.users.removeInterest("u3", "fr", "test", "iii", function (err, data) {
+            action.response = data;
+            next();
+        });
+    }
+};
+
+
+exports.userHasInterest = {
+    name: 'userHasInterest',
+    description: 'Check if the user has that interest ',
+    inputs: {
+        idUser: {
+            required: true,
+            validator: null
+        },
+        lang: {
+            required: true,
+            validator: null
+        },
+        cat: {
+            required: true,
+            validator: null
+        }, interest: {
+            required: true,
+            validator: null
+        }
+    },
+
+    run: function (api, action, next) {
+
+        api.data.users.hasInterest("u3", "fr", "test", "iii", function (err, data) {
+            action.response = data;
+            next();
+        });
+    }
+};
+
 
 exports.userById = {
     name: 'userById',
@@ -33,23 +130,23 @@ exports.userById = {
             validator: null
         }
     },
-    
+
     run: function (api, action, next) {
-        
+
         api.data.users.getById(action.params.idUser, function (err, result) {
             if (err || result == null || result.length == 0) {
-                
+
                 action.connection.rawConnection.responseHttpCode = "404";
                 return next(new Error("not found"));
             } else {
-                
+
                 action.response = result;
                 next();
             }
-             
+
         })
     }
-    
+
 };
 
 exports.createPlayerForApp = {
@@ -61,35 +158,35 @@ exports.createPlayerForApp = {
             validator: null
         }
     },
-    
+
     run: function (api, action, next) {
         // get the user adn his apps
         //  if the user already plays the app -> return player 
         // create a player for the app
         // -> return player
         
-        var temp = { user : null, abort: false, err: null };
-        
+        var temp = { user: null, abort: false, err: null };
+
         async.series(
             [
                 //get user
                 function (cb) {
-                    api.data.users.searchOne({ "_id" : action.params.idUser }, { "_id": 1, "apps": 1 }, function (err, result) {
+                    api.data.users.searchOne({ "_id": action.params.idUser }, { "_id": 1, "apps": 1 }, function (err, result) {
                         if (err || result == null || result.length == 0) {
                             temp.err = new Error('user not found');
                             temp.abort = true;
                             return cb();
                         }
                         temp.user = result;
-                        
+
                         return cb();
                     });
                 },
                 function (cb) {
                     if (temp.abort) return cb();
-                    var selected = _.where(temp.users, { "apps.idapp" : action.params.idApp });
-                        
-                    
+                    var selected = _.where(temp.users, { "apps.idapp": action.params.idApp });
+
+
                 }
             ]
             , function (err) {
@@ -107,9 +204,9 @@ exports.userDelete = {
             validator: null
         }
     },
-    
+
     run: function (api, action, next) {
-         api.data.users.deleteById(action.params.idUser, function (err, result) {
+        api.data.users.deleteById(action.params.idUser, function (err, result) {
             if (err) {
                 next(err);
             } else {
@@ -132,6 +229,6 @@ exports.userDelete = {
                 }
             }
         });
-        
+
     }
 };

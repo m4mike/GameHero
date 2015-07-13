@@ -1,10 +1,79 @@
 ﻿var database = null;
 var utils = require("../utils");
+var _ = require('lodash');
 
 module.exports.init = function (db) {
     database = db;
     return module.exports;
 }
+
+
+module.exports.addInterest = function (idUser, lang, cat, interest, next) {
+    database.getDb(function (err, db) {
+        var inter = "interests_" + lang.trim()
+        var command = {
+            "$addToSet": 
+            {
+                
+            }
+        };
+        command.$addToSet[inter] = { "c": cat, "i": interest };
+        db.users.update( { _id: idUser }, command  , next);
+    });
+};
+
+module.exports.hasInterest = function (idUser, lang, cat, interest, next) {
+    //example query:
+    /*
+     * db.getCollection('users').find(
+            {   _id:"u3",
+                "interests_fr" :   { "$elemMatch" : { c: "test", i:"ii"} }
+            }
+        )
+     * 
+     * */
+    
+    database.getDb(function (err, db) {
+        
+        var command = { "_id" : idUser };
+        command["interests_" + lang.trim()] = {
+            $elemMatch: {c: cat, i:interest}
+        };
+        
+        db.users.findOne(command, { _id: 1 }  , function (err, u) {
+            if (u == null)
+                next(null, false)
+            else
+                next(null, true);
+        });
+    });
+};
+
+module.exports.removeInterest = function (idUser, lang, cat, interest, next) {
+    //get user, remove interest, save interest field back
+    
+    database.getDb(function (err, db) {
+        var proj = {}; proj["interests_" + lang] = 1;
+        db.users.findOne({_id:idUser}, proj, function (err, u) {
+            var unter = u["interests_" + lang];
+            if (unter == null) next(null, 0);
+            var elem =_.remove(unter, function (int) {
+                return int.c == cat && int.i == interest;
+            });
+            if (elem == null) next(null, 0);
+            var updateCommand = {};
+            updateCommand["interests_" + lang] = unter;
+            
+
+            db.users.update({ _id: u._id }, { $set : updateCommand, $currentDate: { lastModified: true } }, function (err1, r2) { 
+                next(null, r2.result);
+            });
+        
+        });//findone
+       
+    });
+};
+
 
 
 module.exports.searchOne = function (search, projection, next) {
@@ -75,7 +144,7 @@ module.exports.save = function (user, next) {
                 if (err)
                     next(new Error('unable to save user'))
                 else
-                    next(null,user);
+                    next(null, user);
             
             })
         }
@@ -83,7 +152,7 @@ module.exports.save = function (user, next) {
 }
 
 
-module.exports.createAndSaveUserFromPlayerAndApp = function (idApp, player, next){
+module.exports.createAndSaveUserFromPlayerAndApp = function (idApp, player, next) {
     if (id_app == null) return next(new Error("idApp was null"));
     if (player == null) return next(new Error("player was null"));
     var u = module.exports.getProto();
@@ -95,7 +164,7 @@ module.exports.createAndSaveUserFromPlayerAndApp = function (idApp, player, next
 module.exports.getProto = function () {
     return {
         "_id" : "u" + utils.randomId(7),
-        "apps" :[]
+        "apps" : []
     }
 }
 

@@ -1,7 +1,8 @@
-module.exports.interests = 
+module.exports.interests =
 [
   {
-      "lang":"fr",
+    "_id":"int:music:fr",
+    "lang": "fr",
     "cat": "Musique",
     "items": [
       "Robbie Williams",
@@ -220,7 +221,8 @@ module.exports.interests =
     ]
   },
   {
-      "lang": "fr",
+      "_id":"int:sport:fr",
+    "lang": "fr",
     "cat": "Sports",
     "items": [
       "Floyd Mayweather",
@@ -327,6 +329,7 @@ module.exports.interests =
     ]
   },
   {
+      "_id": "int:passion:fr",
     "cat": "Loisirs/Passions",
     "items": [
       "Voyages nature",
@@ -434,7 +437,8 @@ module.exports.interests =
     ]
   },
   {
-      "lang": "fr",
+      "_id": "int:beauty:fr",
+    "lang": "fr",
     "cat": "Mode et beauté",
     "items": [
       "Rose fluo",
@@ -814,7 +818,8 @@ module.exports.interests =
     ]
   },
   {
-      "lang": "fr",
+      "_id": "int:games:fr",
+    "lang": "fr",
     "cat": "Jeux",
     "items": [
       "The Elder Scrolls",
@@ -902,7 +907,8 @@ module.exports.interests =
     ]
   },
   {
-      "lang": "fr",
+      "_id": "int:games:movie",
+    "lang": "fr",
     "cat": "Films et émissions TV",
     "items": [
       "Borat",
@@ -1280,7 +1286,8 @@ module.exports.interests =
     ]
   },
   {
-      "lang": "fr",
+      "_id": "int:popular:fr",
+    "lang": "fr",
     "cat": "Les plus populaires",
     "items": [
       "Extreme",
@@ -1678,7 +1685,8 @@ module.exports.interests =
     ]
   },
   {
-      "lang": "fr",
+      "_id": "int:book:fr",
+    "lang": "fr",
     "cat": "Livres/Culture",
     "items": [
       "Littérature anglaise",
@@ -1746,7 +1754,7 @@ module.exports.interests =
       "Thomas Hardy",
       "Jane Eyre",
       "Théâtre",
-       "Roman historique",
+      "Roman historique",
       "Chocolat amer (Laura Esquivel)",
       "Jane Austen",
       "Bible",
@@ -1783,7 +1791,8 @@ module.exports.interests =
     ]
   },
   {
-      "lang": "fr",
+      "_id": "int:other:fr",
+    "lang": "fr",
     "cat": "Autres",
     "items": [
       "Chats",
@@ -1903,7 +1912,7 @@ module.exports.interests =
     ]
   },
   {
-      "lang": "fr",
+    "lang": "fr",
     "cat": "Voyages",
     "items": [
       "Saint Marin",

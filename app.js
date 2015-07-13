@@ -3,7 +3,7 @@ var actionhero = new ActionheroPrototype();
 var api;
 
 process.env.FAKEREDIS = 'false';
-process.env.port = 3000;
+//process.env.port = 3000;
 var should = require('should');
 var async = require('async');
 var assert = require('assert');

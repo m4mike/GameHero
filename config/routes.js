@@ -3,7 +3,8 @@ exports.default = {
     return {
       
             get: [
-                { path: '/status', action: 'status' }, // (GET) /api/players
+                { path: '/status', action: 'status' }, 
+                { path: '/debug', action: 'debugtest' }, 
                 
                 { path: '/apps', action: 'appActions' },
 
@@ -13,6 +14,11 @@ exports.default = {
                
                 { path: '/users', action: 'userActions' },
                 { path: '/users/byId/:idUser', action: 'userById' },
+                { path: '/users/:idUser/addInterest/:lang/:cat/:interest',action:'userAddInterest'},
+                { path: '/users/:idUser/removeInterest/:lang/:cat/:interest',action:'userRemoveInterest'},
+                { path: '/users/:idUser/hasInterest/:lang/:cat/:interest',action:'userHasInterest'},
+          
+  
                
                 { path: '/players', action: 'playerActions' },
                 { path: '/players/byId/:playerId', action: 'playerById' },

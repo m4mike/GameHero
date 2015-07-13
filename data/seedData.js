@@ -26,52 +26,51 @@
     ];
 
     seedData.users = [
-  {
-    "_id": "u1",
-    "apps": [
-      {
-        "id_app": "app_follow",
-        "id_player": "p1"
+        {
+            "_id": "u1",
+            "apps": [
+                {
+                    "id_app": "app_follow",
+                    "id_player": "p1"
                 },
                 {
                     "id_app": "app_mlb",
                     "id_player": "p10"
                 }
-    ],
-    "interests_fr": {
-      "cats": [
+            ],
+            "interests": {
+                "lang": "fr",
+                "items": [
+                    {
+                        "c": "Autres",
+                        "i": "Ferrari"
+                    }
+                ]
+            }
+        },
         {
-          "cat": "Autres",
-          "items": [
-            "Ferrari"
-          ]
-        }
-      ]
-    }
-  },
-  {
-    "_id": "u2",
-    "apps": [
-      {
-        "id_app": "app_follow",
-        "id_player": "p2"
+            "_id": "u2",
+            "apps": [
+                {
+                    "id_app": "app_follow",
+                    "id_player": "p2"
                 },
                 {
                     "id_app": "app_mlb",
                     "id_player": "p12"
                 }
-    ]
-  },
-  {
-    "_id": "u3",
-    "apps": [
-      {
-        "id_app": "app_follow",
-        "id_player": "p3"
-      }
-    ]
-  }
-];
+            ]
+        },
+        {
+            "_id": "u3",
+            "apps": [
+                {
+                    "id_app": "app_follow",
+                    "id_player": "p3"
+                }
+            ]
+        }
+    ];
 
     seedData.players = [
         {

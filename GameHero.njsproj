@@ -49,6 +49,7 @@
     <Compile Include="actions\interestActions.js" />
     <Compile Include="actions\playerActions.js" />
     <Compile Include="actions\swagger.js" />
+    <Compile Include="actions\debugtest.js" />
     <Compile Include="actions\testActions\showDocumentation.js" />
     <Compile Include="actions\tictacMp.js" />
     <Compile Include="actions\tictacActions.js" />
@@ -109,9 +110,9 @@
     <Compile Include="public\lib\underscore-min.js" />
     <Compile Include="public\swagger-ui.js" />
     <Compile Include="public\swagger-ui.min.js" />
-    <Compile Include="test\appDataTests.js" />
+    <Compile Include="tt\appDataTests.js" />
     <Compile Include="tt\dataTests.js" />
-    <Compile Include="tt\interestTests.js" />
+    <Compile Include="test\interestTests.js" />
     <Compile Include="tt\missionTests.js" />
     <Compile Include="tt\extractInterestsFromRedis.js" />
     <Compile Include="tt\tictacTest.js" />

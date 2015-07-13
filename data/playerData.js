@@ -7,24 +7,14 @@ module.exports.init = function (db) {
 }
 
 
-module.exports.add = function (idUser, idApp, next) {
-    //todo
-    database.getDb(function (err, db) {
-        if (err) {
-            console.log("Failed to seed database: " + err);
-        } else {
-            db.players.insert(player, next);
-        }
-    });
-}; //addplayer
-
 module.exports.addPlayer = function (player, next) {
-    database.getDb(function (err, db) {
+       database.getDb(function (err, db) {
         if (err) {
-            console.log("Failed to seed database: " + err);
+            next(err);
         } else {
-            db.players.insert(player, next);
-        }
+          
+          db.players.insert(player, next);
+       }
     });
 }; //addplayer
 

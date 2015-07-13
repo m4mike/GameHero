@@ -1,5 +1,4 @@
 ﻿module.exports.database = this;
-module.exports.interests = require("./interestData.js");
 
 var api = null;
 var database = null;
@@ -33,7 +32,8 @@ var initDb = function (next) {
                     quests: db.collection("quests"),
                     missions : db.collection("missions"),
                     players: db.collection("players"),
-                    users: db.collection("users")
+                    users: db.collection("users"),
+                    interests:db.collection("interests")
                 };
                 
                 return next(null, theDb);
@@ -54,16 +54,13 @@ module.exports.init = function (a) {
         module.exports.players = require("./playerData.js").init(this);
         module.exports.users = require("./userData.js").init(this);
         module.exports.interests = require("./interestData.js").init(api);
+       
     }
     return module.exports;
 }
 
 module.exports.seed = function () {
-    async.parallel(
-        [function(cb){seedMongo(cb)},
-            function(cb){seedRedis(cb)}],function(err){
-        api.log("seed done");
-    })
+    seedMongo();
   
 }
 
@@ -174,25 +171,29 @@ var seedMongo = function (next) {
                     });
                     api.log("Quests seeded");
                     callback();
+                },
+                 //insert interests
+                function (callback) {
+                    require('./seedInterests').interests.forEach(function (item) {
+                        item._id = "urn:cat:" + item.lang + ":" + item.cat;
+                        seedresult.db.interests.insert(item,function(err){
+                             if (err) api.log("Failed to insert interests into mongo",'error');
+                        })
+                    });
+                    api.log("Interests seeded");
+                    callback();
                 }
+                
             ],
                 function (err) { 
-                    
-                    if(next)                     return next();
+                    if (err) api.log(err,'error');
+                    if(next)  return next();
                     return;
-            
-            });
+           });
         }//if
     });//err
 }//seedMongo
 
-
-var seedRedis = function(next){
-    api.log("redis seed check");
-    if(next) return next();
-    return;
-    
-}
 
 
 

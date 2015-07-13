@@ -1,7 +1,7 @@
 var utils = require("../utils")
 
 
-exports.interests = {
+exports.interestActions = {
     name: 'interestActions',
     description: 'List possible actions on interests',
     domain:"player",
@@ -16,7 +16,7 @@ exports.interests = {
             .link("Add interest to player", utils.host + "/api/interests/addtoplayer/:lang/:cat/:interest/:player")
             .link("Remove interest from player", utils.host + "/api/interests/removeFromPlayer/:lang/:cat/:interest/:player")
             .link("Remove interest from user", utils.host + "/api/interests/removeFromPlayer/:lang/:cat/:interest/:player")
-            .link("Add interest to user", utils.host + "/api/interests/addtoplayer/:lang/:cat/:interest/:user");
+            .link("Add interest to user", utils.host + "/api/interests/addtoUser/:lang/:cat/:interest/:user");
         
         
         action.response = collection.toObject();

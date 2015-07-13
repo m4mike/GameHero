@@ -23,7 +23,7 @@ module.exports = {
         }
        
         api.mongo.MongoClient = require('mongodb').MongoClient;
-        api.mongo.Db = require('mongodb').Db;
+        //api.mongo.Db = require('mongodb').Db;
         
         
         api.mongo.getDb = function (next) {
