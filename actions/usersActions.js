@@ -1,5 +1,4 @@
 var utils = require("../utils")
-var Promise = require('bluebird');
 var async = require('async');
 
 exports.users = {

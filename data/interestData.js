@@ -1,6 +1,6 @@
 ﻿// uses a combination of mongo and redis
 _ = require('lodash');
-var Promise = require('bluebird');
+
 var client; // for redis
 var data; // for mongo
 

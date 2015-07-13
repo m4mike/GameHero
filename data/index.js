@@ -4,7 +4,7 @@ var api = null;
 var database = null;
 var isSeeded = false;
 
-var bluebird = require('bluebird');
+
 var theDb = null; //singleton
 var url = "";
 

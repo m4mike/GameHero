@@ -3,36 +3,12 @@ process.env.FAKEREDIS = 'false';
 var redis = require("redis");
 var client = redis.createClient();
 var fs = require('fs');
-//var Promise = require('bluebird');
-//Promise.promisifyAll(client);
+
 var async = require('async');
 
 var results = [];
  
 
-
-// // All your redis commands return promises now.
-// client.keysAsync("urn:Cat*")
-//     .then(function(keys){
-//         console.log(keys);
-//         for (var i = 0, len = keys.length; i < len; i++) {
-//             client.smembersAsync(keys[i]).then(function(members){
-//             var o = { Cat: keys[i], items: members };
-//             console.log(" delayed" + keys[i]);
-//                 results.push(o);
-//             }).catch(function(ee){
-//                 console.log(ee)})
-//         };
-//     console.log('result');
-//     console.log(JSON.stringify(results));
-// 
-// 
-//     })
-//     
-//         
-//     .catch(function(err){
-//         console.log(err)});
- 
  
  
 var oKeys;
