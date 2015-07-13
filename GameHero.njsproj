@@ -60,6 +60,7 @@
     <Compile Include="actions\usersActions.js" />
     <Compile Include="app.js" />
     <Compile Include="config\mongo.js" />
+    <Compile Include="config\redis.js" />
     <Compile Include="config\swagger.js" />
     <Compile Include="controllers\actionController.js" />
     <Compile Include="controllers\homeController.js" />
@@ -76,7 +77,6 @@
     <Compile Include="config\errors.js" />
     <Compile Include="config\logger.js" />
     <Compile Include="config\plugins.js" />
-    <Compile Include="config\redis.js" />
     <Compile Include="config\routes.js" />
     <Compile Include="config\stats.js" />
     <Compile Include="config\tasks.js" />
@@ -90,6 +90,7 @@
     <Compile Include="data\userData.js" />
     <Compile Include="initializers\data.js" />
     <Compile Include="initializers\dataSeed.js" />
+    <Compile Include="node_modules\actionhero\initializers\redis.js" />
     <Compile Include="initializers\mongo.js" />
     <Compile Include="initializers\tictacMpInitialiser.js" />
     <Compile Include="initializers\tictacInitializer.js" />
@@ -97,7 +98,6 @@
     <Compile Include="logic\playerLogic.js" />
     <Compile Include="logic\questLogic.js" />
     <Compile Include="logic\userLogic.js" />
-    <Compile Include="node_modules\actionhero\initializers\redis.js" />
     <Compile Include="public\lib\backbone-min.js" />
     <Compile Include="public\lib\handlebars-2.0.0.js" />
     <Compile Include="public\lib\highlight.7.3.pack.js" />
