@@ -75,13 +75,11 @@ exports.production = {
     servers: {
         web: function (api) {
             return {
-                bindIP: 'test-mbe.herokuapp.com',   //for heroku      
-                port : 443,       
-                secure: true,  
-                padding: null,
+                secure: true,
+                matchExtensionMime: true,
                 metadataOptions: {
-                    serverInformation: false,
-                    requesterInformation: false
+                    serverInformation: true,
+                    requesterInformation: true
                 }
             }
         }
