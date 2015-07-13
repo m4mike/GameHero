@@ -24,3 +24,16 @@
         }
     }
 }
+
+exports.production = {
+    swagger: function (api) {
+        console.log('production: setting swagger to heroku');
+        return {
+            // Should be changed to hit www.yourserver.com 
+            baseUrl: 'https://test-mbe.herokuapp.com',
+           
+           
+        }
+    }
+
+}
