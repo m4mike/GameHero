@@ -10,7 +10,7 @@
     "actionhero": "11.2.4",
     "async": "^1.3.0",
     "lodash": "^3.10.0",
-    "mongodb": "^2.0.35",
+    "mongodb": "^2.0.36",
     "redis": "^0.12.1",
     "redis-url": "^1.2.0",
     "ws": "latest"

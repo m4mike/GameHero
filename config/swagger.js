@@ -1,15 +1,15 @@
 ﻿exports['default'] = {
     swagger: function (api) {
-        return {
+        var swag = {
             // Should be changed to hit www.yourserver.com 
-            baseUrl: '127.0.0.1',
+            baseUrl: 'http://localhost',
             // Specify routes that don't need to be displayed 
             ignoreRoutes: ['/swagger'],
             // Specify how routes are grouped 
             routeTags : {
                 'apps' : ['apps'],
                 'players' : ['players'],
-                'quests' : ['quests','missions'],
+                'quests' : ['quests', 'missions'],
                 'games' : ['tictac'],
                 'users' : ['users', 'interests']
             },
@@ -21,6 +21,14 @@
             groupByVersionTag: false,
             // For simple routes, groups all actions under a single category 
             groupBySimpleActionTag: true
+        };
+
+        if (process.env.NODE_ENV == 'production' || process.env.NPM_CONFIG_PRODUCTION) {
+            console.log('config prod override  ');
+            swag.baseUrl = 'https://test-mbe.herokuapp.com';
         }
+        return swag;
+
+        
     }
 }
