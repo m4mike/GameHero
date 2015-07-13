@@ -14,7 +14,6 @@ exports.default = {
         bindIP: '0.0.0.0',
         // Any additional headers you want actionhero to respond with
         httpHeaders : {
-          'X-Powered-By'                : api.config.general.serverName,
           'Access-Control-Allow-Origin' : '*',
                     //         'Access-Control-Allow-Methods': 'HEAD, GET, POST, PUT, PATCH, DELETE, OPTIONS, TRACE',
           'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE',
@@ -31,7 +30,7 @@ exports.default = {
         //  Visitors can always visit /api and /public as normal
         rootEndpointType : 'file',
         // simple routing also adds an 'all' route which matches /api/:action for all actions
-        simpleRouting : false,
+        simpleRouting : true,
         // queryRouting allows an action to be defined via a URL param, ie: /api?action=:action
         queryRouting : true,
         // The header which will be returned for all flat file served from /public; defined in seconds
@@ -75,7 +74,8 @@ exports.default = {
 exports.production = { 
   servers: {
     web: function(api){
-      return {
+            return {
+        bindIP: 'test-mbe.herokuapp.com',   //for heroku               
         padding: null,
         metadataOptions: {
           serverInformation: false,
