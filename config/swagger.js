@@ -2,7 +2,7 @@
     swagger: function (api) {
         return {
             // Should be changed to hit www.yourserver.com 
-            baseUrl: '127.0.0.1',
+            baseUrl: 'http://localhost',
             // Specify routes that don't need to be displayed 
             ignoreRoutes: ['/swagger'],
             // Specify how routes are grouped 
