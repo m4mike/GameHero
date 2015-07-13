@@ -5,6 +5,10 @@ module.exports = {
     stopPriority: 1000,
     loadPriority: 1000,
     initialize: function (api, next) {
+        
+        console.log(JSON.stringify(process.env));
+        
+
         api.log("Initialisation of api data");
         api.data = require("../data").init(api);
         
