@@ -90,6 +90,7 @@
     <Compile Include="data\userData.js" />
     <Compile Include="initializers\data.js" />
     <Compile Include="initializers\dataSeed.js" />
+    <Compile Include="initializers\swagger.js" />
     <Compile Include="node_modules\actionhero\initializers\redis.js" />
     <Compile Include="initializers\mongo.js" />
     <Compile Include="initializers\tictacMpInitialiser.js" />
