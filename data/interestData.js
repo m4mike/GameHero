@@ -58,7 +58,7 @@ module.exports.getInterestsForCat = function (lang, cat, next) {
 
 module.exports.getRandomInterestsForCat = function (lang, cat, amount, next) {
     amount = typeof amount !== 'undefined' ? amount : 20;
-    var catUrn = "urn:cat:" + cat.trim();
+    var catUrn = "urn:cat:" +lang.trim()+':' + cat.trim();
     return client.srandmember(catUrn, amount, next);
 }
 module.exports.removeCat = function (lang, cat, next) {

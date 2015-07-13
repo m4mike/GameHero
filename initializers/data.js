@@ -6,15 +6,12 @@ module.exports = {
     loadPriority: 1000,
     initialize: function (api, next) {
         
-        console.log(JSON.stringify(process.env));
+        //console.log(JSON.stringify(process.env));
         
-
         api.log("Initialisation of api data");
         api.data = require("../data").init(api);
         
-        
-      
-        
+         
         var client = api.redis.client;
         
         var key;

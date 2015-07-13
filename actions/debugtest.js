@@ -1,5 +1,5 @@
 ﻿var utils = require("../utils")
-var async = require('async');
+
 var _ = require('lodash');
 
 exports.debugtest = {
@@ -9,19 +9,21 @@ exports.debugtest = {
     
     run: function (api, action, done) {
         
-        
-        api.data.users.addInterest("u3", "fr", "Sports", "Parachutisme", function (err, data) {
-            console.log(data);
+     
+            api.data.interests.getRandomInterestsForCat('fr',"Autres",5, function (err, data) {
+            console.log(JSON.stringify(data));
             
-          //  api.data.users.removeInterest("u3", "fr", "test", "iii", function (err1, data1) {
-                
-                
+                   action.response = data;
+             
+               done();
+            })
+    }
+           
                
-                    action.response = data.result;
-                    done();
+                  
                
         
-         });
-    }
+         
+    
     
 };

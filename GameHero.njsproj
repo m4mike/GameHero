@@ -62,12 +62,6 @@
     <Compile Include="config\mongo.js" />
     <Compile Include="config\redis.js" />
     <Compile Include="config\swagger.js" />
-    <Compile Include="controllers\actionController.js" />
-    <Compile Include="controllers\homeController.js" />
-    <Compile Include="controllers\index.js" />
-    <Compile Include="controllers\missionController.js" />
-    <Compile Include="controllers\questController.js" />
-    <Compile Include="controllers\userController.js" />
     <Compile Include="data\appData.js" />
     <Compile Include="data\interestData.js" />
     <Compile Include="data\playerData.js" />
@@ -134,7 +128,6 @@
     <Folder Include="actions\testActions\" />
     <Folder Include="config" />
     <Folder Include="config\servers" />
-    <Folder Include="controllers\" />
     <Folder Include="initializers\" />
     <Folder Include="log" />
     <Folder Include="node_modules\" />

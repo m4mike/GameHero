@@ -145,8 +145,30 @@ describe('Redis tests', function () {
 
     });
 
+    it('listing categories for a language', function (done) {
+
+        api.data.interests.listCats('fr', function (err, data) {
+            assert(data != null);
+            assert(data.length > 0);
+            done();
+        });
+    })
+
+    it('getting random interests for a language and cat', function (done) {
+
+        api.data.interests.getRandomInterestsForCat('fr',"Autres",5, function (err, data) {
+            console.log(JSON.stringify(data));
+            
+            assert(data != null);
+            assert(data.length > 0);
+            console.log(JSON.stringify(data));
+            done();
+        });
+    })
+    
 
 });
+
 
 
 

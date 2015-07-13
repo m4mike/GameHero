@@ -2,7 +2,7 @@
     swagger: function (api) {
         var swag = {
             // Should be changed to hit www.yourserver.com 
-            baseUrl: 'http://localhost',
+            baseUrl: 'localhost',
             // Specify routes that don't need to be displayed 
             ignoreRoutes: ['/swagger'],
             // Specify how routes are grouped 
@@ -21,11 +21,12 @@
             groupByVersionTag: false,
             // For simple routes, groups all actions under a single category 
             groupBySimpleActionTag: true
-        };
+        }
+        
 
         if (process.env.NODE_ENV == 'production' || process.env.NPM_CONFIG_PRODUCTION) {
-            console.log('config prod override  ');
-            swag.baseUrl = 'https://test-mbe.herokuapp.com';
+            console.log('config prod override for swagger ');
+            swag.baseUrl = 'test-mbe.herokuapp.com';
         }
         return swag;
 

@@ -12,6 +12,9 @@ exports.default = {
                 // Which IP to listen on (use '0.0.0.0' for all; '::' for all on ipv4 and ipv6)
                 // Set to `null` when listening to socket
                 bindIP: '0.0.0.0',
+                
+                baseUrl: 'localhost',
+
                 // Any additional headers you want actionhero to respond with
                 httpHeaders : {
                     'Access-Control-Allow-Origin' : '*',
@@ -71,20 +74,16 @@ exports.default = {
     }
 }
 
-exports.production = {
+exports.test = {
     servers: {
         web: function (api) {
-            return {
-                secure: true,
-                matchExtensionMime: true,
-                metadataOptions: {
-                    serverInformation: true,
-                    requesterInformation: true
-                }
+            return{
+                baseUrl : test-mbe.herokuapp.com
             }
         }
     }
 }
+
 
 exports.test = {
     servers: {

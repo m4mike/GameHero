@@ -6,7 +6,7 @@ process.env.FAKEREDIS = 'false';
 //process.env.NODE_ENV = 'production';
 //process.env.port = 3000;
 var should = require('should');
-var async = require('async');
+
 var assert = require('assert');
 var _ = require('lodash');
 

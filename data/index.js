@@ -78,8 +78,9 @@ var seedMongo = function (next) {
                     api.log("Failed to seed database: " + err);
                 } else {
                     seedresult.db = db;
-                    return callback();
+                    
                 }
+                return callback();
             });//getdb
                 
         },
@@ -96,8 +97,9 @@ var seedMongo = function (next) {
                        api.log("Mongo already seeded");
                         seedresult.toSeed = false;
                     }
-                    return callback();
+                    
                 }
+                return callback();
             });
                 
         }
@@ -117,7 +119,7 @@ var seedMongo = function (next) {
                         });
                     });
                     api.log("users seeded");
-                    callback();
+                    return callback();
                     
                 },
                 //insert players
@@ -126,11 +128,11 @@ var seedMongo = function (next) {
                         seedresult.db.players.insert(item, function (err) {
                             if (err)
                                 api.log("Failed to insert player into database: " + err);
-                                
+                            
                         });
                     });
                     api.log("players seeded");
-                    callback();
+                    return callback();
                     
                 },
                 //insert missions
@@ -144,7 +146,7 @@ var seedMongo = function (next) {
                             
                     });
                     api.log("missions seeded");
-                    callback();
+                    return callback();
                     
                 },
                     //insert apps
@@ -158,7 +160,7 @@ var seedMongo = function (next) {
                             
                     });
                     api.log("missions seeded");
-                    callback();
+                    return callback();
                     
                 },
                 //insert quests
@@ -170,7 +172,7 @@ var seedMongo = function (next) {
                         });
                     });
                     api.log("Quests seeded");
-                    callback();
+                    return callback();
                 },
                  //insert interests
                 function (callback) {
@@ -181,7 +183,7 @@ var seedMongo = function (next) {
                         })
                     });
                     api.log("Interests seeded");
-                    callback();
+                    return callback();
                 }
                 
             ],
