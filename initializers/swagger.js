@@ -37,6 +37,8 @@ module.exports = {
       }
       return info;
     };
+        
+        console.log('swagger init, baseurl  : ' + config.swagger.baseUrl);   
 
     api.swagger = {
       documentation: {
@@ -47,7 +49,7 @@ module.exports = {
           version: "" + config.general.apiVersion
         },
 
-        host: config.swagger.baseUrl || (bindIp + ':' + serverPort),
+        host: (config.swagger.baseUrl || bindIp) + ':' + serverPort,
         actionPath: '/' + (actionUrl || 'swagger'),
         basePath: '/' + (actionUrl || 'swagger'),
         schemes: [ 'http' ],
