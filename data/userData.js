@@ -18,7 +18,13 @@ module.exports.addInterest = function (idUser, lang, cat, interest, next) {
             }
         };
         command.$addToSet[inter] = { "c": cat, "i": interest };
-        db.users.update( { _id: idUser }, command  , next);
+        db.users.update({ _id: idUser }, command  , function (err, res) {
+            
+            
+
+            next(null, res);
+
+        });
     });
 };
 

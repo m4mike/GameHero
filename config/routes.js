@@ -35,6 +35,7 @@ exports.default = {
                 { path: '/missions/byId', action: 'missionById' },
               
                 { path: '/interests', action: 'interestActions' },
+                { path: '/interests/categories/:lang', action: 'listCats' },
                 { path: '/interests/add/:lang/:cat/:interest', action: 'addInterest' },
           //      { path: '/interests/byId', action: 'missionById' },
                 { path: '/interestsForCat/:lang/:cat', action: 'interestsForCat' },

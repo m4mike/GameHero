@@ -10,17 +10,17 @@ exports.debugtest = {
     run: function (api, action, done) {
         
         
-        api.data.users.addInterest("u3", "fr", "test", "iii", function (err, data) {
+        api.data.users.addInterest("u3", "fr", "Sports", "Parachutisme", function (err, data) {
             console.log(data);
             
-            api.data.users.removeInterest("u3", "fr", "test", "iii", function (err1, data1) {
+          //  api.data.users.removeInterest("u3", "fr", "test", "iii", function (err1, data1) {
                 
                 
                
-                    action.response = data1;
+                    action.response = data.result;
                     done();
                
-            });
+        
          });
     }
     

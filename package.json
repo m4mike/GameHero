@@ -13,6 +13,7 @@
     "lodash": "^3.10.0",
     "mongodb": "^2.0.35",
     "redis": "^0.12.1",
+    "redis-url": "^1.2.0",
     "ws": "latest"
   },
   "devDependencies": {

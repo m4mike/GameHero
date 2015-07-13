@@ -27,6 +27,35 @@ exports.interestActions = {
     
 };
 
+exports.listCats = {
+    name: 'listCats',
+    description: 'List Categories for a language',
+    outputExample: null,
+    inputs: {
+        lang: {
+            required: true,
+            validator: null
+        }
+    },
+    
+    run: function (api, action, next) {
+        api.data.interests.listCats(action.params.lang, function (err, result) {
+            if (err) return next(err);
+            
+            if (result == null) {
+                action.connection.rawConnection.responseHttpCode = "404";
+                return next(new Error("not found"));
+            }
+            
+            
+            action.response = result;
+            next();
+        })
+            
+    }
+};
+
+
 exports.interestsForCat = {
     name: 'interestsForCat',
     description: 'List interests for an Category',

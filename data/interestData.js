@@ -1,5 +1,5 @@
 ﻿// uses a combination of mongo and redis
-
+_ = require('lodash');
 var Promise = require('bluebird');
 var client; // for redis
 var data; // for mongo
@@ -70,10 +70,16 @@ module.exports.removeCat = function (lang, cat, next) {
     });
     client.del(catUrn, next);
     //todo still need to cleanup tags without cat
+    next(null, true);
 }
 
-module.exports.getCats = function (lang, next) {
+module.exports.listCats = function (lang, next) {
     
-    var catUrn = "urn:cat:" + lang;
-    return client.keys(catUrn, next);
+    var catUrn = "urn:cat:" + lang + ":*";
+    client.keys(catUrn, function (err, cats) {
+        var cleanedcats = _.map(cats, function (cat) {
+            return cat.split(':')[3];
+        });
+        next(null, cleanedcats);
+    })
 }
