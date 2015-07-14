@@ -21,7 +21,7 @@ exports.missions = {
                     _items : result
                             
                 });
-                collection.addSelfIdsToItems(utils.host + "/api/mission/byId/" , "_id");
+                collection.addSelfIdsToItems(api.serverUrl + "/api/mission/byId/" , "_id");
                 action.response = collection.toObject();
                 next();
             }
@@ -57,7 +57,7 @@ exports.missionsForApp = {
                     _items : result
                             
                 });
-                collection.addSelfIdsToItems(utils.host + "/api/mission/byId/" , "_id");
+                collection.addSelfIdsToItems(api.serverUrl + "/api/mission/byId/" , "_id");
                 action.response = collection.toObject();
                 next();
             }

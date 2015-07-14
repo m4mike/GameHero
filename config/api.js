@@ -1,37 +1,34 @@
 exports.default = {
   general: function(api){
     return {
-      apiVersion: '0.1',
-      serverName: 'GameHero API',
+      apiVersion: '0.0.1',
+      serverName: 'actionhero API',
       // id can be set here, or it will be generated dynamically.
       //  Be sure that every server you run has a unique ID (which will happen when generated dynamically)
       //  id: 'myActionHeroServer',
       // A unique token to your application that servers will use to authenticate to each other
       serverToken: 'genesis',
       // The welcome message seen by TCP and webSocket clients upon connection
-      welcomeMessage: 'Welcome to GameHero api',
+      welcomeMessage: 'Hello! Welcome to the actionhero api',
+      // The body message to accompany 404 (file not found) errors regarding flat files
+      flatFileNotFoundMessage: 'Sorry, that file is not found :(',
+      // The message to accompany 500 errors (internal server errors)
+      serverErrorMessage: 'The server experienced an internal error',
+      // defaultLimit & defaultOffset are useful for limiting the length of response lists.
+      defaultLimit: 100,
+      defaultOffset: 0,
       // the redis prefix for actionhero's cache objects
-      cachePrefix: 'ah:cache:',
-      // the redis prefix for actionhero's cache/lock objects
-      lockPrefix: 'ah:lock:',
-      // how long will a lock last before it exipres (ms)?
-      lockDuration: 1000 * 10, // 10 seconds
+      cachePrefix: 'actionhero:cache:',
       // Watch for changes in actions and tasks, and reload/restart them on the fly
       developmentMode: true,
-      // Should we run each action within a domain? Makes your app safer but slows it down
-      actionDomains: true,
       // How many pending actions can a single connection be working on
       simultaneousActions: 5,
       // disables the whitelisting of client params
       disableParamScrubbing: false,
       // params you would like hidden from any logs
       filteredParams: [],
-      // values that signify missing params
-      missingParamChecks: [null, '', undefined],
       // The default filetype to server when a user requests a directory
       directoryFileType : 'index.html',
-      // The default priority level given to middleware of all types (action, connection, and say)
-      defaultMiddlewarePriority : 100,
       // configuration for your actionhero project structure
       paths: {
         'action':      [ __dirname + '/../actions'      ] ,
@@ -43,12 +40,17 @@ exports.default = {
         'initializer': [ __dirname + '/../initializers' ] ,
         'plugin':      [ __dirname + '/../node_modules' ] 
       },
+      // list of actionhero plugins you want to load
+      plugins: [
+        // this is a list of plugin names
+        // plugin still need to be included in `package.json` or the path defined in `api.config.general.paths.plugin`
+      ],
       // hash containing chat rooms you wish to be created at server boot
       startingChatRooms: {
         // format is {roomName: {authKey, authValue}}
         //'secureRoom': {authorized: true},
-        'defaultRoom': {},
-        'anotherRoom': {},
+        'defaultRoom': {}
+        
       }
     }
   }
@@ -56,19 +58,15 @@ exports.default = {
 
 exports.test = { 
   general: function(api){
-    var actionDomains = true;
-    if(process.env.ACTIONDOMAINS === 'false'){
-      actionDomains = false;
-    }
-
     return {
       id: 'test-server',
       developmentMode: true,
-      actionDomains: actionDomains,
       startingChatRooms: {
         'defaultRoom': {},
         'otherRoom': {},
+        'secureRoom': {authorized: true}
       },
+      developmentMode: true
     }
   }
 }

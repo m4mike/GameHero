@@ -15,7 +15,7 @@ exports.default = {
 exports.test = { 
   stats: function(api){
     return {
-      writeFrequency: 1000,
+      writeFrequency: 0,
       keys: ['test:stats']
     }
   }

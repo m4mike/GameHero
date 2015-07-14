@@ -37,9 +37,49 @@ module.exports = {
       }
       return info;
     };
-        
+        if(process.env.PORT){
+          console.log('ENV PORT = ' + process.env.PORT );
+          if (process.env.NODE_ENV == 'production' || process.env.NPM_CONFIG_PRODUCTION) {
+              serverPort = null;
+              console.log('heroku hack, port is empty' );
+              
+          }
+          
+        }
         console.log('swagger init, baseurl  : ' + config.swagger.baseUrl);
         console.log('swagger init, port  : ' + serverPort);   
+
+    var theHost  = (config.swagger.baseUrl || bindIp);
+    var theSchemes = [ 'http' ];
+    if(serverPort != null)
+    {
+      theHost = theHost + ":" + serverPort;
+      console.log('Swagger host initialised to: ' + theHost);
+    }
+     if (process.env.NODE_ENV == 'production' || process.env.NPM_CONFIG_PRODUCTION) {
+       theSchemes = [ 'https' ];
+        console.log('Swagger schemes initialised to: https');
+        api.serverUrl = 'https://' + theHost ;
+        
+     }else{
+       api.serverUrl = 'http://' + theHost ; 
+     }
+
+      if (process.env.NODE_ENV == 'production' || process.env.NPM_CONFIG_PRODUCTION) {
+        theSchemes = [ 'https' ];
+         console.log('Swagger schemes initialised to: https');
+        api.serverUrl = 'https://' + theHost ;
+       
+    }else{
+       api.serverUrl = 'http://' + theHost ; 
+      }
+     api.log('api server set to ' + api.serverUrl);
+      
+
+     api.log('api server set to ' + api.serverUrl);
+     
+
+
 
     api.swagger = {
       documentation: {
@@ -47,13 +87,14 @@ module.exports = {
         info: {
           title: config.general.serverName,
           description: config.general.welcomeMessage,
-          version: "" + config.general.apiVersion
+          version: "" + config.general.apiVersion,
+          server: api.serverUrl
         },
 
-        host: (config.swagger.baseUrl || bindIp) + ':' + serverPort,
-        actionPath: '/' + (actionUrl || 'swagger'),
+        host: theHost ,
+        //actionPath: '/' + (actionUrl || 'swagger'),
         basePath: '/' + (actionUrl || 'swagger'),
-        schemes: [ 'http' ],
+        schemes: theSchemes,
         consumes: [ 'application/json' ],
         produces: [ 'application/json' ],
         paths: {},
@@ -332,6 +373,9 @@ module.exports = {
         }
       }
     };
+    
+    
+    
     next();
   },
 

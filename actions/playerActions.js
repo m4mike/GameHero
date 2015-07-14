@@ -10,8 +10,8 @@ exports.players = {
     run: function (api, action, next) {
       
         var collection = new utils.HyperJson();
-        collection.link("Find player by id", utils.host + "/api/players/byId/:playerId")
-            .link("Delete player", utils.host + "-delete-/api/players/:playerId");
+        collection.link("Find player by id", api.serverUrl + "/api/players/byId/:playerId")
+            .link("Delete player", api.serverUrl + "-delete-/api/players/:playerId");
         
         action.response = collection.toObject();
         action.response.error = null;
@@ -51,7 +51,7 @@ exports.playerById = {
                     //    _items : result
                             
                     //});
-                    //collection.addSelfIdsToItems(utils.host + "/api/players/getById/" , "_id");
+                    //collection.addSelfIdsToItems(api.serverUrl + "/api/players/getById/" , "_id");
                     action.response = result;
                     next();
                 }

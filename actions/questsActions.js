@@ -11,8 +11,8 @@ exports.quests = {
 
         var collection = new utils.HyperJson();
         collection
-            .link("For Mission", utils.host + "/api/quests/forMission/idMission")
-            .link("For App", utils.host + "/api/quests/forApp/idApp");
+            .link("For Mission", api.serverUrl + "/api/quests/forMission/idMission")
+            .link("For App", api.serverUrl + "/api/quests/forApp/idApp");
 
         action.response = collection.toObject();
         action.response.error = null;
@@ -50,7 +50,7 @@ exports.questsForMission = {
                         _items: result
 
                     });
-                    collection.addSelfIdsToItems(utils.host + "/api/quests/", "_id");
+                    collection.addSelfIdsToItems(api.serverUrl + "/api/quests/", "_id");
                     action.response = collection.toObject();
                     next();
                 }
@@ -83,7 +83,7 @@ exports.questsForApp = {
                         _items: result
 
                     });
-                    collection.addSelfIdsToItems(utils.host + "/api/quests/", "_id");
+                    collection.addSelfIdsToItems(api.serverUrl + "/api/quests/", "_id");
                     action.response = collection.toObject();
                     next();
                 }
@@ -117,7 +117,7 @@ exports.questSearch = {
                         _items: result
 
                     });
-                    collection.addSelfIdsToItems(utils.host + "/api/quests/", "_id");
+                    collection.addSelfIdsToItems(api.serverUrl + "/api/quests/", "_id");
                     action.response = collection.toObject();
                     next();
                 }

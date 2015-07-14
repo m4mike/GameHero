@@ -11,12 +11,12 @@ exports.users = {
 
 
         var collection = new utils.HyperJson();
-        collection.link("Find User by id", utils.host + "/api/users/byId/:idUser")
-            .link(" DELETE Delete user, will delete its players", utils.host + "-delete-/api/users/:idUser")
-            .link("Create player for App", utils.host + "/api/users/:idUser/addPlayer/:idPlayer/:app")
-            .link("Add interest to user", utils.host + "/api/users/:idUser/addInterest/:lang/:cat/:interest")
-            .link("Remove interest from user", utils.host + "/api/users/:idUser/removeInterest/:lang/:cat/:interest")
-            .link("check if user has interest", utils.host + "/api/users/:idUser/hasInterest/:lang/:cat/:interest")
+        collection.link("Find User by id", api.serverUrl + "/api/users/byId/:idUser")
+            .link(" DELETE Delete user, will delete its players", api.serverUrl + "-delete-/api/users/:idUser")
+            .link("Create player for App", api.serverUrl + "/api/users/:idUser/addPlayer/:idPlayer/:app")
+            .link("Add interest to user", api.serverUrl + "/api/users/:idUser/addInterest/:lang/:cat/:interest")
+            .link("Remove interest from user", api.serverUrl + "/api/users/:idUser/removeInterest/:lang/:cat/:interest")
+            .link("check if user has interest", api.serverUrl + "/api/users/:idUser/hasInterest/:lang/:cat/:interest")
 
 
         action.response = collection.toObject();
@@ -222,7 +222,7 @@ exports.userDelete = {
                     //    _items : result
                     
                     //});
-                    //collection.addSelfIdsToItems(utils.host + "/api/users/getById/" , "_id");
+                    //collection.addSelfIdsToItems(api.serverUrl + "/api/users/getById/" , "_id");
                     action.response = result.result;
                     next();
                 }

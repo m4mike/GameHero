@@ -10,13 +10,13 @@ exports.interestActions = {
     run: function (api, action, next) {
       
         var collection = new utils.HyperJson();
-        collection.link("Add interest to system", utils.host + "/api/interests/add/:lang/:cat/:interest")
-            .link("Delete interest from system", utils.host + "-delete-/api/interests/:cat/:interest")
-          //  .link("Add interest to player", utils.host + "/api/interests/addtoplayer/:cat/:interest/:player")
-            .link("Add interest to player", utils.host + "/api/interests/addtoplayer/:lang/:cat/:interest/:player")
-            .link("Remove interest from player", utils.host + "/api/interests/removeFromPlayer/:lang/:cat/:interest/:player")
-            .link("Remove interest from user", utils.host + "/api/interests/removeFromPlayer/:lang/:cat/:interest/:player")
-            .link("Add interest to user", utils.host + "/api/interests/addtoUser/:lang/:cat/:interest/:user");
+        collection.link("Add interest to system", api.serverUrl + "/api/interests/add/:lang/:cat/:interest")
+            .link("Delete interest from system", api.serverUrl + "-delete-/api/interests/:cat/:interest")
+          //  .link("Add interest to player", api.serverUrl + "/api/interests/addtoplayer/:cat/:interest/:player")
+            .link("Add interest to player", api.serverUrl + "/api/interests/addtoplayer/:lang/:cat/:interest/:player")
+            .link("Remove interest from player", api.serverUrl + "/api/interests/removeFromPlayer/:lang/:cat/:interest/:player")
+            .link("Remove interest from user", api.serverUrl + "/api/interests/removeFromPlayer/:lang/:cat/:interest/:player")
+            .link("Add interest to user", api.serverUrl + "/api/interests/addtoUser/:lang/:cat/:interest/:user");
         
         
         action.response = collection.toObject();
