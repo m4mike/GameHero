@@ -25,7 +25,7 @@
   },
   "scripts": {
     "help": "actionhero help",
-    "start": "actionhero start",
+    "start": "node app",
     "actionhero": "actionhero",
     "startCluster": "actionhero startCluster",
     "test": "mocha"
