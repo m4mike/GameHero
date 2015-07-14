@@ -26,7 +26,7 @@
 
         if (process.env.NODE_ENV == 'production' || process.env.NPM_CONFIG_PRODUCTION) {
             console.log('config prod override for swagger ');
-            swag.baseUrl = 'test-mbe.herokuapp.com';
+            swag.baseUrl = 'gamehero.herokuapp.com';
            
         }
         return swag;
