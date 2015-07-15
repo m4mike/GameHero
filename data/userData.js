@@ -10,19 +10,16 @@ module.exports.init = function (db) {
 
 module.exports.addInterest = function (idUser, lang, cat, interest, next) {
     database.getDb(function (err, db) {
-        var inter = "interests_" + lang.trim()
+        //var inter = "interests" 
         var command = {
-            "$addToSet": 
-            {
-                
-            }
+            "$addToSet":  {interests: { "l": lang, "c": cat, "i": interest } }
         };
-        command.$addToSet[inter] = { "c": cat, "i": interest };
+        //command.$addToSet[inter] = { "l":lang, "c": cat, "i": interest };
         db.users.update({ _id: idUser }, command  , function (err, res) {
-            
-            
-
-            next(null, res);
+            if (err) return next(err);
+            else {
+                db.users.findOne({ _id: idUser }, {_id:1,interests:1} ,next);
+            }
 
         });
     });
@@ -33,7 +30,7 @@ module.exports.hasInterest = function (idUser, lang, cat, interest, next) {
     /*
      * db.getCollection('users').find(
             {   _id:"u3",
-                "interests_fr" :   { "$elemMatch" : { c: "test", i:"ii"} }
+                "interests" :   { "$elemMatch" : { c: "test", i:"ii"} }
             }
         )
      * 
@@ -42,8 +39,8 @@ module.exports.hasInterest = function (idUser, lang, cat, interest, next) {
     database.getDb(function (err, db) {
         
         var command = { "_id" : idUser };
-        command["interests_" + lang.trim()] = {
-            $elemMatch: {c: cat, i:interest}
+        command["interests"  ] = {
+            $elemMatch: {l: lang ,c: cat, i:interest}
         };
         
         db.users.findOne(command, { _id: 1 }  , function (err, u) {
@@ -59,20 +56,23 @@ module.exports.removeInterest = function (idUser, lang, cat, interest, next) {
     //get user, remove interest, save interest field back
     
     database.getDb(function (err, db) {
-        var proj = {}; proj["interests_" + lang] = 1;
+        var proj = {}; proj["interests"] = 1;
         db.users.findOne({_id:idUser}, proj, function (err, u) {
-            var unter = u["interests_" + lang];
+            var unter = u["interests" ];
             if (unter == null) next(null, 0);
             var elem =_.remove(unter, function (int) {
-                return int.c == cat && int.i == interest;
+                return int.l == lang && int.c == cat && int.i == interest;
             });
-            if (elem == null) next(null, 0);
+            if (elem == null) next(null, u);
             var updateCommand = {};
-            updateCommand["interests_" + lang] = unter;
+            if (unter == null) unter = [];
+            updateCommand["interests"] = unter;
             
 
-            db.users.update({ _id: u._id }, { $set : updateCommand, $currentDate: { lastModified: true } }, function (err1, r2) { 
-                next(null, r2.result);
+            db.users.update({ _id: u._id }, { $set : updateCommand, $currentDate: { lastModified: true } }, function (err1, r2) {
+                
+                db.users.findOne({ _id: idUser }, { _id: 1, interests: 1 } , next);
+                
             });
         
         });//findone
@@ -104,6 +104,7 @@ module.exports.getById = function (idUser, next) {
         if (err) {
             next(err);
         } else {
+
             db.users.findOne({ _id: idUser }, next);
         }
     });

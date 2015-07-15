@@ -38,15 +38,14 @@
                     "id_player": "p10"
                 }
             ],
-            "interests": {
-                "lang": "fr",
-                "items": [
+            "interests":  [
                     {
+                        "l": "fr",
                         "c": "Autres",
                         "i": "Ferrari"
                     }
                 ]
-            }
+            
         },
         {
             "_id": "u2",
@@ -60,6 +59,7 @@
                     "id_player": "p12"
                 }
             ]
+            ,"interests":[]
         },
         {
             "_id": "u3",
@@ -68,7 +68,7 @@
                     "id_app": "app_follow",
                     "id_player": "p3"
                 }
-            ]
+            ] , "interests": []
         }
     ];
 

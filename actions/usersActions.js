@@ -50,7 +50,12 @@ exports.userAddInterest = {
 
     run: function (api, action, next) {
 
-        api.data.users.addInterest("u3", "fr", "test", "iii", function (err, data) {
+        api.data.users.addInterest(action.params.idUser, 
+                                   action.params.lang, 
+                                   action.params.cat, 
+                                   action.params.interest, function (err, data) {
+            //var collection = new utils.HyperJson(data);
+            //collection.addSelfId();
             action.response = data;
             next();
         });
@@ -81,9 +86,12 @@ exports.userRemoveInterest = {
 
     run: function (api, action, next) {
 
-        api.data.users.removeInterest("u3", "fr", "test", "iii", function (err, data) {
+        api.data.users.removeInterest(action.params.idUser, 
+                                   action.params.lang, 
+                                   action.params.cat, 
+                                   action.params.interest, function (err, data) {
             action.response = data;
-            next();
+            next(null, data);
         });
     }
 };
@@ -112,7 +120,10 @@ exports.userHasInterest = {
 
     run: function (api, action, next) {
 
-        api.data.users.hasInterest("u3", "fr", "test", "iii", function (err, data) {
+        api.data.users.hasInterest(action.params.idUser, 
+                                   action.params.lang, 
+                                   action.params.cat, 
+                                   action.params.interest, function (err, data) {
             action.response = data;
             next();
         });

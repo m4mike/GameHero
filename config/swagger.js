@@ -11,7 +11,8 @@
                 'players' : ['players'],
                 'quests' : ['quests', 'missions'],
                 'games' : ['tictac'],
-                'users' : ['users', 'interests']
+                'users' : ['users'],
+                'interests' : ['interests']
             },
             // Generate documentation for simple actions specified by action-name 
             documentSimpleRoutes: false,

@@ -24,6 +24,8 @@ serverDomain.run(function () {
     console.log('***********************************************')
     console.log('* Starting actionHero Domain                  *')
     console.log('***********************************************')
+    if (process.env.NODE_ENV == 'development')
+        process.env.PORT = 3000;
     actionhero.start(function (err, apiFromCallback) {
         if (err) { console.log(err); }
         api = apiFromCallback;

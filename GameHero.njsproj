@@ -6,12 +6,18 @@
     <ProjectGuid>{673abd67-c6b4-4759-b32e-47d4cb9b4aa2}</ProjectGuid>
     <ProjectHome />
     <ProjectView>ShowAllFiles</ProjectView>
-    <StartupFile>app.js</StartupFile>
+    <StartupFile>index.js</StartupFile>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
     <ProjectTypeGuids>{3AF33F2E-1136-4D97-BBB7-1795711AC8B8};{349c5851-65df-11da-9384-00065b846f21};{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}</ProjectTypeGuids>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+    <NodejsPort>3000</NodejsPort>
+    <StartWebBrowser>True</StartWebBrowser>
+    <LaunchUrl>http://localhost:3000/swagger.html</LaunchUrl>
+    <Environment>PORT = 3000</Environment>
+    <NodeExePath>
+    </NodeExePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'" />
   <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
@@ -58,7 +64,7 @@
     <Compile Include="actions\testActions\randomNumber.js" />
     <Compile Include="actions\testActions\sleepTest.js" />
     <Compile Include="actions\usersActions.js" />
-    <Compile Include="app.js" />
+    <Compile Include="index.js" />
     <Compile Include="config\mongo.js" />
     <Compile Include="config\redis.js" />
     <Compile Include="config\swagger.js" />
@@ -70,7 +76,6 @@
     <Compile Include="config\api.js" />
     <Compile Include="config\errors.js" />
     <Compile Include="config\logger.js" />
-    <Compile Include="config\plugins.js" />
     <Compile Include="config\routes.js" />
     <Compile Include="config\stats.js" />
     <Compile Include="config\tasks.js" />
@@ -93,6 +98,7 @@
     <Compile Include="logic\playerLogic.js" />
     <Compile Include="logic\questLogic.js" />
     <Compile Include="logic\userLogic.js" />
+    <Compile Include="Procfile" />
     <Compile Include="public\lib\backbone-min.js" />
     <Compile Include="public\lib\handlebars-2.0.0.js" />
     <Compile Include="public\lib\highlight.7.3.pack.js" />
@@ -105,11 +111,13 @@
     <Compile Include="public\lib\underscore-min.js" />
     <Compile Include="public\swagger-ui.js" />
     <Compile Include="public\swagger-ui.min.js" />
+    <Compile Include="tasks\stats.js" />
     <Compile Include="tt\appDataTests.js" />
     <Compile Include="tt\dataTests.js" />
     <Compile Include="test\interestTests.js" />
     <Compile Include="tt\missionTests.js" />
     <Compile Include="tt\extractInterestsFromRedis.js" />
+    <Compile Include="tt\promisetests.js" />
     <Compile Include="tt\tictacTest.js" />
     <Compile Include="utils\HyperJson.js" />
     <Compile Include="utils\index.js" />
@@ -136,13 +144,11 @@
     <Folder Include="public\fonts\" />
     <Folder Include="public\images\" />
     <Folder Include="public\lib\" />
-    <Folder Include="src\" />
     <Folder Include="pids" />
     <Folder Include="public" />
     <Folder Include="public\css" />
     <Folder Include="public\javascript" />
     <Folder Include="public\logo" />
-    <Folder Include="servers\" />
     <Folder Include="data\" />
     <Folder Include="logic\" />
     <Folder Include="tasks\" />

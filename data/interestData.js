@@ -14,18 +14,14 @@ module.exports.init = function (api) {
 
 
 module.exports.addInterest = function (lang, cat, interest, next) {
-   
     var catUrn = "urn:cat:" + lang.trim() + ":" + cat.trim();
     client.sadd(catUrn, interest);
     if (next != null) {
-        
         client.sadd("urn:tag:" + lang.trim() + ":" + interest, cat, next);
     }
     else {
-        
         client.sadd("urn:tag:" + lang.trim() + ":" + interest, cat);
     }
-   
 }
 
 module.exports.removeInterest = function (lang, cat, interest, next) {
