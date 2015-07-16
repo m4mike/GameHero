@@ -18,11 +18,16 @@
     <Environment>PORT = 3000</Environment>
     <NodeExePath>
     </NodeExePath>
+    <DebuggerPort>
+    </DebuggerPort>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'" />
   <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
   <ItemGroup>
     <Content Include="data\seedInterests.js" />
+    <Content Include="images\chat.html.png" />
+    <Content Include="images\index.html.png" />
+    <Content Include="images\mocha.jpg" />
     <Content Include="package.json" />
     <Content Include="public\css\print.css" />
     <Content Include="public\css\reset.css" />
@@ -64,6 +69,8 @@
     <Compile Include="actions\testActions\randomNumber.js" />
     <Compile Include="actions\testActions\sleepTest.js" />
     <Compile Include="actions\usersActions.js" />
+    <Compile Include="actions\socialActions.js" />
+    <Compile Include="datap\index.js" />
     <Compile Include="index.js" />
     <Compile Include="config\mongo.js" />
     <Compile Include="config\redis.js" />
@@ -98,6 +105,7 @@
     <Compile Include="logic\playerLogic.js" />
     <Compile Include="logic\questLogic.js" />
     <Compile Include="logic\userLogic.js" />
+    <Compile Include="node_modules\actionhero\servers\web.js" />
     <Compile Include="Procfile" />
     <Compile Include="public\lib\backbone-min.js" />
     <Compile Include="public\lib\handlebars-2.0.0.js" />
@@ -111,10 +119,14 @@
     <Compile Include="public\lib\underscore-min.js" />
     <Compile Include="public\swagger-ui.js" />
     <Compile Include="public\swagger-ui.min.js" />
+    <Compile Include="startDomain.js" />
     <Compile Include="tasks\stats.js" />
+    <Compile Include="tt\general.js" />
+    <Compile Include="test\social\socialtest.js" />
+    <Compile Include="test\_setup.js" />
     <Compile Include="tt\appDataTests.js" />
     <Compile Include="tt\dataTests.js" />
-    <Compile Include="test\interestTests.js" />
+    <Compile Include="tt\interestTests.js" />
     <Compile Include="tt\missionTests.js" />
     <Compile Include="tt\extractInterestsFromRedis.js" />
     <Compile Include="tt\promisetests.js" />
@@ -136,11 +148,14 @@
     <Folder Include="actions\testActions\" />
     <Folder Include="config" />
     <Folder Include="config\servers" />
+    <Folder Include="images\" />
     <Folder Include="initializers\" />
     <Folder Include="log" />
+    <Folder Include="datap\" />
     <Folder Include="node_modules\" />
     <Folder Include="node_modules\actionhero\" />
     <Folder Include="node_modules\actionhero\initializers\" />
+    <Folder Include="node_modules\actionhero\servers\" />
     <Folder Include="public\fonts\" />
     <Folder Include="public\images\" />
     <Folder Include="public\lib\" />
@@ -152,6 +167,8 @@
     <Folder Include="data\" />
     <Folder Include="logic\" />
     <Folder Include="tasks\" />
+    <Folder Include="test\integration\" />
+    <Folder Include="test\social\" />
     <Folder Include="tt\" />
     <Folder Include="utils\" />
     <Folder Include="test" />

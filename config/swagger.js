@@ -12,7 +12,8 @@
                 'quests' : ['quests', 'missions'],
                 'games' : ['tictac'],
                 'users' : ['users'],
-                'interests' : ['interests']
+                'interests' : ['interests'],
+                'social' : ['social']
             },
             // Generate documentation for simple actions specified by action-name 
             documentSimpleRoutes: false,
@@ -26,7 +27,7 @@
         
 
         if (process.env.NODE_ENV == 'production' || process.env.NPM_CONFIG_PRODUCTION) {
-            console.log('config prod override for swagger ');
+            //console.log('config prod override for swagger ');
             swag.baseUrl = 'gamehero.herokuapp.com';
            
         }

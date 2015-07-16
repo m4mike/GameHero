@@ -1,7 +1,7 @@
 exports.default = { 
   routes: function(api){
-    return {
-      
+        return {
+            
             get: [
                 { path: '/status', action: 'status' }, 
                 { path: '/debug', action: 'debugtest' }, 
@@ -14,9 +14,9 @@ exports.default = {
                
                 { path: '/users', action: 'userActions' },
                 { path: '/users/byId/:idUser', action: 'userById' },
-                { path: '/users/:idUser/addInterest/:lang/:cat/:interest',action:'userAddInterest'},
-                { path: '/users/:idUser/removeInterest/:lang/:cat/:interest',action:'userRemoveInterest'},
-                { path: '/users/:idUser/hasInterest/:lang/:cat/:interest',action:'userHasInterest'},
+                { path: '/users/:idUser/addInterest/:lang/:cat/:interest', action: 'userAddInterest' },
+                { path: '/users/:idUser/removeInterest/:lang/:cat/:interest', action: 'userRemoveInterest' },
+                { path: '/users/:idUser/hasInterest/:lang/:cat/:interest', action: 'userHasInterest' },
           
   
                
@@ -25,6 +25,9 @@ exports.default = {
                 { path: "/players/delete/:playerId", action: "playerDelete" }, 
             
                  
+                { path: '/social', action: 'socialactions' },
+
+
                 { path: '/quests', action: 'questsActions' }, 
                 { path: '/quests/forMission/:idMission', action: 'questsForMission' },
                 { path: '/quests/forApp/:idApp', action: 'questsForApp' },
@@ -40,14 +43,20 @@ exports.default = {
           //      { path: '/interests/byId', action: 'missionById' },
                 { path: '/interestsForCat/:lang/:cat', action: 'interestsForCat' },
                 
-                 { path: '/tictac/start', action: 'tictacCreate' }, 
+                { path: '/tictac/start', action: 'tictacCreate' }, 
                 { path: '/tictac/start/:x/:y', action: 'tictacCreateAndStart' },
                 { path: '/tictac/view', action: 'tictacView' },
                 { path: '/tictac/play/:idGame/:x/:y', action: 'tictacMove' },
 
 
                 { path: '/swagger', action: 'swagger' }
-
+            ],
+            post: [
+               
+                { path: '/social/post', action: 'socialpost' },
+                { path: '/social/status', action: 'socialstatus' },
+                { path: '/social/attack', action: 'socialattack' },
+             
 
             ],
             delete: [

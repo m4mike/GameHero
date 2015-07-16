@@ -21,11 +21,12 @@
     "grunt-mocha": "latest",
     "grunt-nodemon": "latest",
     "mocha": "latest",
-    "morgan": "latest"
+    "morgan": "latest",
+    "request": "^2.58.0"
   },
   "scripts": {
     "help": "actionhero help",
-    "start": "node app",
+    "start": "foreman index",
     "actionhero": "actionhero",
     "startCluster": "actionhero startCluster",
     "test": "mocha"

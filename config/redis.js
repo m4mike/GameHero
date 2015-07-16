@@ -34,7 +34,7 @@ exports.default = {
             redisDetails.options = null;
         }
         // Which channel to use on redis pub/sub for RPC communication
-        redisDetails.channel = 'gh:rpc';
+        redisDetails.channel = 'gamehero:rpc';
         // How long to wait for an RPC call before considering it a failure 
         redisDetails.rpcTimeout = 5000;
         // which redis package should you ise?

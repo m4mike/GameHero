@@ -10,7 +10,7 @@ var interests;
 var client;
 
 describe('Redis tests', function () {
-
+    
     before(function (done) {
         this.timeout(10000);
         actionhero.start(function (err, a) {
@@ -21,12 +21,31 @@ describe('Redis tests', function () {
             done();
         })
     });
-
+    
     after(function (done) {
         actionhero.stop(function () {
             done();
         });
     });
+    
+    
+
+    //before(function (done) {
+    //    this.timeout(10000);
+    //    actionhero.start(function (err, a) {
+    //        api = a;
+    //        api.data.init(api);
+    //        interests = api.data.interests.init(api);
+    //        client = api.redis.client;
+    //        done();
+    //    })
+    //});
+
+    //after(function (done) {
+    //    actionhero.stop(function () {
+    //        done();
+    //    });
+    //});
 
     it('should have an api object with proper parts', function (done) {
         [

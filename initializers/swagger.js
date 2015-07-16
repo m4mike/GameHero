@@ -46,8 +46,9 @@ module.exports = {
           }
           
         }
+
         console.log('swagger init, baseurl  : ' + config.swagger.baseUrl);
-        console.log('swagger init, port  : ' + serverPort);   
+        //console.log('swagger init, port  : ' + serverPort);   
 
     var theHost  = (config.swagger.baseUrl || bindIp);
     var theSchemes = [ 'http' ];
@@ -76,7 +77,7 @@ module.exports = {
      api.log('api server set to ' + api.serverUrl);
       
 
-     api.log('api server set to ' + api.serverUrl);
+    // api.log('api server set to ' + api.serverUrl);
      
 
 
