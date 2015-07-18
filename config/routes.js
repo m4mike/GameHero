@@ -20,13 +20,17 @@ exports.default = {
           
   
                
-                { path: '/players', action: 'playerActions' },
-                { path: '/players/byId/:playerId', action: 'playerById' },
-                { path: "/players/delete/:playerId", action: "playerDelete" }, 
-            
+                { path: '/player', action: 'playerActions' },
+                { path: '/player/byId/:playerId', action: 'playerById' },
+                //{ path: "/player/delete/:playerId", action: "playerDelete" }, 
+                { path: '/player/wall/byId/:playerId/:month', action: 'socialwallplayer' },
+                
                  
                 { path: '/social', action: 'socialactions' },
-
+                { path: '/social/log/:app/:month', action: 'socialactions' },
+                { path: '/social/wall/player/:playerId/:month', action: 'socialwallplayer' },
+                { path: '/social/wall/extplayer/:ext_playerId/:month', action: 'socialwallextplayer' },
+                
 
                 { path: '/quests', action: 'questsActions' }, 
                 { path: '/quests/forMission/:idMission', action: 'questsForMission' },

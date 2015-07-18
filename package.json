@@ -9,6 +9,7 @@
   "dependencies": {
     "actionhero": "11.2.4",
     "async": "^1.3.0",
+    "bluebird": "^2.9.34",
     "lodash": "^3.10.0",
     "mongodb": "^2.0.36",
     "redis": "^0.12.1",

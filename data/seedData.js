@@ -76,7 +76,7 @@
         {
             "_id": "p1",
             "id_user": "u1",
-            "id_external": "an external id,ex authentication",
+            "id_external": "mlg1",
             "counters": {
                 "exp": 100,
                 "level": 1
@@ -110,7 +110,7 @@
         {
             "_id": "p2",
             "id_user": "u2",
-            "id_external": "an external id,ex authentication",
+            "id_external": "mlg2",
             "counters": {
                 "exp": 2100,
                 "level": 1
@@ -148,7 +148,7 @@
         {
             "_id": "p3",
             "id_user": "u3",
-            "id_external": "an external id,ex authentication",
+            "id_external": "mlg3",
             "counters": {
                 "exp": 3100,
                 "level": 3

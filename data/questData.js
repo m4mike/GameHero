@@ -19,13 +19,13 @@ module.exports.getById = function (iqQuest, next) {
 module.exports.forMission = function (idMission, next) {
     database.getDb(function (err, db) {
         if (err) {
-            next(err, null);
+            return next(err, null);
         } else {
             db.quests.find({ id_mission: idMission }).toArray(function (err, results) {
                 if (err) {
-                    next(err, null);
+                   return next(err, null);
                 } else {
-                    next(null, results);
+                    return  next(null, results);
                 }
             });
         }

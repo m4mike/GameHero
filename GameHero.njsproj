@@ -24,6 +24,7 @@
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'" />
   <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
   <ItemGroup>
+    <Content Include="0.todo\todo.txt" />
     <Content Include="data\seedInterests.js" />
     <Content Include="images\chat.html.png" />
     <Content Include="images\index.html.png" />
@@ -71,6 +72,8 @@
     <Compile Include="actions\usersActions.js" />
     <Compile Include="actions\socialActions.js" />
     <Compile Include="datap\index.js" />
+    <Compile Include="data\seedActionLog.js" />
+    <Compile Include="data\socialData.js" />
     <Compile Include="index.js" />
     <Compile Include="config\mongo.js" />
     <Compile Include="config\redis.js" />
@@ -152,6 +155,7 @@
     <Folder Include="initializers\" />
     <Folder Include="log" />
     <Folder Include="datap\" />
+    <Folder Include="0.todo\" />
     <Folder Include="node_modules\" />
     <Folder Include="node_modules\actionhero\" />
     <Folder Include="node_modules\actionhero\initializers\" />

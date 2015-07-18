@@ -1,12 +1,18 @@
-﻿module.exports.database = this;
+﻿var Promise = require('bluebird');
+
+module.exports.database = this;
+module.exports.social = null;
+
 
 var api = null;
-var database = null;
+
 var isSeeded = false;
 
 
 var theDb = null; //singleton
 var url = "";
+
+
 
 module.exports.getDb = function (next) {
     if (theDb == null) {
@@ -15,6 +21,7 @@ module.exports.getDb = function (next) {
     return next(null, theDb)
 }
 
+module.exports.getDBAsync =  Promise.promisify(module.exports.getDb);
 
 var initDb = function (next) {
     if (theDb == null) {
@@ -33,7 +40,9 @@ var initDb = function (next) {
                     missions : db.collection("missions"),
                     players: db.collection("players"),
                     users: db.collection("users"),
-                    interests:db.collection("interests")
+                    interests: db.collection("interests"),
+                    social : db.collection("social"),
+                    walls : db.collection("walls")
                 };
                 
                 return next(null, theDb);
@@ -53,6 +62,7 @@ module.exports.init = function (a) {
         module.exports.quests = require("./questData.js").init(this);
         module.exports.players = require("./playerData.js").init(this);
         module.exports.users = require("./userData.js").init(this);
+        module.exports.social = require("./socialData.js").init(api);
         module.exports.interests = require("./interestData.js").init(api);
        
     }
@@ -183,6 +193,29 @@ var seedMongo = function (next) {
                         })
                     });
                     api.log("Interests seeded");
+                    return callback();
+                },
+                 //insert logitems
+                function (callback) {
+                    require('./seedActionLog.js').logs.forEach(function (item) {
+                        
+                        
+                        seedresult.db.social.insert(item, function (err) {
+                            if (err) api.log("Failed to insert interests into mongo", 'error');
+                        })
+                    });
+                    api.log("Social logs seeded");
+                    return callback();
+                },
+                 //insert walls
+                function (callback) {
+                    require('./seedActionLog.js').walls.forEach(function (item) {
+                        
+                        seedresult.db.walls.insert(item, function (err) {
+                            if (err) api.log("Failed to insert interests into mongo", 'error');
+                        })
+                    });
+                    api.log("Social wallw seeded");
                     return callback();
                 }
                 

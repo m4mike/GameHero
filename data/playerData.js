@@ -28,6 +28,17 @@ module.exports.getByplayerName = function (playername, next) {
     });
 };//getplayer
 
+module.exports.getIdByExtId = function (extId, next) {
+    database.getDb(function (err, db) {
+        if (err) {
+            next(err);
+        } else {
+            db.players.findOne({ id_external: extId },{_id:1}, next);
+        }
+    });
+};//getplayer
+
+
 module.exports.getById = function (playerId, next) {
     database.getDb(function (err, db) {
         if (err) {

@@ -135,5 +135,13 @@ describe('social', function () {
         });
     });
 
-
+    it("getting a wall for a player", function (done) {
+        //console.log("starting test");
+        console.log('getting : ' + setup.testUrl + "/social/wall/player/:playerId/:month");
+        request.get(setup.testUrl + "/social/p1/201507", function (err, response, body) {
+            //console.log(JSON.stringify(response));
+            
+            done();
+        });
+    });
 });
