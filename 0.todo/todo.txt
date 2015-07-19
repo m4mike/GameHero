@@ -1,1 +1,4 @@
-﻿
+﻿v move social post on wall action creates a task, 
+	v move log and wall post creation logic to the task
+
+for an attack,status and post : check the player is for that app

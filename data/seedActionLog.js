@@ -1,34 +1,34 @@
 ﻿module.exports.logs =
 [
     {
-        "_id": "log0001",
+        "_id": "log1",
         "a": "status",
         "ts": "2015-07-15T13-00-00Z",
-        "app": "app_mlg",
+        "id_app": "app_mlg",
         "from": {
-            "id_player": "p1",
+            "id_player": "p11",
             "id_user": "u1",
-            "ext_id": "mlg1",
-            "name": "Angelica"
+            "id_ext": "mlg11",
+            "name": "Amanda"
         },
         "post": {
             "msg": "Je me sens bien"
         }
     },
     {
-        "_id": "log002",
+        "_id": "log2",
         "a": "post",
         "ts": "2015-07-15T13-00-00Z",
-        "app": "app_mlg",
+        "id_app": "app_mlg",
         "from": {
-            "id": "p1",
-            "ext_id": "mlg1",
-            "name": "Angelica"
+            "id": "p11",
+            "id_ext": "mlg11",
+            "name": "Amanda"
         },
         "to": {
-            "id": "p2",
-            "ext_id": "mlg2",
-            "name": "Jessica"
+            "id": "p12",
+            "id_ext": "mlg12",
+            "name": "Beatrice"
         },
         "post": {
             "msg": "Tu es prês de moi?"
@@ -39,18 +39,18 @@
         "_id": "log3",
         "a": "attack",
         "ts": "2015-07-15T13-00-00Z",
-        "app": "app_mlg",
+        "id_app": "app_mlg",
         "from": {
-            "id": "p1",
-            "ext_id": "mlg1",
-            "name": "Angelica"
+            "id": "p11",
+            "id_ext": "mlg11",
+            "name": "Amanda"
         },
         "to": {
-            "id": "p2",
-            "ext_id": "mlg2",
-            "name": "Jessica"
+            "id": "p12",
+            "id_ext": "mlg12",
+            "name": "Beatrice"
         },
-
+        
         "detail": {
             "winner": "from",
             "game": "bitchfight",
@@ -60,7 +60,7 @@
             "a_score": "6",
             "d_score": "0",
             "item_transfer": {
-                "ext_id_item": "--MLG id of item -",
+                "id_ext_item": "--MLG id of item -",
                 "name": "name of item to display"
             }
         },
@@ -73,9 +73,10 @@
 
 module.exports.walls = [
     {
-        _id: null,
-        id_player: "p1",
+        _id: 'wall_p11_201507',
+        id_player: "p11",
         id_user: "u1",
+        id_ext:"mlg11",
         "id_app": "app_mlg",
         month: 201507,
         items: [
@@ -83,46 +84,47 @@ module.exports.walls = [
             {
                 "id_log": "log0001",
                 "a": "status",
-                "ts": "2015-07-15T13-00-00Z",
+                "ts": "2015-07-15T13-10-00Z",
                 "post": {
                     "msg": "Je me sens bien"
                 }
             },
 
-
             {
                 "id_log": "log002",
                 "a": "post",
-                "ts": "2015-07-15T13-00-00Z",
+                "ts": "2015-07-15T13-01-00Z",
                 "from": {
-                    "id": "p1",
-                    "ext_id": "mlg1",
-                    "name": "Angelica"
+                    "id": "p12",
+                    "id_ext": "mlg12",
+                    "name": "Beatrice"
+                   
                 },
                 "to": {
-                    "id": "p2",
-                    "ext_id": "mlg2",
-                    "name": "Jessica"
+                    "id": "p11",
+                    "id_ext": "mlg11",
+                    "name": "Amanda"
                 },
                 "post": {
-                    "msg": "Tu es prês de moi?"
+                    "msg": "Oui, je suis prês de toi"
                 }
             }
 
             ,
+           
             {
                 "idLog": "log3",
                 "a": "attack",
                 "ts": "2015-07-15T13-00-00Z",
                 "from": {
-                    "id": "p1",
-                    "ext_id": "mlg1",
-                    "name": "Angelica"
+                    "id": "p11",
+                    "id_ext": "mlg11",
+                    "name": "Amanda"
                 },
                 "to": {
-                    "id": "p2",
-                    "ext_id": "mlg2",
-                    "name": "Jessica"
+                    "id": "p12",
+                    "id_ext": "mlg12",
+                    "name": "Beatrice"
                 },
                 "winner": "from",
                 "detail": {
@@ -133,7 +135,7 @@ module.exports.walls = [
                     "a_score": "6",
                     "d_score": "0",
                     "item_transfer": {
-                        "ext_id_item": "--MLG id of item -",
+                        "id_ext_item": "--MLG id of item -",
                         "name": "name of item to display"
                     }
                 },
@@ -144,10 +146,11 @@ module.exports.walls = [
         ]
     },
     {
-        _id: null,
-        id_player: "p2",
+        _id: 'wall_p2_201507',
+        id_player: "p12",
         id_user: "u2",
-        "id_app": "app_mlg2",
+        id_ext:"mlg12",
+        "id_app": "app_mlg",
         month: 201507,
         items: [
             {
@@ -155,14 +158,14 @@ module.exports.walls = [
                 "a": "post",
                 "ts": "2015-07-15T13-00-00Z",
                 "from": {
-                    "id": "p1",
-                    "ext_id": "mlg1",
-                    "name": "Angelica"
+                    "id": "p11",
+                    "id_ext": "mlg11",
+                    "name": "Amanda"
                 },
                 "to": {
-                    "id": "p2",
-                    "ext_id": "mlg2",
-                    "name": "Jessica"
+                    "id": "p12",
+                    "id_ext": "mlg12",
+                    "name": "Beatrice"
                 },
                 "post": {
                     "msg": "Tu es prês de moi?"
@@ -174,14 +177,14 @@ module.exports.walls = [
                 "a": "attack",
                 "ts": "2015-07-15T13-00-00Z",
                 "from": {
-                    "id": "p1",
-                    "ext_id": "mlg1",
-                    "name": "Angelica"
+                    "id": "p11",
+                    "id_ext": "mlg11",
+                    "name": "Amanda"
                 },
                 "to": {
-                    "id": "p2",
-                    "ext_id": "mlg2",
-                    "name": "Jessica"
+                    "id": "p12",
+                    "id_ext": "mlg12",
+                    "name": "Beatrice"
                 },
                 "winner": "from",
                 "detail": {
@@ -192,7 +195,7 @@ module.exports.walls = [
                     "a_score": "6",
                     "d_score": "0",
                     "item_transfer": {
-                        "ext_id_item": "--MLG id of item -",
+                        "id_ext_item": "--MLG id of item -",
                         "name": "name of item to display"
                     }
                 },
@@ -200,10 +203,6 @@ module.exports.walls = [
                     "msg": "voila pour ta poire"
                 }
             }
-
-
-
-
         ]
     }
 ]

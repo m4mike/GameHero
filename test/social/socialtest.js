@@ -40,14 +40,10 @@ describe('social', function () {
         "ts": "2015-07-15T13-00-00Z",
         "app": "app_mlg",
         "from": {
-            "id": "- internal id of attacker -",
-            "ext_id": "--MLG id of attacker -",
-            "name": "Angelica"
+            "id": "p1"
         },
         "to": {
-            "id": "-internal id of defender -",
-            "ext_id": "--MLG id of defender -",
-            "name": "Jessica"
+            "id": "p2",
         },
         "detail": {
             "game": "bitchfight",
@@ -90,14 +86,12 @@ describe('social', function () {
             "when": "2015-07-15T13-00-00Z",
             "app": "app_mlg",
             "from": {
-                "id": "internal id of player",
-                "ext_id": "--MLG id -",
-                "name": "Angelica"
+                "id": "p1"
+             
             },
             "to": {
-                "id": "internal id of player",
-                "ext_id": "--MLG id -",
-                "name": "Jessica"
+                "id": "p2"
+               
             },
             "post": {
                 "msg": "Tu es prês de moi?"
@@ -106,7 +100,7 @@ describe('social', function () {
         options.url = setup.testUrl + "/post";
         console.log('posting : ' + options.url);
         request.post(options, function (err, response, body) {
-            //console.log(JSON.stringify(body));
+            console.log(JSON.stringify(body));
            
             done();
         });
@@ -120,7 +114,7 @@ describe('social', function () {
             "app": "app_mlg",
             "from": {
                 "ext_id": "--MLG id -",
-                "name": "Angelica"
+                "name": "Amanda"
             },
             "post": {
                 "msg": "Je me sens bien"

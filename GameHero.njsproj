@@ -20,6 +20,8 @@
     </NodeExePath>
     <DebuggerPort>
     </DebuggerPort>
+    <NodeExeArguments>
+    </NodeExeArguments>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'" />
   <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
@@ -123,7 +125,8 @@
     <Compile Include="public\swagger-ui.js" />
     <Compile Include="public\swagger-ui.min.js" />
     <Compile Include="startDomain.js" />
-    <Compile Include="tasks\stats.js" />
+    <Compile Include="tasks\socialattack.js" />
+    <Compile Include="tasks\postOnWall.js" />
     <Compile Include="tt\general.js" />
     <Compile Include="test\social\socialtest.js" />
     <Compile Include="test\_setup.js" />

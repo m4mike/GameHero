@@ -61,6 +61,46 @@ exports.playerById = {
     }
 };
 
+exports.playersForApp = {
+    name: 'playersForApp',
+    description: 'get all players for an app',
+    inputs: {
+        idApp: {
+            required: true,
+            validator: null
+        }
+    },
+    
+    run: function (api, action, next) {
+        var id = action.params.idApp;
+        
+        api.data.players.playersForApp(id, function (err, result) {
+            if (err)  return next(err); 
+            if (result == null) {
+                action.connection.rawConnection.responseHttpCode = "404";
+                return next(new Error("not found"));
+            } else {
+                if (result.length == 0) {
+                    action.connection.rawConnection.responseHttpCode = "404";
+                    return next(new Error("not found: " + id));
+                    
+                }
+                var collection = new utils.HyperJson({
+                    _items : result
+                    
+                });
+                collection.addSelfIdsToItems(api.serverUrl + "/api/players/byId/" , "_id");
+                action.response = result;
+                next();
+            }
+            
+        });
+        
+    }
+};
+
+
+
 exports.playerDelete = {
     name: 'playerDelete',
     description: 'Delete player by Id',

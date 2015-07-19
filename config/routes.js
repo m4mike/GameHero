@@ -20,10 +20,11 @@ exports.default = {
           
   
                
-                { path: '/player', action: 'playerActions' },
-                { path: '/player/byId/:playerId', action: 'playerById' },
-                //{ path: "/player/delete/:playerId", action: "playerDelete" }, 
-                { path: '/player/wall/byId/:playerId/:month', action: 'socialwallplayer' },
+                { path: '/players', action: 'playerActions' },
+                { path: '/players/byId/:playerId', action: 'playerById' },
+                { path: '/players/forApp/:idApp', action: 'playersForApp' },
+               
+                { path: '/players/wall/byId/:playerId/:month', action: 'socialwallplayer' },
                 
                  
                 { path: '/social', action: 'socialactions' },
@@ -56,10 +57,10 @@ exports.default = {
                 { path: '/swagger', action: 'swagger' }
             ],
             post: [
-               
+                { path: '/social/attack', action: 'socialattack' },
                 { path: '/social/post', action: 'socialpost' },
                 { path: '/social/status', action: 'socialstatus' },
-                { path: '/social/attack', action: 'socialattack' },
+                
              
 
             ],

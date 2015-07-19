@@ -10,7 +10,7 @@
             "profile": {}
         },
         {
-            "_id": "app_mlb",
+            "_id": "app_mlg",
             "counters": {
                 "exp": 0,
                 "level": 1
@@ -34,7 +34,7 @@
                     "id_player": "p1"
                 },
                 {
-                    "id_app": "app_mlb",
+                    "id_app": "app_mlg",
                     "id_player": "p10"
                 }
             ],
@@ -55,7 +55,7 @@
                     "id_player": "p2"
                 },
                 {
-                    "id_app": "app_mlb",
+                    "id_app": "app_mlg",
                     "id_player": "p12"
                 }
             ]
@@ -76,7 +76,8 @@
         {
             "_id": "p1",
             "id_user": "u1",
-            "id_external": "mlg1",
+            "id_ext": "mlg1",
+            "dispname":"Amanda",
             "counters": {
                 "exp": 100,
                 "level": 1
@@ -110,7 +111,8 @@
         {
             "_id": "p2",
             "id_user": "u2",
-            "id_external": "mlg2",
+            "id_ext": "mlg2",
+            "dispname": "Beatrice",
             "counters": {
                 "exp": 2100,
                 "level": 1
@@ -148,7 +150,8 @@
         {
             "_id": "p3",
             "id_user": "u3",
-            "id_external": "mlg3",
+            "id_ext": "mlg3",
+            "dispname": "Monica",
             "counters": {
                 "exp": 3100,
                 "level": 3
@@ -185,9 +188,10 @@
             ]
         },
         {
-            "_id": "p10",
+            "_id": "p11",
             "id_user": "u1",
-            "id_external": "an external id,ex authentication",
+            "id_ext": "mlg11",
+            "dispname": "Amanda",
             "counters": {
                 "diamonds": 10,
                 "exp": 100,
@@ -203,15 +207,17 @@
                 "attack": 0,
                 "defence": 0
             },
-            "id_app": "app_mlb",
+            "id_app": "app_mlg",
             "items": [],
             "badges": [],
             "quests": []
         },
+      
         {
             "_id": "p12",
             "id_user": "u2",
-            "id_external": "an external id,ex authentication",
+            "dispname": "Beatrice",
+            "id_ext": "mlg12",
             "counters": {
                 "diamonds": 10,
                 "exp": 2100,
@@ -227,7 +233,32 @@
                 "attack": 0,
                 "defence": 0
             },
-            "apps": "app_mlb",
+            "id_app": "app_mlg",
+            "items": [],
+            "badges": [],
+            "quests": []
+        },
+        {
+            "_id": "p13",
+            "id_user": "u3",
+            "dispname": "Clara",
+            "id_ext": "mlg13",
+            "counters": {
+                "diamonds": 10,
+                "exp": 2100,
+                "level": 1,
+                "energy": 0,
+                "money": 0,
+                "health": 0
+            },
+            "profile": {
+                "energy": 20,
+                "health": 110,
+                "skillpoints": 0,
+                "attack": 0,
+                "defence": 0
+            },
+            "id_app": "app_mlg",
             "items": [],
             "badges": [],
             "quests": []
@@ -236,7 +267,7 @@
     seedData.missions = [
         {
             "_id": "mmacarons",
-            "id_app": "app_mlb",
+            "id_app": "app_mlg",
             "name": "Visitéz 5 lieux de macarons de Paris",
             "slug": ",mmacarons,",
             "timing": "10d",
@@ -260,7 +291,7 @@
     seedData.quests = [
         {
             "_id": "qmacarons1",
-            "id_app": "app_mlb",
+            "id_app": "app_mlg",
             "display": "Les macarons de Dalloyau",
             "data": {
                 "adress": "Dalloyau. 101, rue du Faubourg Saint-Honoré, VIIIe.",
@@ -289,7 +320,7 @@
         },
         {
             "_id": "qmacarons2",
-            "id_app": "app_mlb",
+            "id_app": "app_mlg",
             "display": "Les macarons de Pierre Hermé",
             "data": {
                 "adress": "Jean-Paul Hévin. 231, rue Saint-Honoré, Ier",

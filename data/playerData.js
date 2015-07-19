@@ -6,6 +6,32 @@ module.exports.init = function (db) {
     return module.exports;
 }
 
+module.exports.playerExists =  function (id, next) {
+    database.getDb(function (err, db) {
+        if (err) return next(err);
+        db.players.findOne({ _id: id }, { _id: 1 }, function (err, pl) {
+            if (err) return next(err);
+            var exists = true;
+            if (pl == null) exists = false;
+            if (pl._id == null) exists = false;
+            return next(null, exists);        
+                
+        });
+        
+    });
+};//playerExists
+
+module.exports.playersForApp = function (id, next) {
+    database.getDb(function (err, db) {
+        if (err) return next(err);
+        db.players.find({ id_app: id }, { _id: 1 }).toArray( function (err, pl) {
+            if (err) return next(err);
+            return next(null, pl);
+                
+        });
+        
+    });
+};//playersForApp
 
 module.exports.addPlayer = function (player, next) {
        database.getDb(function (err, db) {
@@ -28,12 +54,12 @@ module.exports.getByplayerName = function (playername, next) {
     });
 };//getplayer
 
-module.exports.getIdByExtId = function (extId, next) {
+module.exports.getIdByidExt = function (idExt, next) {
     database.getDb(function (err, db) {
         if (err) {
             next(err);
         } else {
-            db.players.findOne({ id_external: extId },{_id:1}, next);
+            db.players.findOne({ id_ext: idExt },{_id:1}, next);
         }
     });
 };//getplayer
@@ -45,6 +71,27 @@ module.exports.getById = function (playerId, next) {
             next(err);
         } else {
             db.players.findOne({ _id: playerId }, next);
+        }
+    });
+};//getplayer
+
+
+module.exports.getSelectedInfoById = function (playerId,selected, next) {
+    database.getDb(function (err, db) {
+        if (err) {
+            next(err);
+        } else {
+            db.players.findOne({ _id: playerId }, selected, next);
+        }
+    });
+};//getplayer
+
+module.exports.getBaseInfoById = function (playerId,  next) {
+    database.getDb(function (err, db) {
+        if (err) {
+            next(err);
+        } else {
+            db.players.findOne({ _id: playerId }, {_id:1,id_user:1,id_ext:1,id_app:1,dispname:1}, next);
         }
     });
 };//getplayer
@@ -111,7 +158,7 @@ module.exports.save = function (player, next) {
 module.exports.getProto = function () {
     return {
         _id : "p"+utils.randomId(7),
-        id_external: null,
+        id_ext: null,
         counters: {
            
             "exp": 0,

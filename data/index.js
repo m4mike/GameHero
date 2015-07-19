@@ -2,6 +2,7 @@
 
 module.exports.database = this;
 module.exports.social = null;
+module.exports.players = null;
 
 
 var api = null;
