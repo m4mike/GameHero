@@ -62,6 +62,10 @@
     <Compile Include="actions\missionActions.js" />
     <Compile Include="actions\interestActions.js" />
     <Compile Include="actions\playerActions.js" />
+    <Compile Include="actions\social\socialAttackAction.js" />
+    <Compile Include="actions\social\socialPostToWallActions.js" />
+    <Compile Include="actions\social\socialUtils.js" />
+    <Compile Include="actions\social\socialGetWallActions.js" />
     <Compile Include="actions\swagger.js" />
     <Compile Include="actions\debugtest.js" />
     <Compile Include="actions\testActions\showDocumentation.js" />
@@ -72,17 +76,17 @@
     <Compile Include="actions\testActions\randomNumber.js" />
     <Compile Include="actions\testActions\sleepTest.js" />
     <Compile Include="actions\usersActions.js" />
-    <Compile Include="actions\socialActions.js" />
+    <Compile Include="actions\social\socialActions.js" />
     <Compile Include="datap\index.js" />
-    <Compile Include="data\seedActionLog.js" />
-    <Compile Include="data\socialData.js" />
+    <Content Include="data\seedActionLog.js" />
+    <Content Include="data\socialData.js" />
     <Compile Include="index.js" />
     <Compile Include="config\mongo.js" />
     <Compile Include="config\redis.js" />
     <Compile Include="config\swagger.js" />
-    <Compile Include="data\appData.js" />
-    <Compile Include="data\interestData.js" />
-    <Compile Include="data\playerData.js" />
+    <Content Include="data\appData.js" />
+    <Content Include="data\interestData.js" />
+    <Content Include="data\playerData.js" />
     <Compile Include="gruntfile.js" />
     <Compile Include="actions\status.js" />
     <Compile Include="config\api.js" />
@@ -93,12 +97,12 @@
     <Compile Include="config\tasks.js" />
     <Content Include="public\chat.html" />
     <Content Include="public\index.html" />
-    <Compile Include="data\actionData.js" />
-    <Compile Include="data\index.js" />
-    <Compile Include="data\missionData.js" />
-    <Compile Include="data\questData.js" />
-    <Compile Include="data\seedData.js" />
-    <Compile Include="data\userData.js" />
+    <Content Include="data\actionData.js" />
+    <Content Include="data\index.js" />
+    <Content Include="data\missionData.js" />
+    <Content Include="data\questData.js" />
+    <Content Include="data\seedData.js" />
+    <Content Include="data\userData.js" />
     <Compile Include="initializers\data.js" />
     <Compile Include="initializers\dataSeed.js" />
     <Compile Include="initializers\swagger.js" />
@@ -111,7 +115,6 @@
     <Compile Include="logic\questLogic.js" />
     <Compile Include="logic\userLogic.js" />
     <Compile Include="node_modules\actionhero\servers\web.js" />
-    <Compile Include="Procfile" />
     <Compile Include="public\lib\backbone-min.js" />
     <Compile Include="public\lib\handlebars-2.0.0.js" />
     <Compile Include="public\lib\highlight.7.3.pack.js" />
@@ -151,6 +154,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="actions\" />
+    <Folder Include="actions\social\" />
     <Folder Include="actions\testActions\" />
     <Folder Include="config" />
     <Folder Include="config\servers" />

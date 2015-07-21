@@ -44,22 +44,13 @@ module.exports.addPlayer = function (player, next) {
     });
 }; //addplayer
 
-module.exports.getByplayerName = function (playername, next) {
-    database.getDb(function (err, db) {
-        if (err) {
-            next(err);
-        } else {
-            db.players.findOne({ playername: playername }, next);
-        }
-    });
-};//getplayer
 
 module.exports.getIdByidExt = function (idExt, next) {
     database.getDb(function (err, db) {
         if (err) {
             next(err);
         } else {
-            db.players.findOne({ id_ext: idExt },{_id:1}, next);
+            db.players.findOne({ id_ext: idExt },{_id:1,id_user:1,id_ext:1,dispname:1,id_app:1}, next);
         }
     });
 };//getplayer
@@ -92,6 +83,16 @@ module.exports.getBaseInfoById = function (playerId,  next) {
             next(err);
         } else {
             db.players.findOne({ _id: playerId }, {_id:1,id_user:1,id_ext:1,id_app:1,dispname:1}, next);
+        }
+    });
+};//getplayer
+
+module.exports.getBaseInfoByIdExt = function (playerId, next) {
+    database.getDb(function (err, db) {
+        if (err) {
+            next(err);
+        } else {
+            db.players.findOne({ id_ext: playerId }, { _id: 1, id_user: 1, id_ext: 1, id_app: 1, dispname: 1 }, next);
         }
     });
 };//getplayer

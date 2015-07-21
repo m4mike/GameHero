@@ -22,8 +22,8 @@ exports.default = {
                
                 { path: '/players', action: 'playerActions' },
                 { path: '/players/byId/:playerId', action: 'playerById' },
-                { path: '/players/forApp/:idApp', action: 'playersForApp' },
-               
+                { path: '/players/forApp/:idApp', action: 'playersForApp' }, 
+                { path: '/players/create/app/:idApp/extid/:idExt', action: 'createPlayerExt' } ,
                 { path: '/players/wall/byId/:playerId/:month', action: 'socialwallplayer' },
                 
                  

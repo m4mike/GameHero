@@ -26,7 +26,7 @@ exports.status = {
 
     },
     "serverInformation":{  
-      "serverName":"actionhero API",
+      "serverName":"GameHero API",
       "apiVersion":"0.0.1",
       "requestDuration":12,
             "currentTime": 1420953679624,

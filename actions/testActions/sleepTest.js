@@ -16,8 +16,8 @@ exports.sleepTest = {
     "sleepDelta":1005,
     "sleepDuration":1000,
     "serverInformation":{  
-      "serverName":"actionhero API",
-      "apiVersion":"0.0.1",
+      "serverName":"GameHero API",
+      "apiVersion":"0.7",
       "requestDuration":1006,
       "currentTime":1420953572327
     }

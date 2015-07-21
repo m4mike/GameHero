@@ -2,3 +2,5 @@
 	v move log and wall post creation logic to the task
 
 for an attack,status and post : check the player is for that app
+
+when attacking with ext-id and player doesn't exist, create the player'
