@@ -147,7 +147,7 @@ module.exports.save = function (player, next) {
         } else {
             return db.players.save(player, { w: 1 }, function (err, data) {
                 if (err) return next(new Error("unable to save player"))
-                return next(data);
+                return next(null,data);
             });
         }
        

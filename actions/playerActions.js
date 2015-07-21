@@ -249,7 +249,7 @@ exports.createPlayerExt = {
             //save player
             api.data.players.save(state.player, function (err, p) {
                 if (err) {
-                    state.err = new Error('Unable to create player');
+                    state.err = new Error('Unable to create player:' + err);
                     state.abort = true; emitter.emit('error');
                 }
                 else emitter.emit('ready');
