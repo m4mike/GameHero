@@ -47,7 +47,7 @@ exports.questsForMission = {
                         return;
                     }
                     var collection = new utils.HyperJson({
-                        _items: result
+                        ok:1, _result: result
 
                     });
                     collection.addSelfIdsToItems(api.serverUrl + "/api/quests/", "_id");
@@ -80,7 +80,7 @@ exports.questsForApp = {
                     next(new Error("not found"));
                 } else {
                     var collection = new utils.HyperJson({
-                        _items: result
+                        ok:1, _result: result
 
                     });
                     collection.addSelfIdsToItems(api.serverUrl + "/api/quests/", "_id");
@@ -114,7 +114,7 @@ exports.questSearch = {
                     next(new Error("not found"));
                 } else {
                     var collection = new utils.HyperJson({
-                        _items: result
+                        ok:1, _result: result
 
                     });
                     collection.addSelfIdsToItems(api.serverUrl + "/api/quests/", "_id");

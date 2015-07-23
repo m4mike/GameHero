@@ -43,7 +43,7 @@ exports.status = {
         data.response.stats             = stats;
         data.response.queues            = details.queues;
         data.response.workers           = details.workers;
-        data.response.environment = "hello";
+        data.response.environment = api.environment;
         next(err);
       });
     });

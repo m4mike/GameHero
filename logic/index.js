@@ -1,18 +1,18 @@
-﻿module.exports.database = null;
-module.exports.missions = null;
-module.exports.quests = null;
-module.exports.players = null;
-module.exports.users = null;
+﻿module.exports.quests = null;
+module.exports.counters = null;
 
-var cachedApi = null;
+var api = null;
 
-module.exports.init = function (api) {
+module.exports.init = function (theApi) {
     
-    if (cachedApi == null) {
-        cachedApi = api; // save the reference once
-        module.exports.quests = new require("./questLogic").init(api);
-        module.exports.players = new require("./playerLogic").init(api);
-        module.exports.users = new require("./userLogic").init(api);
+    if (api == null) {
+        api = theApi; // save the reference once
+        //api.logic = {};
+        module.exports.quests  = require("./questLogic").init(api);
+        //module.exports.players = new require("./playerLogic").init(api);
+        module.exports.counters = require("./counterLogic").init(api);
+        
+        
     }
     return module.exports;
     

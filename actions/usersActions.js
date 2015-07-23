@@ -56,8 +56,10 @@ exports.userAddInterest = {
                                    action.params.interest, function (err, data) {
             //var collection = new utils.HyperJson(data);
             //collection.addSelfId();
-            action.response = data;
-            next();
+            api.data.users.getById(action.params.idUser, function (err, uu) {
+                action.response = { ok: 1, _result: uu };
+                next(err);
+            });
         });
     }
 };
@@ -90,8 +92,10 @@ exports.userRemoveInterest = {
                                    action.params.lang, 
                                    action.params.cat, 
                                    action.params.interest, function (err, data) {
-            action.response = data;
-            next(null, data);
+            api.data.users.getById(action.params.idUser, function (err, uu) {
+                action.response = { ok: 1, _result: uu };
+                next(err);
+            });
         });
     }
 };
@@ -124,7 +128,7 @@ exports.userHasInterest = {
                                    action.params.lang, 
                                    action.params.cat, 
                                    action.params.interest, function (err, data) {
-            action.response = data;
+            action.response = { ok: 1, _result: data };
             next();
         });
     }
@@ -150,7 +154,7 @@ exports.userById = {
                 return next(new Error("not found"));
             } else {
 
-                action.response = result;
+                action.response = { ok: 1, _result: result };
                 next();
             }
 
@@ -234,7 +238,7 @@ exports.userDelete = {
                     
                     //});
                     //collection.addSelfIdsToItems(api.serverUrl + "/api/users/getById/" , "_id");
-                    action.response = result.result;
+                    action.response = { ok: 1, _result: result.result };
                     next();
                 }
             }

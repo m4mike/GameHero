@@ -1,7 +1,7 @@
 ﻿module.exports.init = function (api) {
     
     var async = require("async");
-    var data = new require("../data")(api);
+    var data = require('../data');
     var _ = require("lodash");
     
     
@@ -81,9 +81,8 @@
         
     };
     
-    logic.quests = {};
-    logic.quests.getValidQuestsForplayer = _getQuestsForplayer;
-        
+    module.exports.getValidQuestsForplayer = _getQuestsForplayer;
+    return module.exports;
     
 
 }//init

@@ -10,6 +10,7 @@ module.exports = {
         
         api.log("Initialisation of api data");
         api.data = require("../data").init(api);
+        api.logic = require("../logic").init(api);
         
          
         var client = api.redis.client;

@@ -13,7 +13,7 @@ exports.debugtest = {
             api.data.interests.getRandomInterestsForCat('fr',"Autres",5, function (err, data) {
             console.log(JSON.stringify(data));
             
-                   action.response = data;
+                   action.response = { ok: 1, _result: data };
              
                done();
             })

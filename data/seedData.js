@@ -1,28 +1,68 @@
 ﻿(function (seedData) {
 
+
+
     seedData.apps = [
-        {
-            "_id": "app_follow",
-            "counters": {
-                "exp": 0,
-                "level": 1
-            },
-            "profile": {}
-        },
-        {
-            "_id": "app_mlg",
-            "counters": {
-                "exp": 0,
-                "level": 1
-            },
-            "profile": {
-                "energy": 20,
-                "health": 100,
-                "skillpoints": 5,
-                "attack": 0,
-                "defence": 0
-            }
-        }
+  {
+      "_id": "app_follow",
+      "counters": {
+          "exp": 0,
+          "level": 1
+      },
+      "profile": {}
+  },
+  {
+      "_id": "app_mlg",
+      "counters": {
+          "exp": 0,
+          "level": 1
+      },
+      "profile": {
+          "energy": 20,
+          "health": 100,
+          "skillpoints": 5,
+          "attack": 0,
+          "defence": 0
+      },
+      "actions": [
+          {
+              "id": "status",
+              "counters": [
+                [
+                  "exp",
+                  1
+                ]
+              ]
+          },
+  {
+      "id": "post",
+      "counters": [
+        [
+          "exp",
+          2
+        ]
+      ]
+  },
+  {
+      "id": "attack",
+      "counters": [
+        [
+          "exp",
+          3
+        ]
+      ]
+  },
+  {
+      "id": "attack-win",
+      "counters": [
+        [
+          "exp",
+          5
+        ]
+      ]
+  }
+      ]
+  }
     ];
 
     seedData.users = [
@@ -38,14 +78,14 @@
                     "id_player": "p10"
                 }
             ],
-            "interests":  [
+            "interests": [
                     {
                         "l": "fr",
                         "c": "Autres",
                         "i": "Ferrari"
                     }
-                ]
-            
+            ]
+
         },
         {
             "_id": "u2",
@@ -59,7 +99,7 @@
                     "id_player": "p12"
                 }
             ]
-            ,"interests":[]
+            , "interests": []
         },
         {
             "_id": "u3",
@@ -68,7 +108,7 @@
                     "id_app": "app_follow",
                     "id_player": "p3"
                 }
-            ] , "interests": []
+            ], "interests": []
         }
     ];
 
@@ -77,7 +117,7 @@
             "_id": "p1",
             "id_user": "u1",
             "id_ext": "mlg1",
-            "dispname":"Amanda",
+            "dispname": "Amanda",
             "counters": {
                 "exp": 100,
                 "level": 1
@@ -212,7 +252,7 @@
             "badges": [],
             "quests": []
         },
-      
+
         {
             "_id": "p12",
             "id_user": "u2",

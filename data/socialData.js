@@ -19,7 +19,7 @@ module.exports.getPlayerWall = function (idPlayer, month, next) {
     database.getDb(function (err, db) {
         if (err) return next(err);
         var id = getWallIdFromPlayerAndMonth(idPlayer, Number(month))
-        return db.walls.find({ _id: id  }).toArray(next);
+        return db.walls.findOne({ _id: id  },next);
 
 
     });
@@ -32,7 +32,7 @@ module.exports.getExtPlayerWall = function (idExt, month, next) {
             if (err) return next(err);
             if (idPlayer == null) return next(new Error("Ext Id not found"));
             var imonth = Number(month);
-            return db.walls.find({ id_player: idPlayer._id, month: imonth }).toArray(next);
+            return db.walls.findOne({ id_player: idPlayer._id, month: imonth },next);
         })
     })
 }; //getPlayerWall

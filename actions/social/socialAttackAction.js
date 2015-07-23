@@ -12,7 +12,7 @@ var socialUtils = require('./socialUtils.js');
  */
 exports.socialattack = {
     name: 'socialattack',
-    description: 'A player attacks another player: example with internal ids: (for external, replace id by id_ext) ' + JSON.stringify({
+    description: 'A player attacks another player: example with internal ids: (for external, replace id by id_ext)<br/> ' + JSON.stringify({
         "app": "app_mlg",
         "from": {
             "id": "p11"
@@ -87,7 +87,7 @@ exports.socialattack = {
             validator: null
         },
         detail: {
-            description: 'the details of the attack example :' + JSON.stringify({
+            description: 'the details of the attack example :<br/>' + JSON.stringify({
                 "detail": {
                     "game": "bitchfight",
                     "a_health": "10",
@@ -115,6 +115,7 @@ exports.socialattack = {
     run: function (api, action, next) {
         
         var state = {
+            action : 'attack',
             playerFrom: action.params.from, 
             playerTo: action.params.to, 
             playerFromCheck : false,
@@ -122,13 +123,14 @@ exports.socialattack = {
             idApp: action.params.app, 
             post: action.params.post, 
             detail : action.params.detail,
+            winner : action.params.winner,
             err: null
         };
         
         var EventEmitter = require('events').EventEmitter;
         var emitter = new EventEmitter();
         
-
+        
         //binding the events
         //   start -> getting players from player id's
         //            checkPlayerFrom - playerFrom -
@@ -144,19 +146,19 @@ exports.socialattack = {
                     state.playerFrom = state.playerFrom.id_ext;
                     state.playerTo = state.playerTo.id_ext;
                 } else {
-        
+                    
                     state.playerFrom = state.playerFrom.id;
                     state.playerTo = state.playerTo.id;
                 }
             }
-               
-         
-
+            
+            
+            
             emitter.emit(nextEmit);
         });
         
         emitter.on('internal', function () { emitter.emit('getplayers') });
-        emitter.on('external', function () { emitter.emit('getplayersext')});
+        emitter.on('external', function () { emitter.emit('getplayersext') });
         emitter.on('getplayers', function () {
             //check both players then emit post
             
@@ -222,7 +224,6 @@ exports.socialattack = {
         });
         
         
-        
         emitter.on('post', function () {
             if (!state.playerFromCheck) {
                 state.err = new Error('player from not found'); return emitter.emit('error');
@@ -236,17 +237,26 @@ exports.socialattack = {
                 state.post = {};
                 state.post.msg = msg;
             }
+            
             api.tasks.enqueue("socialattack", state, 'default', function (err, toRun) {
                 state.resp = {
                     ok: 1,
                     state: 'queued'
                 };
-                return emitter.emit('ready');
+                return emitter.emit('counters');
             });
             
             
         });
         
+        emitter.on('counters', function () {
+            var actions = [state.action];
+            if (state.winner == 'from') actions.push('attack-win');
+            api.logic.counters.updateCounters(state.playerFrom._id, state.idApp, actions, function (err, update) {
+                state.resp = update;
+                emitter.emit('ready');
+            })
+        });
         
         emitter.on('ready', function () {
             action.response = state.resp;

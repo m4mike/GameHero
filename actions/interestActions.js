@@ -48,7 +48,7 @@ exports.listCats = {
             }
             
             
-            action.response = result;
+            action.response = { ok: 1, _result: result };
             next();
         })
             
@@ -83,7 +83,7 @@ exports.interestsForCat = {
             }
             
             
-            action.response = result;
+            action.response = { ok: 1, _result: result };
             next();
         })
             
@@ -123,7 +123,7 @@ exports.addInterest = {
                 }
             
             
-                action.response = result;
+                action.response = { ok: 1, _result: result };
                 next();
         })
             
@@ -164,7 +164,7 @@ exports.deleteInterest = {
             }
             
             
-            action.response = result;
+            action.response = { ok: 1, _result: 'deleted' };
             next();
         })
             

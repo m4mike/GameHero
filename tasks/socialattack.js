@@ -1,12 +1,12 @@
-exports.task = {
-  name: "socialattack",
-  description: "player p1 attacks player p2  ",
-  frequency: 0,
-  queue: "default",
-  plugins:       [],
-  pluginOptions: [],
-
-    run: function (api, params, next){
+﻿exports.task = {
+    name: "socialattack",
+    description: "player p1 attacks player p2  ",
+    frequency: 0,
+    queue: "default",
+    plugins: [],
+    pluginOptions: [],
+    
+    run: function (api, params, next) {
         //var state = {
         //    playerFrom: action.params.from, 
         //    playerTo: action.params.to, 
@@ -18,7 +18,7 @@ exports.task = {
         //    err: null
         //};
         //postOnWall = function (playerFrom, playerTo, app, post, next) {
-        api.data.social.socialAttack(params.playerFrom,params.playerTo,params.idApp,params.post,params.detail,next)
+        api.data.social.socialAttack(params.playerFrom, params.playerTo, params.idApp, params.post, params.detail, next)
    
-  }
+    }
 };

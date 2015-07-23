@@ -44,7 +44,7 @@ exports.socialwallplayer = {
         }
         api.data.social.getPlayerWall(action.params.playerId, action.params.month, function (err, res) {
             
-            action.response = res;
+            action.response = { ok: 1, _result: res };
             action.response.error = null;
             next(null, res);
 
@@ -84,7 +84,7 @@ exports.socialwallExtPlayer = {
         }
         api.data.social.getExtPlayerWall(action.params.ext_playerId, action.params.month, function (err, res) {
             
-            action.response = res;
+            action.response = { ok: 1, _result: res };
             action.response.error = null;
             next(null, res);
 

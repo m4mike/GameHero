@@ -69,7 +69,7 @@ exports.socialstatus = {
  */
 exports.socialpost = {
     name: 'socialpost',
-    description: 'post on a players wall',
+    description: 'post on a players wall<br/> example:<br/>{"app":"app_mlg","from":{"id":"p11"},"to":{"id":"p12"},"post":{"msg":"Comment vas tu?"}}',
     outputExample: {
         
         app: "app_mlg",
@@ -104,6 +104,7 @@ exports.socialpost = {
     run: function (api, action, next) {
         
         var state = {
+            action : 'post',
             playerFrom: action.params.from, 
             playerTo: action.params.to, 
             playerFromCheck : false,
@@ -122,12 +123,42 @@ exports.socialpost = {
         //            checkPlayerTo   - playerTO -
         //   post -> create task to post, reply
         
+        if (typeof state.playerFrom === 'object') {
+            if (state.playerFrom.id_ext != null) {
+                nextEmit = 'external';
+                state.playerFrom = state.playerFrom.id_ext;
+                state.playerTo = state.playerTo.id_ext;
+            } else {
+                
+                state.playerFrom = state.playerFrom.id;
+                state.playerTo = state.playerTo.id;
+            }
+        }
         
+        emitter.on('start', function (){
+            var nextEmit = 'internal';
+            if (typeof state.playerFrom === 'object') {
+                if (state.playerFrom.id_ext != null) {
+                    nextEmit = 'external';
+                    state.playerFrom = state.playerFrom.id_ext;
+                    state.playerTo = state.playerTo.id_ext;
+                } else {
+                    
+                    state.playerFrom = state.playerFrom.id;
+                    state.playerTo = state.playerTo.id;
+                }
+            }
+            emitter.emit(nextEmit);
+        })
         
-        emitter.on('start', function () {
+
+        emitter.on('internal', function () {
             //check both players then emit post
             async.parallel([
                 function (cb) {
+                    
+                  
+
                     api.data.players.getBaseInfoById(state.playerFrom, function (err, p1) {
                         if (p1 == null) { state.playerFromCheck = false; }
                         else {
@@ -155,7 +186,37 @@ exports.socialpost = {
             
         });
         
-        
+        emitter.on('external', function () {
+            //check both players from external id then emit post
+            
+            async.parallel([
+                function (cb) {
+                    api.data.players.getBaseInfoByIdExt(state.playerFrom, function (err, p1) {
+                        if (p1 == null) { state.playerFromCheck = false; }
+                        else {
+                            state.playerFrom = p1;
+                            state.playerFromCheck = true;
+                        }
+                        cb();
+                    })
+                },
+                function (cb) {
+                    api.data.players.getBaseInfoByIdExt(state.playerTo, function (err, p2) {
+                        if (p2 == null) { state.playerToCheck = false; }
+                        else {
+                            state.playerTo = p2;
+                            state.playerToCheck = true;
+                        }
+                        cb();
+                    })
+                }]
+                , function (err) {
+                emitter.emit('post');
+            
+            });
+            
+            
+        });
         
         emitter.on('post', function () {
             if (!state.playerFromCheck) {
@@ -171,16 +232,20 @@ exports.socialpost = {
                 state.post.msg = msg;
             }
             api.tasks.enqueue("postonwall", state, 'default', function (err, toRun) {
-                state.resp = {
-                    ok: 1,
-                    state: 'queued'
-                };
-                return emitter.emit('ready');
+               
+                return emitter.emit('calc');
             });
             
             
         });
         
+        emitter.on('calc', function () { 
+            api.logic.counters.updateCounters(state.playerFrom._id, state.idApp, state.action, function (err, update) {
+                state.resp = update;
+                emitter.emit('ready');
+            })
+            
+        });
         
         emitter.on('ready', function () {
             action.response = state.resp;

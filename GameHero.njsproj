@@ -61,7 +61,8 @@
     <Compile Include="actions\appActions.js" />
     <Compile Include="actions\missionActions.js" />
     <Compile Include="actions\interestActions.js" />
-    <Compile Include="actions\playerActions.js" />
+    <Compile Include="actions\player\playerCreateActions.js" />
+    <Compile Include="actions\player\playerRetrievalActions.js" />
     <Compile Include="actions\social\socialAttackAction.js" />
     <Compile Include="actions\social\socialPostToWallActions.js" />
     <Compile Include="actions\social\socialUtils.js" />
@@ -80,6 +81,7 @@
     <Compile Include="datap\index.js" />
     <Content Include="data\seedActionLog.js" />
     <Content Include="data\socialData.js" />
+    <Content Include="data\seedCounters.js" />
     <Compile Include="index.js" />
     <Compile Include="config\mongo.js" />
     <Compile Include="config\redis.js" />
@@ -106,14 +108,13 @@
     <Compile Include="initializers\data.js" />
     <Compile Include="initializers\dataSeed.js" />
     <Compile Include="initializers\swagger.js" />
+    <Compile Include="logic\counterLogic.js" />
     <Compile Include="node_modules\actionhero\initializers\redis.js" />
     <Compile Include="initializers\mongo.js" />
     <Compile Include="initializers\tictacMpInitialiser.js" />
     <Compile Include="initializers\tictacInitializer.js" />
     <Compile Include="logic\index.js" />
-    <Compile Include="logic\playerLogic.js" />
     <Compile Include="logic\questLogic.js" />
-    <Compile Include="logic\userLogic.js" />
     <Compile Include="node_modules\actionhero\servers\web.js" />
     <Compile Include="public\lib\backbone-min.js" />
     <Compile Include="public\lib\handlebars-2.0.0.js" />
@@ -128,8 +129,9 @@
     <Compile Include="public\swagger-ui.js" />
     <Compile Include="public\swagger-ui.min.js" />
     <Compile Include="startDomain.js" />
-    <Compile Include="tasks\socialattack.js" />
+    <Compile Include="tasks\pingTask.js" />
     <Compile Include="tasks\postOnWall.js" />
+    <Compile Include="tasks\socialAttack.js" />
     <Compile Include="tt\general.js" />
     <Compile Include="test\social\socialtest.js" />
     <Compile Include="test\_setup.js" />
@@ -154,8 +156,10 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="actions\" />
+    <Folder Include="actions\player\" />
     <Folder Include="actions\social\" />
     <Folder Include="actions\testActions\" />
+    <Folder Include="bin\" />
     <Folder Include="config" />
     <Folder Include="config\servers" />
     <Folder Include="images\" />
@@ -163,6 +167,7 @@
     <Folder Include="log" />
     <Folder Include="datap\" />
     <Folder Include="0.todo\" />
+    <Folder Include="NewFolder1\" />
     <Folder Include="node_modules\" />
     <Folder Include="node_modules\actionhero\" />
     <Folder Include="node_modules\actionhero\initializers\" />

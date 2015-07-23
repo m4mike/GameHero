@@ -155,6 +155,20 @@ module.exports.save = function (player, next) {
 }
 
 
+module.exports.update = function (idPlayer,setField, next) {
+    database.getDb(function (err, db) {
+        if (err) {
+            next(err, null);
+        } else {
+            return db.players.update({ _id: idPlayer }, { $set: setField }, function (err, data) {
+                if (err && next) return next(new Error("unable to update player"))
+                if (next) return next(null, data);
+            });
+        }
+
+    });
+}
+
 
 module.exports.getProto = function () {
     return {

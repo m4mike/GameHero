@@ -199,7 +199,7 @@ exports.appCreatePlayer = {
         
         
         emitter.on('ready', function () {
-            action.response = state.player;
+            action.response = { ok: 1 , _result: state.player };
             next(null, state.player);
         });
         

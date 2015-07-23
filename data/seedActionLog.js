@@ -146,7 +146,7 @@ module.exports.walls = [
         ]
     },
     {
-        _id: 'wall_p2_201507',
+        _id: 'wall_p12_201507',
         id_player: "p12",
         id_user: "u2",
         id_ext:"mlg12",
