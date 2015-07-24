@@ -16,14 +16,17 @@ module.exports = {
             
            
             client.get(kk, function (err, val) {
-                console.log("Worker : " + kk + " val :" + val);
-                var d = new moment(val,'MMM D YYYY MM:mm:ss');
+                console.log("Worker : " + kk.slice(0,20) );
+                var d = new moment(val,'ddd MMM D YYYY HH:mm:ss GMT+DDYY (UTC)');
                 var td = new moment();
 
-                console.log('started : ' + d.fromNow());
+                console.log('started : ' + d.fromNow() + 'diff:'  + d.diff(td, 'days'));
+
                 if (d.diff(td, 'days') < -1) {
-                    console.log('deleting');
+                    console.log('...deleting');
                 }
+                else
+                    console.log('...worker is current')
             })
 
           
