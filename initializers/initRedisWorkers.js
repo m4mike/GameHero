@@ -21,9 +21,9 @@ module.exports = {
                     var td = new moment();
                     var kar = k.split(':');
                     var kkk = kar[2];
-                    console.log('started : ' + d.fromNow() + 'diff:' + d.diff(td, 'days'));
+                    console.log('started : ' + d.fromNow() + 'diff:' + d.diff(td, 'hours'));
                     
-                    if (d.diff(td, 'days') < -1) {
+                    if (d.diff(td, 'hours') < -1) {
                         client.del(k, function (err, res) {
                             client.srem('resque:workers', kkk, function (err, sres) {
                                 console.log('deleted key');
