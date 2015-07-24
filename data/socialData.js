@@ -55,9 +55,10 @@ var getCurrentMonth = function () {
     return Number("" + d.getFullYear() + m2);
 }
 
-module.exports.postOnWall = function (playerFrom, playerTo, app, post, next) {
+module.exports.postOnWall = function (playerFrom, playerTo, app, post,action, next) {
     var state = {
         db: null,
+        action : action,
         actionLog: null,
         idWall: null,
         playerFrom: playerFrom,
@@ -74,6 +75,8 @@ module.exports.postOnWall = function (playerFrom, playerTo, app, post, next) {
     //   start -> getDb ->createActionLog -> createWallItem
     
     emitter.on('start', function () {
+        if (state.action === 'status')
+            state.playerTo = state.playerFrom;
         database.getDb(function (err, db) {
             if (err) { state.err = err; return emitter.emit('error'); }
             state.db = db;
@@ -83,11 +86,13 @@ module.exports.postOnWall = function (playerFrom, playerTo, app, post, next) {
 
     emitter.on('createactionlog', function () {
         var al = getSocialProto();
-        al.a = 'post';
+        al.a = state.action;
         al.from._id = state.playerFrom._id;
         al.from.id_ext = state.playerFrom.id_ext;
         al.from.id_user = state.playerFrom.id_user;
         al.from.dispname = state.playerFrom.dispname;
+
+
         al.id_app = state.idApp;
         al.post = state.post;
         state.actionLog = al;

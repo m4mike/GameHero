@@ -4,36 +4,6 @@ var util = require('util');
 var async = require('async');
 
 
-var standardInputs = {
-    actiontype: {
-        required: true,
-        validator: null
-    },
-    ts: {
-        required: true,
-        validator: null
-    },
-    app: {
-        required: true,
-        validator: null
-    },
-    from: {
-        required: true,
-        validator: null
-    },
-    to: {
-        required: true,
-        validator: null
-    },
-    detail: {
-        required: false,
-        validator: null
-    },
-    post: {
-        required: false,
-        validator: null
-    },
-};
 
 
 /*
@@ -45,18 +15,127 @@ var standardInputs = {
 
 exports.socialstatus = {
     name: 'socialstatus',
-    description: 'post a status on a players wall',
-    outputExample: null,
-    inputs: standardInputs,
+    description: 'change status on a players wall<br/> example:<br/>{"app":"app_mlg","from":{"id":"p11"},"post":{"msg":"quelle belle journée!"}}',
+    inputs: {
+        app: {
+            required: true,
+            validator: null
+        },
+        from: {
+            required: true,
+            validator: null
+        },
+        post: {
+            required: false,
+            validator: null
+        }
+    },
     
     
     run: function (api, action, next) {
         
-        action.response = JSON.stringify(action.params);
-        action.response.error = null;
+        var state = {
+            action : 'status',
+            playerFrom: action.params.from, 
+            playerFromCheck : false,
+            idApp: action.params.app, 
+            post: action.params.post, 
+            err: null
+        };
         
-        next();
+        var EventEmitter = require('events').EventEmitter;
+        var emitter = new EventEmitter();
+        
+        //binding the events
+        //   start -> getting players from player id's
+        //            checkPlayerFrom - playerFrom -
+        //            checkPlayerTo   - playerTO -
+        //   post -> create task to post, reply
+        
+        
+        emitter.on('start', function () {
+            var nextEmit = 'internal';
+            if (typeof state.playerFrom === 'object') {
+                if (state.playerFrom.id_ext != null) {
+                    nextEmit = 'external';
+                    state.playerFrom = state.playerFrom.id_ext;
+                } else {
+                    state.playerFrom = state.playerFrom.id;
+                   
+                }
+            }
+            emitter.emit(nextEmit);
+        })
+        
+        
+        emitter.on('internal', function () {
+            api.data.players.getBaseInfoById(state.playerFrom, function (err, p1) {
+                if (p1 == null) { state.playerFromCheck = false; }
+                else {
+                    state.playerFrom = p1;
+                    state.playerFromCheck = true;
+                    emitter.emit('post');
+            
+                }
+            })
+        });
+        
+        emitter.on('external', function () {
+            //check both players from external id then emit post
+            
+            api.data.players.getBaseInfoByIdExt(state.playerFrom, function (err, p1) {
+                if (p1 == null) { state.playerFromCheck = false; state.err = new Error('player not found');emitter.emit('error');}
+                else {
+                    state.playerFrom = p1;
+                    state.playerFromCheck = true;
+                    emitter.emit('post');
+                }
+            })
+        });
+        
+        emitter.on('post', function () {
+            if (!state.playerFromCheck) {
+                state.err = new Error('player from not found'); return emitter.emit('error');
+            }
+           
+            
+            if (typeof state.post == 'string') {
+                var msg = state.post
+                state.post = {};
+                state.post.msg = msg;
+            }
+            api.tasks.enqueue("postonwall", state, 'default', function (err, toRun) {
+                
+                return emitter.emit('calc');
+            });
+            
+            
+        });
+        
+        emitter.on('calc', function () {
+            api.logic.counters.updateCounters(state.playerFrom._id, state.idApp, state.action, function (err, update) {
+                state.resp = update;
+                emitter.emit('ready');
+            })
+            
+        });
+        
+        emitter.on('ready', function () {
+            action.response = state.resp;
+            return next();
+        });
+        
+        emitter.on('error', function () {
+            action.error = state.err;
+            action.connection.rawConnection.responseHttpCode = "404";
+            return next(state.err);
+        });
+        
+        
+        emitter.emit('start');
+
     }
+
 
 };
 
@@ -123,19 +202,8 @@ exports.socialpost = {
         //            checkPlayerTo   - playerTO -
         //   post -> create task to post, reply
         
-        if (typeof state.playerFrom === 'object') {
-            if (state.playerFrom.id_ext != null) {
-                nextEmit = 'external';
-                state.playerFrom = state.playerFrom.id_ext;
-                state.playerTo = state.playerTo.id_ext;
-            } else {
-                
-                state.playerFrom = state.playerFrom.id;
-                state.playerTo = state.playerTo.id;
-            }
-        }
         
-        emitter.on('start', function (){
+        emitter.on('start', function () {
             var nextEmit = 'internal';
             if (typeof state.playerFrom === 'object') {
                 if (state.playerFrom.id_ext != null) {
@@ -151,16 +219,16 @@ exports.socialpost = {
             emitter.emit(nextEmit);
         })
         
-
+        
         emitter.on('internal', function () {
             //check both players then emit post
             async.parallel([
                 function (cb) {
                     
-                  
-
+                    
+                    
                     api.data.players.getBaseInfoById(state.playerFrom, function (err, p1) {
-                        if (p1 == null) { state.playerFromCheck = false; }
+                        if (p1 == null) { state.playerFromCheck = false; state.err = new Error('player not found'); }
                         else {
                             state.playerFrom = p1;
                             state.playerFromCheck = true;
@@ -170,7 +238,7 @@ exports.socialpost = {
                 },
                 function (cb) {
                     api.data.players.getBaseInfoById(state.playerTo, function (err, p2) {
-                        if (p2 == null) { state.playerToCheck = false; }
+                        if (p2 == null) { state.playerToCheck = false; state.err = new Error('player not found');}
                         else {
                             state.playerTo = p2;
                             state.playerToCheck = true;
@@ -232,14 +300,14 @@ exports.socialpost = {
                 state.post.msg = msg;
             }
             api.tasks.enqueue("postonwall", state, 'default', function (err, toRun) {
-               
+                
                 return emitter.emit('calc');
             });
             
             
         });
         
-        emitter.on('calc', function () { 
+        emitter.on('calc', function () {
             api.logic.counters.updateCounters(state.playerFrom._id, state.idApp, state.action, function (err, update) {
                 state.resp = update;
                 emitter.emit('ready');

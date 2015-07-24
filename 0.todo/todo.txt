@@ -3,13 +3,19 @@
 
 
 
-- counter system:
-  defining counters and how actions affect counters for apps
-  defining the tasks to update player profiles with new counters when an action accured.
+v counter system:
+  v defining counters and how actions affect counters for apps
+  v defining the tasks to update player profiles with new counters when an action accured.
   
-- new counters need to be calculated immediately
+v new counters need to be calculated immediately
 
 
 - player notifications using websockets
    when a player interacts with the api, perform a login for the player, the player id, travels along with the request
    when an action is finished, postprocessor, attaches a notification to the reply..
+
+
+recalculate level when new counters have been calculated
+
+define badges 
+calculate badges when counters change

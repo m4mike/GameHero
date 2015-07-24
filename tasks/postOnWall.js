@@ -8,6 +8,7 @@ exports.task = {
 
     run: function (api, params, next){
         //var state = {
+        //    action : 'post' or 'status'
         //    playerFrom: action.params.from, 
         //    playerTo: action.params.to, 
         //    playerFromCheck : false,
@@ -17,7 +18,8 @@ exports.task = {
         //    err: null
         //};
         //postOnWall = function (playerFrom, playerTo, app, post, next) {
-        api.data.social.postOnWall(params.playerFrom,params.playerTo,params.idApp,params.post,next)
+       
+            api.data.social.postOnWall(params.playerFrom,params.playerTo,params.idApp,params.post,params.action,next)
    
   }
 };
