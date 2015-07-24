@@ -10,11 +10,11 @@ module.exports.start = function (cb) {
     
     serverDomain.on('error', function (er) {
         console.error('********************************************** Caught error!', er);
-        actionhero.restart(function (err, apiFromCallback) {
-            if (err) { console.log(err); }
-            module.exports.api = apiFromCallback;
-            if (cb) cb(null, module.exports.api);
-        });
+        //actionhero.restart(function (err, apiFromCallback) {
+        //    if (err) { console.log(err); }
+        //    module.exports.api = apiFromCallback;
+        //    if (cb) cb(null, module.exports.api);
+        //});
     });
     
     serverDomain.run(function (err,api) {

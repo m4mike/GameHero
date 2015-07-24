@@ -300,7 +300,6 @@ var getSocialProto = function () {
         'id_app': '',
         'from': {},
         'to': {},
-        'detail': {},
         'post': {}
     }
 }

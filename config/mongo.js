@@ -3,7 +3,7 @@
         var mongoDetails = {};
         
         if (process.env.MONGOLAB_URI != null) {
-            console.log("Mongo running in heroku");
+            //console.log("Mongo running in heroku");
             mongoDetails = { url : process.env.MONGOLAB_URI + "/gami" };
         } else {
             

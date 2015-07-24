@@ -10,10 +10,8 @@ exports.default = {
         
         var redisDetails = {};
         
-       
-      
         if (process.env.REDISTOGO_URL != null) {
-            console.log("Redis running in heroku");
+            //console.log("Redis running in heroku");
             var rd = require('redis-url').parse(process.env.REDISTOGO_URL);
             redisDetails.host = rd.hostname || '127.0.0.1';
             redisDetails.port = rd.port || 6379;
