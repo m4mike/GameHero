@@ -107,6 +107,7 @@
     <Content Include="data\userData.js" />
     <Compile Include="initializers\data.js" />
     <Compile Include="initializers\dataSeed.js" />
+    <Compile Include="initializers\initRedisWorkers.js" />
     <Compile Include="initializers\swagger.js" />
     <Compile Include="logic\counterLogic.js" />
     <Compile Include="node_modules\actionhero\initializers\redis.js" />
@@ -167,7 +168,6 @@
     <Folder Include="log" />
     <Folder Include="datap\" />
     <Folder Include="0.todo\" />
-    <Folder Include="NewFolder1\" />
     <Folder Include="node_modules\" />
     <Folder Include="node_modules\actionhero\" />
     <Folder Include="node_modules\actionhero\initializers\" />

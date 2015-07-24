@@ -11,6 +11,7 @@
     "async": "^1.4.0",
     "bluebird": "^2.9.34",
     "lodash": "^3.10.0",
+    "moment": "^2.10.3",
     "mongodb": "^2.0.39",
     "optimist": "^0.6.1",
     "redis": "^0.12.1",
@@ -28,7 +29,7 @@
     "request": "^2.58.0"
   },
   "scripts": {
-    "help": "actionhero help",
+    "help": "actionhero start",
     "start": "actionhero startCluster",
     "actionhero": "actionhero",
     "startCluster": "actionhero startCluster",
