@@ -14,22 +14,27 @@ module.exports = {
         var key;
         client.keys("resque:worker:*", function (err, kk) {
             
-           
-            client.get(kk, function (err, val) {
-                console.log("Worker : " + kk.slice(0,20) );
-                var d = new moment(val,'ddd MMM D YYYY HH:mm:ss GMT+DDYY (UTC)');
-                var td = new moment();
+            _.forEach(kk, function (k) {
+                client.get(k, function (err, val) {
+                    console.log("Worker : " + k.slice(0, 20));
+                    var d = new moment(val, 'ddd MMM D YYYY HH:mm:ss GMT+DDYY (UTC)');
+                    var td = new moment();
+                    var kar = k.split(':');
+                    var kkk = kar[2];
+                    console.log('started : ' + d.fromNow() + 'diff:' + d.diff(td, 'days'));
+                    
+                    if (d.diff(td, 'days') < -1) {
+                        client.del(k, function (err, res) {
+                            client.srem('resque:workers', kkk, function (err, sres) {
+                                console.log('deleted key');
+                            })
+                        })
+                    }
+                    else
+                        console.log('...worker is current')
+                })
 
-                console.log('started : ' + d.fromNow() + 'diff:'  + d.diff(td, 'days'));
-
-                if (d.diff(td, 'days') < -1) {
-                    console.log('...deleting');
-                }
-                else
-                    console.log('...worker is current')
             })
-
-          
 
         });
         
