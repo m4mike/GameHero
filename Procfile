@@ -1,1 +1,1 @@
-﻿web: node index.js
+﻿web: node ./node_modules/actionhero/bin/actionhero startCluster
