@@ -8,7 +8,7 @@ var util = require('util');
  * */
 exports.createPlayerExt = {
     name: 'createPlayerExt',
-    description: 'Creates a player if given an external id, </br>if a player with that external id is found, it is returned (even if the app is different)<br/>',
+    description: 'Creates a player if given an external id, </br>if a player with that external id is found, it is returned (even if the app is different)<br/> try to create a player for app app_mlg',
     inputs: {
         idApp: {
             required: true,

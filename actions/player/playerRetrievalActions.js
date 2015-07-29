@@ -24,7 +24,7 @@ exports.players = {
 
 exports.playerById = {
     name: 'playerById',
-    description: 'Get player by Id',
+    description: 'Get player by Id, try player id p1,p2,p3,p11,p12,p13',
     inputs: {
         playerId: {
             required: true,
@@ -53,7 +53,7 @@ exports.playerById = {
                         _result : result
                     
                     });
-                    hj.link(api.serverUrl + "/api/players/getFullById/" . result._id);
+                    hj.link(api.serverUrl + "/api/players/getFullById/" + result._id);
                     action.response = hj.toObject();
                     next();
                 }
@@ -65,7 +65,7 @@ exports.playerById = {
 
 exports.playersForApp = {
     name: 'playersForApp',
-    description: 'get all players for an app',
+    description: 'get all players for an app, try appId : app_mlg',
     inputs: {
         idApp: {
             required: true,
