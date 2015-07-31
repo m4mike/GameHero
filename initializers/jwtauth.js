@@ -11,9 +11,9 @@ module.exports = {
             processToken: function (token,cb) {
                 jsonwebtoken.verify(token, api.config.jwtauth.secret, {}, function (err, data) {
                     if (err) {
-                        cb(err);
+                        return cb(err);
                     } else {
-                        cb(null,data);
+                        return cb(null,data);
                     }
                 });
             },
@@ -22,12 +22,12 @@ module.exports = {
                     var token = jsonwebtoken.sign(data, api.config.jwtauth.secret, {
                         algorithm: api.config.jwtauth.algorithm
                     });
-                    cb(null,token);
+                    return cb(null,token);
                 } catch (err) {
-                    cb(err);
+                    return cb(err);
                 }
             }
         };
-        next();
+        return next();
     }
 }
