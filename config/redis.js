@@ -10,8 +10,8 @@ exports.default = {
         
         var redisDetails = {};
         var redis_url = '';
-        if (process.env.REDISTOGO_URL != null) redi_url = process.env.REDISTOGO_URL;
-        if (process.env.REDIS_URL != null) redi_url = process.env.REDIS_URL;
+        if (process.env.REDISTOGO_URL != null) redis_url = process.env.REDISTOGO_URL;
+        if (process.env.REDIS_URL != null) redis_url = process.env.REDIS_URL;
 
             //console.log("Redis running in heroku");
             var rd = require('redis-url').parse(process.env.REDISTOGO_URL);
