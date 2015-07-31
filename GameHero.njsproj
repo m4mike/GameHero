@@ -32,6 +32,7 @@
     <Content Include="images\index.html.png" />
     <Content Include="images\mocha.jpg" />
     <Content Include="package.json" />
+    <Content Include="Procfile" />
     <Content Include="public\css\print.css" />
     <Content Include="public\css\reset.css" />
     <Content Include="public\css\screen.css" />
@@ -163,6 +164,7 @@
     <Compile Include="public\javascript\actionheroClient.min.js" />
     <Content Include="public\logo\actionhero.png" />
     <Content Include="public\logo\sky.jpg" />
+    <Content Include="test\mocha.opts" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="actions\" />
