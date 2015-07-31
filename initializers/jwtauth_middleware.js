@@ -39,16 +39,16 @@ module.exports = {
                         if (err) return next(err);
                         // Valid data, lets set it and continue
                         data.connection.apiuser = res;
-                        next();
+                        return next();
                     });
                 }//if authenticated
                 else
-                    next();
+                    return next();
             }//preprocesssor
         }//middleware def
         
         api.actions.addMiddleware(middleware);
-        next();
+        return next();
     }
 
 }
