@@ -22,7 +22,7 @@ exports.socialattack = {
         },
         "winner": "from",
         "detail": {
-            "game": "bitchfight",
+            "game": "MYLITTLEDUEL",
             "a_health": "10",
             "d_health": "8",
             "a_score": "6",
@@ -48,7 +48,7 @@ exports.socialattack = {
         },
         "winner": "from",
         "detail": {
-            "game": "bitchfight",
+            "game": "MYLITTLEDUEL",
             
             "a_health": "10",
             "d_health": "8",
@@ -89,7 +89,7 @@ exports.socialattack = {
         detail: {
             description: 'the details of the attack example :<br/>' + JSON.stringify({
                 "detail": {
-                    "game": "bitchfight",
+                    "game": "MYLITTLEDUEL",
                     "a_health": "10",
                     "d_health": "8",
                     "a_score": "6",

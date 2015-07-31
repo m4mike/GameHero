@@ -9,8 +9,20 @@ exports.default = {
     redis: function (api) {
         
         var redisDetails = {};
-        
-        if (process.env.REDISTOGO_URL != null) {
+        var redis_url = '';
+        if (process.env.REDISTOGO_URL != null) redi_url = process.env.REDISTOGO_URL;
+        if (process.env.REDIS_URL != null) redi_url = process.env.REDIS_URL;
+
+            //console.log("Redis running in heroku");
+            var rd = require('redis-url').parse(process.env.REDISTOGO_URL);
+            redisDetails.host = rd.hostname || '127.0.0.1';
+            redisDetails.port = rd.port || 6379;
+            redisDetails.password = rd.password || '';
+            redisDetails.database = rd.database || 0;
+            redisDetails.options = null;
+
+        if(redis_url != '')
+        {
             //console.log("Redis running in heroku");
             var rd = require('redis-url').parse(process.env.REDISTOGO_URL);
             redisDetails.host = rd.hostname || '127.0.0.1';
@@ -19,7 +31,6 @@ exports.default = {
             redisDetails.database = rd.database || 0;
             redisDetails.options = null;
         } else {
-            
             
             // You can opt to use a real redis DB
             // This is required for multi-server deployments

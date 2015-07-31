@@ -62,6 +62,7 @@
     <Compile Include="actions\authentication\apikeyActions.js" />
     <Compile Include="actions\connectActions.js" />
     <Compile Include="actions\games\gameActions.js" />
+    <Compile Include="actions\games\myLittleDuel.js" />
     <Compile Include="actions\missionActions.js" />
     <Compile Include="actions\interestActions.js" />
     <Compile Include="actions\player\playerCreateActions.js" />
@@ -87,6 +88,7 @@
     <Content Include="data\socialData.js" />
     <Content Include="data\seedCounters.js" />
     <Content Include="data\gameData.js" />
+    <Content Include="data\apiUserData.js" />
     <Compile Include="index.js" />
     <Compile Include="config\mongo.js" />
     <Compile Include="config\redis.js" />

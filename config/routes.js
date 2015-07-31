@@ -58,6 +58,7 @@ exports.default = {
                 { path: '/games/byId', action: 'gameById' },
                 { path: '/games/all', action: 'allGames' },
                 { path: '/games/forApp/', action: 'gamesForApp' }, 
+        
                 
                 { path: '/games/tictac/start', action: 'tictacCreate' }, 
                 { path: '/games/tictac/start/:x/:y', action: 'tictacCreateAndStart' },
@@ -72,11 +73,12 @@ exports.default = {
                 { path: '/social/post', action: 'socialpost' },
                 { path: '/social/status', action: 'socialstatus' },
                 
+                { path: '/games/save', action: 'savegamedata' } ,        
              
 
             ],
             delete: [
-                { path: "/players/:playerId", action: "playerDelete" },
+                //{ path: "/players/:playerId", action: "playerDelete" },
                 { path: "/interests/:lang/:cat/:interest", action: "deleteInterest" },
         
             ]

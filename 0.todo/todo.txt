@@ -15,6 +15,17 @@ v new counters need to be calculated immediately
    when an action is finished, postprocessor, attaches a notification to the reply..
 
 
+- define games:
+enum ChallengeType: String {
+    case Quiz           = "QUIZ"
+    case ImagePuzzle    = "IMAGEPUZZLE"
+    case Boggle         = "BOGGLE"
+    case Memory         = "MEMORY"
+    static let allValues = [Quiz, ImagePuzzle, Boggle, Memory]
+}
+mylittleduel
+
+
 recalculate level when new counters have been calculated
 
 define badges 

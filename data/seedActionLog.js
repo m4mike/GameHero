@@ -53,7 +53,7 @@
         
         "detail": {
             "winner": "from",
-            "game": "bitchfight",
+            "game": "MYLITTLEDUEL",
             "difficulty": "3",
             "a_health": "10",
             "d_health": "8",
@@ -128,7 +128,7 @@ module.exports.walls = [
                 },
                 "winner": "from",
                 "detail": {
-                    "game": "bitchfight",
+                    "game": "MYLITTLEDUEL",
                     "difficulty": "3",
                     "a_health": "10",
                     "d_health": "8",
@@ -188,7 +188,7 @@ module.exports.walls = [
                 },
                 "winner": "from",
                 "detail": {
-                    "game": "bitchfight",
+                    "game": "MYLITTLEDUEL",
                     "difficulty": "3",
                     "a_health": "10",
                     "d_health": "8",

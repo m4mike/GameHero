@@ -46,7 +46,7 @@ describe('social', function () {
             "id": "p2",
         },
         "detail": {
-            "game": "bitchfight",
+            "game": "MYLITTLEDUEL",
             "winner": "from",
             "a_health": "10",
             "d_health": "8",

@@ -1,6 +1,8 @@
 ﻿(function (seedData) {
 
-
+    seedData.apiUsers = [
+        {login:'laurent',psw:'',hash:''}
+    ];
 
     seedData.apps = [
   {
@@ -24,7 +26,7 @@
           "attack": 0,
           "defence": 0
       },
-      "games": ["game_bf"],
+      "games": ["QUIZ", "IMAGEPUZZLE", "BOGGLE", "MEMORY", "MYLITTLEDUEL"],
       "actions": [
           {
               "id": "status",
@@ -66,7 +68,7 @@
   }
     ];
 
-    seedData.games = [{ _id: "game_bf" }]
+    seedData.games = [{ _id: "QUIZ" }, { _id: "IMAGEPUZZLE" }, { _id: "BOGGLE" }, { _id: "MEMORY" }, { _id: "MYLITTLEDUEL" }]
 
     seedData.users = [
         {

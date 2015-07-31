@@ -34,6 +34,24 @@ module.exports.getAll = function (next) {
     });
 };//gamesForApp
 
+/*saveDelayedGameMoves({
+    game: 'MYLITTLEDUEL', 
+    player: state.player, 
+    data: { defence : state.defence, attack: state.attack }
+    */
+module.exports.saveGameData = function (data, next) {
+    database.getDb(function (err, db) {
+        if (err) return next(err);
+        //update game data into player profile
+        db.games.update({ _id: data.game + "_" + data.player._id }, data.data, function (err, nothing) {
+            if (err) return next(err);
+            return next();
+
+        });
+
+    });
+};//gamesForApp
+
 
 
 

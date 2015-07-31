@@ -65,15 +65,12 @@ module.exports.getByIdExtFull = function (idExt, next) {
     });
 };//getplayer
 
-module.exports.getById = function (playerId, next) {
+module.exports.getById = function (id, next) {
     database.getDb(function (err, db) {
-        if (err) {
-            next(err);
-        } else {
-            db.players.findOne({ _id: playerId },{_id:1,id_user:1,id_ext:1,dispname:1,id_app:1,counters:1}, next);
-        }
+        if (err) return next(err);
+        db.players.findOne({ _id: id },{_id:1,id_user:1,id_ext:1,dispname:1,id_app:1,counters:1}, next);
     });
-};//getplayer
+};//getById
 
 module.exports.getByIdFull = function (playerId, next) {
     database.getDb(function (err, db) {
