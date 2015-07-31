@@ -45,18 +45,37 @@ module.exports.addPlayer = function (player, next) {
 }; //addplayer
 
 
-module.exports.getIdByidExt = function (idExt, next) {
+module.exports.getByIdExt = function (idExt, next) {
     database.getDb(function (err, db) {
         if (err) {
             next(err);
         } else {
-            db.players.findOne({ id_ext: idExt },{_id:1,id_user:1,id_ext:1,dispname:1,id_app:1}, next);
+            db.players.findOne({ id_ext: idExt },{_id:1,id_user:1,id_ext:1,dispname:1,id_app:1,counters:1}, next);
         }
     });
 };//getplayer
 
+module.exports.getByIdExtFull = function (idExt, next) {
+    database.getDb(function (err, db) {
+        if (err) {
+            next(err);
+        } else {
+            db.players.findOne({ id_ext: idExt }, next);
+        }
+    });
+};//getplayer
 
 module.exports.getById = function (playerId, next) {
+    database.getDb(function (err, db) {
+        if (err) {
+            next(err);
+        } else {
+            db.players.findOne({ _id: playerId },{_id:1,id_user:1,id_ext:1,dispname:1,id_app:1,counters:1}, next);
+        }
+    });
+};//getplayer
+
+module.exports.getByIdFull = function (playerId, next) {
     database.getDb(function (err, db) {
         if (err) {
             next(err);
@@ -65,7 +84,6 @@ module.exports.getById = function (playerId, next) {
         }
     });
 };//getplayer
-
 
 module.exports.getSelectedInfoById = function (playerId,selected, next) {
     database.getDb(function (err, db) {

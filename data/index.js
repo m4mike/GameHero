@@ -3,7 +3,7 @@
 module.exports.database = this;
 module.exports.social = null;
 module.exports.players = null;
-
+module.exports.games = null;
 
 var api = null;
 
@@ -40,6 +40,7 @@ var initDb = function (next) {
                     quests: db.collection("quests"),
                     missions : db.collection("missions"),
                     players: db.collection("players"),
+                    games:db.collection("games"),
                     users: db.collection("users"),
                     interests: db.collection("interests"),
                     social : db.collection("social"),
@@ -65,7 +66,8 @@ module.exports.init = function (a) {
         module.exports.users = require("./userData.js").init(this);
         module.exports.social = require("./socialData.js").init(api);
         module.exports.interests = require("./interestData.js").init(api);
-       
+        module.exports.games = require("./gameData.js").init(api);
+
     }
     return module.exports;
 }
@@ -217,6 +219,17 @@ var seedMongo = function (next) {
                         })
                     });
                     api.log("Social wallw seeded");
+                    return callback();
+                },
+                   //insert games
+                function (callback) {
+                    seedData.games.forEach(function (item) {
+
+                        seedresult.db.games.insert(item, function (err) {
+                            if (err) api.log("Failed to insert games into mongo", 'error');
+                        })
+                    });
+                    api.log("Games seeded");
                     return callback();
                 }
                 

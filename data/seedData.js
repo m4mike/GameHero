@@ -24,6 +24,7 @@
           "attack": 0,
           "defence": 0
       },
+      "games": ["game_bf"],
       "actions": [
           {
               "id": "status",
@@ -64,6 +65,8 @@
       ]
   }
     ];
+
+    seedData.games = [{ _id: "game_bf" }]
 
     seedData.users = [
         {
@@ -113,197 +116,218 @@
     ];
 
     seedData.players = [
+  {
+      "_id": "p1",
+      "id_user": "u1",
+      "id_ext": "mlg1",
+      "dispname": "Amanda",
+      "counters": {
+          "exp": 100,
+          "level": 1
+      },
+      "profile": {},
+      "id_app": "app_follow",
+      "items": [
         {
-            "_id": "p1",
-            "id_user": "u1",
-            "id_ext": "mlg1",
-            "dispname": "Amanda",
-            "counters": {
-                "exp": 100,
-                "level": 1
-            },
-            "profile": {},
-            "id_app": "app_follow",
-            "items": [
-                {
-                    "id_item": 1,
-                    "amount": 1
-                }
-            ],
-            "badges": [
-                {
-                    "id_badge": 1,
-                    "display": "Starter"
-                },
-                {
-                    "id_badge": 3,
-                    "display": "Starter"
-                }
-            ],
-            "quests": [
-                {
-                    "id_quest": "qfollow1",
-                    "display": "follow1",
-                    "mastering": null
-                }
-            ]
-        },
-        {
-            "_id": "p2",
-            "id_user": "u2",
-            "id_ext": "mlg2",
-            "dispname": "Beatrice",
-            "counters": {
-                "exp": 2100,
-                "level": 1
-            },
-            "profile": {},
-            "apps": "app_follow",
-            "items": [
-                {
-                    "id_item": 1,
-                    "amount": 1
-                }
-            ],
-            "badges": [
-                {
-                    "id_badge": 1,
-                    "display": "Starter"
-                },
-                {
-                    "id_badge": 3,
-                    "display": "Starter"
-                }
-            ],
-            "quests": [
-                {
-                    "display": "follow1",
-                    "mastering": null
-                },
-                {
-                    "id_quest": "qfollow2",
-                    "display": "follow2",
-                    "mastering": null
-                }
-            ]
-        },
-        {
-            "_id": "p3",
-            "id_user": "u3",
-            "id_ext": "mlg3",
-            "dispname": "Monica",
-            "counters": {
-                "exp": 3100,
-                "level": 3
-            },
-            "profile": {},
-            "apps": "app_follow",
-            "items": [
-                {
-                    "id_item": 1,
-                    "amount": 1
-                }
-            ],
-            "badges": [
-                {
-                    "id_badge": 1,
-                    "display": "Starter"
-                },
-                {
-                    "id_badge": 3,
-                    "display": "Starter"
-                }
-            ],
-            "quests": [
-                {
-                    "id_quest": "qfollow1",
-                    "display": "follow1",
-                    "mastering": null
-                },
-                {
-                    "id_quest": "qfollow2",
-                    "display": "follow2",
-                    "mastering": null
-                }
-            ]
-        },
-        {
-            "_id": "p11",
-            "id_user": "u1",
-            "id_ext": "mlg11",
-            "dispname": "Amanda",
-            "counters": {
-                "diamonds": 10,
-                "exp": 100,
-                "level": 1,
-                "energy": 0,
-                "money": 0,
-                "health": 0
-            },
-            "profile": {
-                "energy": 20,
-                "health": 100,
-                "skillpoints": 1,
-                "attack": 0,
-                "defence": 0
-            },
-            "id_app": "app_mlg",
-            "items": [],
-            "badges": [],
-            "quests": []
-        },
-
-        {
-            "_id": "p12",
-            "id_user": "u2",
-            "dispname": "Beatrice",
-            "id_ext": "mlg12",
-            "counters": {
-                "diamonds": 10,
-                "exp": 2100,
-                "level": 1,
-                "energy": 0,
-                "money": 0,
-                "health": 0
-            },
-            "profile": {
-                "energy": 20,
-                "health": 110,
-                "skillpoints": 0,
-                "attack": 0,
-                "defence": 0
-            },
-            "id_app": "app_mlg",
-            "items": [],
-            "badges": [],
-            "quests": []
-        },
-        {
-            "_id": "p13",
-            "id_user": "u3",
-            "dispname": "Clara",
-            "id_ext": "mlg13",
-            "counters": {
-                "diamonds": 10,
-                "exp": 2100,
-                "level": 1,
-                "energy": 0,
-                "money": 0,
-                "health": 0
-            },
-            "profile": {
-                "energy": 20,
-                "health": 110,
-                "skillpoints": 0,
-                "attack": 0,
-                "defence": 0
-            },
-            "id_app": "app_mlg",
-            "items": [],
-            "badges": [],
-            "quests": []
+            "id_item": 1,
+            "amount": 1
         }
+      ],
+      "badges": [
+        {
+            "id_badge": 1,
+            "display": "Starter"
+        },
+        {
+            "id_badge": 3,
+            "display": "Starter"
+        }
+      ],
+      "quests": [
+        {
+            "id_quest": "qfollow1",
+            "display": "follow1",
+            "mastering": null
+        }
+      ]
+  },
+  {
+      "_id": "p2",
+      "id_user": "u2",
+      "id_ext": "mlg2",
+      "dispname": "Beatrice",
+      "counters": {
+          "exp": 2100,
+          "level": 1
+      },
+      "profile": {},
+      "apps": "app_follow",
+      "items": [
+        {
+            "id_item": 1,
+            "amount": 1
+        }
+      ],
+      "badges": [
+        {
+            "id_badge": 1,
+            "display": "Starter"
+        },
+        {
+            "id_badge": 3,
+            "display": "Starter"
+        }
+      ],
+      "quests": [
+        {
+            "display": "follow1",
+            "mastering": null
+        },
+        {
+            "id_quest": "qfollow2",
+            "display": "follow2",
+            "mastering": null
+        }
+      ]
+  },
+  {
+      "_id": "p3",
+      "id_user": "u3",
+      "id_ext": "mlg3",
+      "dispname": "Monica",
+      "counters": {
+          "exp": 3100,
+          "level": 3
+      },
+      "profile": {},
+      "apps": "app_follow",
+      "items": [
+        {
+            "id_item": 1,
+            "amount": 1
+        }
+      ],
+      "badges": [
+        {
+            "id_badge": 1,
+            "display": "Starter"
+        },
+        {
+            "id_badge": 3,
+            "display": "Starter"
+        }
+      ],
+      "quests": [
+        {
+            "id_quest": "qfollow1",
+            "display": "follow1",
+            "mastering": null
+        },
+        {
+            "id_quest": "qfollow2",
+            "display": "follow2",
+            "mastering": null
+        }
+      ]
+  },
+  {
+      "_id": "p11",
+      "id_user": "u1",
+      "id_ext": "mlg11",
+      "dispname": "Amanda",
+      "counters": {
+          "diamonds": 10,
+          "exp": 100,
+          "level": 1,
+          "energy": 0,
+          "money": 0,
+          "health": 0
+      },
+      "profile": {
+          "energy": 20,
+          "health": 100,
+          "skillpoints": 1,
+          "attack": 0,
+          "defence": 0
+      },
+      "id_app": "app_mlg",
+      "games": [
+      {
+          "_id": "game-bf",
+          "attacks": "LLL",
+          "defences": "UUU"
+      }
+      ],
+      "items": [],
+      "badges": [],
+      "quests": []
+  },
+  {
+      "_id": "p12",
+      "id_user": "u2",
+      "dispname": "Beatrice",
+      "id_ext": "mlg12",
+      "counters": {
+          "diamonds": 10,
+          "exp": 2100,
+          "level": 1,
+          "energy": 0,
+          "money": 0,
+          "health": 0
+      },
+      "profile": {
+          "energy": 20,
+          "health": 110,
+          "skillpoints": 0,
+          "attack": 0,
+          "defence": 0
+      },
+      "id_app": "app_mlg",
+      "games": [
+        {
+            "_id": "game-bf",
+            "attacks": "MML",
+            "defences": "MMM"
+        }
+      ],
+      "items": [],
+      "badges": [],
+      "quests": []
+  },
+  {
+      "_id": "p13",
+      "id_user": "u3",
+      "dispname": "Clara",
+      "id_ext": "mlg13",
+      "counters": {
+          "diamonds": 10,
+          "exp": 2100,
+          "level": 1,
+          "energy": 0,
+          "money": 0,
+          "health": 0
+      },
+      "profile": {
+          "energy": 20,
+          "health": 110,
+          "skillpoints": 0,
+          "attack": 0,
+          "defence": 0
+      },
+      "id_app": "app_mlg",
+      "games": [
+        {
+            "_id": "game-bf",
+            "attacks": "UML",
+            "defences": "UUU"
+        }
+      ],
+      "items": [],
+      "badges": [],
+      "quests": []
+  }
     ];
+
     seedData.missions = [
         {
             "_id": "mmacarons",

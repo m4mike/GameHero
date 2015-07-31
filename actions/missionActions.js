@@ -1,38 +1,31 @@
 ﻿var utils = require("../utils")
 
 exports.missions = {
-    name: 'missionsList',
-    description: 'List all missions',
+    name: 'missions',
+    description: 'List all actions on missions',
     outputExample: null,
     
     run: function (api, action, next) {
         
-
-        api.data.missions.getMissions(function (err, result) {
-            if (err) {
-                next(err);
-            } else {
-                if (result == null || result.length == 0) {
-                    action.connection.rawConnection.responseHttpCode = "404";
-                    next(new Error("not found"));
-                    return;
-                }
-                var collection = new utils.HyperJson({
-                    _items : result
-                            
-                });
-                collection.addSelfIdsToItems(api.serverUrl + "/api/mission/byId/" , "_id");
-                action.response = collection.toObject();
-                next();
-            }
-        });
-     }
+        
+        var collection = new utils.HyperJson();
+        collection
+            .link("By id", api.serverUrl + "/api/missions/byId/idMission")
+            .link("For App", api.serverUrl + "/api/missions/forApp/idApp");
+        
+        action.response = collection.toObject();
+        action.response.error = null;
+        
+        next();
+    }
 };
+
+
 
 
 exports.missionsForApp = {
     name: 'missionsForApp',
-    description: 'List all missions for an Application',
+    description: 'List all missions for an Application, try app_mlg',
     outputExample: null,
     inputs: {
         idApp: {
@@ -68,7 +61,7 @@ exports.missionsForApp = {
 
 exports.missionById = {
     name: 'missionById',
-    description: 'Get mision by Id',
+    description: 'Get mision by Id, try mmacarons',
     outputExample: null,
     inputs: {
         idMission: {

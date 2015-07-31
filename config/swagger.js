@@ -8,9 +8,10 @@
             // Specify how routes are grouped 
             routeTags : {
                 'apps' : ['apps'],
+                'authentication':['auth'],
                 'players' : ['players'],
                 'quests' : ['quests', 'missions'],
-                'games' : ['tictac'],
+                'games' : ['tictac','games'],
                 'users' : ['users'],
                 'interests' : ['interests'],
                 'social' : ['social']

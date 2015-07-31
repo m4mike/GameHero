@@ -5,11 +5,13 @@ exports.default = {
             get: [
                 { path: '/status', action: 'status' }, 
                 { path: '/debug', action: 'debugtest' }, 
+                { path: '/auth/getToken/', action: 'getapikey' }, 
+                { path: '/auth/testToken/', action: 'testapikey' }, 
                 
                 { path: '/apps', action: 'appActions' },
-
                 { path: '/apps/:idApp/createPlayerForUser/:idUser', action: 'appCreatePlayer' },
                 { path: '/apps/list', action: 'appList' },
+                { path: '/apps/byId/', action: 'appById' },
                
                
                 { path: '/users', action: 'userActions' },
@@ -18,14 +20,16 @@ exports.default = {
                 { path: '/users/:idUser/removeInterest/:lang/:cat/:interest', action: 'userRemoveInterest' },
                 { path: '/users/:idUser/hasInterest/:lang/:cat/:interest', action: 'userHasInterest' },
           
-  
-               
+                
                 { path: '/players', action: 'playerActions' },
-                { path: '/players/byId/:playerId', action: 'playerById' },
+                { path: '/players/byId', action: 'playerById' },
+                { path: '/players/byExtId/:playerId', action: 'playerByIdExt' },
+                { path: '/players/byIdFull/:playerId', action: 'playerByIdFull' },
+                { path: '/players/byExtIdFull/:playerId', action: 'playerByExtIdFull' },
                 { path: '/players/forApp/:idApp', action: 'playersForApp' }, 
                 { path: '/players/create/app/:idApp/extid/:idExt', action: 'createPlayerExt' } ,
-                { path: '/players/wall/byId/:playerId/:month', action: 'socialwallplayer' },
-                
+                { path: '/players/wall/byId/:playerId/:month', action: 'socialwallplayer' }, 
+                { path: '/players/wall/byExtId/:ext_playerId/:month', action: 'socialwallextplayer' } , 
                  
                 { path: '/social', action: 'socialactions' },
                 { path: '/social/log/:app/:month', action: 'socialactions' },
@@ -37,21 +41,28 @@ exports.default = {
                 { path: '/quests/forMission/:idMission', action: 'questsForMission' },
                 { path: '/quests/forApp/:idApp', action: 'questsForApp' },
                 { path: '/quests/search/:search', action: 'questsSearch' },
+               
+                { path: '/missions', action: 'missions' },
+               
                 
-                { path: '/missions', action: 'missionsList' },
                 { path: '/missions/forApp', action: 'missionsForApp' },
                 { path: '/missions/byId', action: 'missionById' },
               
                 { path: '/interests', action: 'interestActions' },
                 { path: '/interests/categories/:lang', action: 'listCats' },
                 { path: '/interests/add/:lang/:cat/:interest', action: 'addInterest' },
-          //      { path: '/interests/byId', action: 'missionById' },
                 { path: '/interestsForCat/:lang/:cat', action: 'interestsForCat' },
+            
                 
-                { path: '/tictac/start', action: 'tictacCreate' }, 
-                { path: '/tictac/start/:x/:y', action: 'tictacCreateAndStart' },
-                { path: '/tictac/view', action: 'tictacView' },
-                { path: '/tictac/play/:idGame/:x/:y', action: 'tictacMove' },
+                { path: '/games', action: 'gameActions' },
+                { path: '/games/byId', action: 'gameById' },
+                { path: '/games/all', action: 'allGames' },
+                { path: '/games/forApp/', action: 'gamesForApp' }, 
+                
+                { path: '/games/tictac/start', action: 'tictacCreate' }, 
+                { path: '/games/tictac/start/:x/:y', action: 'tictacCreateAndStart' },
+                { path: '/games/tictac/view', action: 'tictacView' },
+                { path: '/games/tictac/play/:idGame/:x/:y', action: 'tictacMove' },
 
 
                 { path: '/swagger', action: 'swagger' }

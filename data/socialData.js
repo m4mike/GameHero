@@ -28,7 +28,7 @@ module.exports.getPlayerWall = function (idPlayer, month, next) {
 module.exports.getExtPlayerWall = function (idExt, month, next) {
     database.getDb(function (err, db) {
         if (err) return next(err);
-        api.data.players.getIdByidExt(idExt, function (err, idPlayer) {
+        api.data.players.getByIdExt(idExt, function (err, idPlayer) {
             if (err) return next(err);
             if (idPlayer == null) return next(new Error("Ext Id not found"));
             var imonth = Number(month);

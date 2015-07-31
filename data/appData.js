@@ -22,12 +22,12 @@ module.exports.list = function (next) {
     });
 };
 
-module.exports.getById = function (idApp, next) {
+module.exports.getById = function (id, next) {
     database.getDb(function (err, db) {
         if (err) {
             next(err);
         } else {
-            db.apps.findOne({ _id: idApp }, next);
+            db.apps.findOne({ _id: id }, next);
         }
     });
 }

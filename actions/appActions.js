@@ -46,6 +46,46 @@ exports.appList = {
     }
 };
 
+exports.appById = {
+    name: 'appById',
+    description: 'Get an App by Id, try app_mlg',
+    inputs: {
+        id: {
+            required: true,
+            validator: null
+        }
+    },
+    
+    run: function (api, action, next) {
+        var id = action.params.id;
+        
+        api.data.apps.getById(id, function (err, result) {
+            if (err) next(err);
+            else {
+                if (result == null) {
+                    action.connection.rawConnection.responseHttpCode = "404";
+                    next(new Error("not found"));
+                } else {
+                    if (result.length == 0) {
+                        action.connection.rawConnection.responseHttpCode = "404";
+                        next(new Error("not found: " + id));
+                        return;
+                    }
+                    
+                    var hj = new utils.HyperJson({
+                        ok: 1,    
+                        _result : result
+                    
+                    });
+                    
+                    action.response = hj.toObject();
+                    next();
+                }
+            }
+        });
+        
+    }
+};
 
 
 /****

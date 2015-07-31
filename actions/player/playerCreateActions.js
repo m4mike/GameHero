@@ -51,7 +51,7 @@ exports.createPlayerExt = {
         
         //test: maybe the player exists
         emitter.on('maybeplayer', function () {
-            api.data.players.getIdByidExt(state.idExt, function (err, player) {
+            api.data.players.getByIdExt(state.idExt, function (err, player) {
                 if (!err && player != null) {
                     if (player.id_ext === state.idExt) {
                         state.player = player;

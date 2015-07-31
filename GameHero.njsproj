@@ -14,7 +14,7 @@
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
     <NodejsPort>3000</NodejsPort>
     <StartWebBrowser>True</StartWebBrowser>
-    <LaunchUrl>http://localhost:3000/swagger.html</LaunchUrl>
+    <LaunchUrl>http://localhost:3000/public/chat.html</LaunchUrl>
     <Environment>PORT = 3000</Environment>
     <NodeExePath>
     </NodeExePath>
@@ -59,6 +59,9 @@
     <Content Include="public\swagger.html" />
     <Content Include="README.md" />
     <Compile Include="actions\appActions.js" />
+    <Compile Include="actions\authentication\apikeyActions.js" />
+    <Compile Include="actions\connectActions.js" />
+    <Compile Include="actions\games\gameActions.js" />
     <Compile Include="actions\missionActions.js" />
     <Compile Include="actions\interestActions.js" />
     <Compile Include="actions\player\playerCreateActions.js" />
@@ -68,7 +71,7 @@
     <Compile Include="actions\social\socialUtils.js" />
     <Compile Include="actions\social\socialGetWallActions.js" />
     <Compile Include="actions\swagger.js" />
-    <Compile Include="actions\debugtest.js" />
+    <Compile Include="actions\testActions\debugtest.js" />
     <Compile Include="actions\testActions\showDocumentation.js" />
     <Compile Include="actions\tictacMp.js" />
     <Compile Include="actions\tictacActions.js" />
@@ -78,10 +81,12 @@
     <Compile Include="actions\testActions\sleepTest.js" />
     <Compile Include="actions\usersActions.js" />
     <Compile Include="actions\social\socialActions.js" />
+    <Compile Include="config\jwtauth.js" />
     <Compile Include="datap\index.js" />
     <Content Include="data\seedActionLog.js" />
     <Content Include="data\socialData.js" />
     <Content Include="data\seedCounters.js" />
+    <Content Include="data\gameData.js" />
     <Compile Include="index.js" />
     <Compile Include="config\mongo.js" />
     <Compile Include="config\redis.js" />
@@ -105,9 +110,12 @@
     <Content Include="data\questData.js" />
     <Content Include="data\seedData.js" />
     <Content Include="data\userData.js" />
+    <Compile Include="initializers\chatMiddleWare.js" />
     <Compile Include="initializers\data.js" />
     <Compile Include="initializers\dataSeed.js" />
     <Compile Include="initializers\initRedisWorkers.js" />
+    <Compile Include="initializers\jwtauth.js" />
+    <Compile Include="initializers\jwtauth_middleware.js" />
     <Compile Include="initializers\swagger.js" />
     <Compile Include="logic\counterLogic.js" />
     <Compile Include="node_modules\actionhero\initializers\redis.js" />
@@ -156,6 +164,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="actions\" />
+    <Folder Include="actions\games\" />
+    <Folder Include="actions\authentication\" />
     <Folder Include="actions\player\" />
     <Folder Include="actions\social\" />
     <Folder Include="actions\testActions\" />
@@ -170,6 +180,7 @@
     <Folder Include="node_modules\" />
     <Folder Include="node_modules\actionhero\" />
     <Folder Include="node_modules\actionhero\initializers\" />
+    <Folder Include="node_modules\actionhero\public\" />
     <Folder Include="node_modules\actionhero\servers\" />
     <Folder Include="public\fonts\" />
     <Folder Include="public\images\" />

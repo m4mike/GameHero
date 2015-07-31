@@ -10,6 +10,7 @@
     "actionhero": "latest",
     "async": "^1.4.0",
     "bluebird": "^2.9.34",
+    "jsonwebtoken": "^5.0.4",
     "lodash": "^3.10.0",
     "moment": "^2.10.3",
     "mongodb": "^2.0.39",
