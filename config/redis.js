@@ -13,18 +13,12 @@ exports.default = {
         if (process.env.REDISTOGO_URL != null) redis_url = process.env.REDISTOGO_URL;
         if (process.env.REDIS_URL != null) redis_url = process.env.REDIS_URL;
 
-            //console.log("Redis running in heroku");
-            var rd = require('redis-url').parse(process.env.REDISTOGO_URL);
-            redisDetails.host = rd.hostname || '127.0.0.1';
-            redisDetails.port = rd.port || 6379;
-            redisDetails.password = rd.password || '';
-            redisDetails.database = rd.database || 0;
-            redisDetails.options = null;
+          
 
         if(redis_url != '')
         {
             //console.log("Redis running in heroku");
-            var rd = require('redis-url').parse(process.env.REDISTOGO_URL);
+            var rd = require('redis-url').parse(redis_url);
             redisDetails.host = rd.hostname || '127.0.0.1';
             redisDetails.port = rd.port || 6379;
             redisDetails.password = rd.password || '';

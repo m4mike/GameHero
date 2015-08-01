@@ -6,7 +6,7 @@
     <ProjectGuid>{673abd67-c6b4-4759-b32e-47d4cb9b4aa2}</ProjectGuid>
     <ProjectHome />
     <ProjectView>ShowAllFiles</ProjectView>
-    <StartupFile>./node_modules/actionhero/bin/actionhero</StartupFile>
+    <StartupFile>ah.js</StartupFile>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
     <ProjectTypeGuids>{3AF33F2E-1136-4D97-BBB7-1795711AC8B8};{349c5851-65df-11da-9384-00065b846f21};{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}</ProjectTypeGuids>
@@ -14,7 +14,7 @@
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
     <NodejsPort>3000</NodejsPort>
     <StartWebBrowser>True</StartWebBrowser>
-    <LaunchUrl>http://localhost:3000/public/chat.html</LaunchUrl>
+    <LaunchUrl>http://localhost:3000</LaunchUrl>
     <Environment>PORT = 3000</Environment>
     <NodeExePath>
     </NodeExePath>
@@ -22,6 +22,7 @@
     </DebuggerPort>
     <NodeExeArguments>
     </NodeExeArguments>
+    <ScriptArguments>start</ScriptArguments>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'" />
   <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
@@ -59,6 +60,7 @@
     <Content Include="public\o2c.html" />
     <Content Include="public\swagger.html" />
     <Content Include="README.md" />
+    <Compile Include="ah.js" />
     <Compile Include="actions\appActions.js" />
     <Compile Include="actions\authentication\apikeyActions.js" />
     <Compile Include="actions\connectActions.js" />
@@ -121,6 +123,8 @@
     <Compile Include="initializers\jwtauth_middleware.js" />
     <Compile Include="initializers\swagger.js" />
     <Compile Include="logic\counterLogic.js" />
+    <Compile Include="methods\start.js" />
+    <Compile Include="methods\startCluster.js" />
     <Compile Include="node_modules\actionhero\initializers\redis.js" />
     <Compile Include="initializers\mongo.js" />
     <Compile Include="initializers\tictacInitializer.js" />
@@ -181,6 +185,7 @@
     <Folder Include="log" />
     <Folder Include="datap\" />
     <Folder Include="0.todo\" />
+    <Folder Include="methods\" />
     <Folder Include="node_modules\" />
     <Folder Include="node_modules\actionhero\" />
     <Folder Include="node_modules\actionhero\initializers\" />
