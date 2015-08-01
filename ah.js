@@ -169,7 +169,10 @@ fs.readdirSync(binary.paths.projectRoot + '/methods/').sort().forEach(function(f
 });
 
 binary.mainAction = binary.argv._[0];
-if(!binary.mainAction){ binary.mainAction = 'start' }
+if(!binary.mainAction){ 
+	binary.log('action missing, setting to: startCluster')
+	binary.mainAction = 'startCluster' 
+}
 
 binary.isDaemon = (binary.argv.isDaemon === 'true');
 
@@ -190,7 +193,7 @@ if(binary.actions[binary.mainAction]){
     binary.log('spawned child process with pid ' + child.pid, 'notice');
     setTimeout(process.exit, 2000); // TODO: why is this sleep needed?
   } else if(binary.argv.isDaemon){
-    binary.logger.remove(winston.transports.Console);
+    //binary.logger.remove(winston.transports.Console);
     binary.actions[binary.mainAction](binary, function(){});
   } else {
     binary.log('custom actionhero >> ' + binary.mainAction);
