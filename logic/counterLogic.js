@@ -107,10 +107,14 @@ module.exports.updateCounters = function (idPlayer, idApp, actions, next) {
         else
             next(null, {
                 ok: 1,
-                modified: state.modified, 
-                idPlayer: state.player._id, 
-                id_ext : state.player.id_ext, 
-                counters: state.player.counters
+                notification: {
+                    type:'counter_update',
+                    modified: state.modified,
+                    idPlayer: state.player._id, 
+                    id_ext : state.player.id_ext, 
+                    counters: state.player.counters
+                }
+           
             });
     });
 

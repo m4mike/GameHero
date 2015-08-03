@@ -9,7 +9,7 @@ exports.default = {
                 { path: '/auth/testToken/', action: 'testapikey' }, 
                 
                 { path: '/apps', action: 'appActions' },
-                { path: '/apps/:idApp/createPlayerForUser/:idUser', action: 'appCreatePlayer' },
+                //{ path: '/apps/:idApp/createPlayerForUser/:idUser', action: 'appCreatePlayer' },
                 { path: '/apps/list', action: 'appList' },
                 { path: '/apps/byId/', action: 'appById' },
                
@@ -27,7 +27,7 @@ exports.default = {
                 { path: '/players/byIdFull/:playerId', action: 'playerByIdFull' },
                 { path: '/players/byExtIdFull/:playerId', action: 'playerByExtIdFull' },
                 { path: '/players/forApp/:idApp', action: 'playersForApp' }, 
-                { path: '/players/create/app/:idApp/extid/:idExt', action: 'createPlayerExt' } ,
+                { path: '/players/create/app/:idApp/extid/:idExt/dispName/:dispname', action: 'createPlayerExt' } ,
                 { path: '/players/wall/byId/:playerId/:month', action: 'socialwallplayer' }, 
                 { path: '/players/wall/byExtId/:ext_playerId/:month', action: 'socialwallextplayer' } , 
                  
@@ -35,6 +35,8 @@ exports.default = {
                 { path: '/social/log/:app/:month', action: 'socialactions' },
                 { path: '/social/wall/player/:playerId/:month', action: 'socialwallplayer' },
                 { path: '/social/wall/extplayer/:ext_playerId/:month', action: 'socialwallextplayer' },
+                { path: '/social/wall/last/player/', action: 'sociallastwallplayer' },
+                { path: '/social/wall/last/extplayer/', action: 'lastwallextplayer' },
                 
 
                 { path: '/quests', action: 'questsActions' }, 

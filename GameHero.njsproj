@@ -6,7 +6,7 @@
     <ProjectGuid>{673abd67-c6b4-4759-b32e-47d4cb9b4aa2}</ProjectGuid>
     <ProjectHome />
     <ProjectView>ShowAllFiles</ProjectView>
-    <StartupFile>ah</StartupFile>
+    <StartupFile>ah.js</StartupFile>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
     <ProjectTypeGuids>{3AF33F2E-1136-4D97-BBB7-1795711AC8B8};{349c5851-65df-11da-9384-00065b846f21};{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}</ProjectTypeGuids>
@@ -22,7 +22,7 @@
     </DebuggerPort>
     <NodeExeArguments>
     </NodeExeArguments>
-    <ScriptArguments>startCluster</ScriptArguments>
+    <ScriptArguments>start</ScriptArguments>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'" />
   <PropertyGroup Condition="'$(Configuration)' == 'Release'" />

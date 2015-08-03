@@ -17,24 +17,26 @@ exports.createPlayerExt = {
         idExt: {
             required: true,
             validator: null
+        }, dispname: {
+            required: true,
+            validator: null
         }
     },
     
     run: function (api, action, next) {
-        
-        
-        
         var state = {
             app: null,
             user: null, 
             player: null, 
             idApp: action.params.idApp, 
             idExt : action.params.idExt,
+            dispname : action.params.dispname,
             idUser: null, 
             abort: false, err: null
         };
         
         if (state.idExt == '{idExt}') return next(new Error('idExt is required'));
+        if (state.dispname == '{dispname}') return next(new Error('dispname is required'));
         var EventEmitter = require('events').EventEmitter;
         var emitter = new EventEmitter();
         
@@ -96,6 +98,7 @@ exports.createPlayerExt = {
             }
             state.player.id_app = state.app._id;
             state.player.id_ext = state.idExt;
+            state.player.dispname = state.dispname;
             if (state.user == null) {
                 //create user from player and app
                 emitter.emit('createAndSaveUserFromPlayerAndApp');

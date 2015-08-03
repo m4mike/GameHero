@@ -1,32 +1,23 @@
 ﻿v move social post on wall action creates a task, 
 	v move log and wall post creation logic to the task
 
-
-
 v counter system:
   v defining counters and how actions affect counters for apps
   v defining the tasks to update player profiles with new counters when an action accured.
   
 v new counters need to be calculated immediately
 
-
-- player notifications using websockets
-   when a player interacts with the api, perform a login for the player, the player id, travels along with the request
-   when an action is finished, postprocessor, attaches a notification to the reply..
-
-
-- define games:
-enum ChallengeType: String {
-    case Quiz           = "QUIZ"
-    case ImagePuzzle    = "IMAGEPUZZLE"
-    case Boggle         = "BOGGLE"
-    case Memory         = "MEMORY"
-    static let allValues = [Quiz, ImagePuzzle, Boggle, Memory]
-}
-mylittleduel
-
+v when wall oesn't exist for current month, look for the last wall that exists
 
 recalculate level when new counters have been calculated
 
 define badges 
 calculate badges when counters change
+
+calculate quests when new player is created
+
+first time something is written to a wall, an it needs created, the write is lost?
+
+- player notifications using websockets
+   when a player interacts with the api, perform a login for the player, the player id, travels along with the request
+   when an action is finished, postprocessor, attaches a notification to the reply..

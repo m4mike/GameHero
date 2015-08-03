@@ -15,29 +15,69 @@ module.exports.init = function (theapi) {
     return module.exports;
 }
 
+var getCurrentMonth = function () {
+    var d = new Date();
+    var m = d.getMonth() + 1;
+    var m2 = m < 10 ? "0" + m : "" + m;
+    return Number("" + d.getFullYear() + m2);
+}
+
+
 module.exports.getPlayerWall = function (idPlayer, month, next) {
     database.getDb(function (err, db) {
         if (err) return next(err);
-        var id = getWallIdFromPlayerAndMonth(idPlayer, Number(month))
-        return db.walls.findOne({ _id: id  },next);
+        
+        if (month == null ) { //month is empty or not a number
+            month = getCurrentMonth();
+        } else {
+            month = Number(month);
+        }
 
-
+        var id = getWallIdFromPlayerAndMonth(idPlayer, month)
+        db.walls.findOne({ _id: id }, next);
     });
 }; //getPlayerWall
+
+module.exports.getPlayerLastWall = function (idPlayer, next) {
+    database.getDb(function (err, db) {
+        if (err) return next(err);
+       
+        //find the last known wall
+        db.walls.find({ id_player: idPlayer }).sort({ month: -1 }).limit(1).toArray(
+            function (err, results) {
+                if (Array.isArray(results)) {
+                    if (results.length > 0) return next(null, results[0]);
+                    return next(null, null);
+                }
+                if (err) return next(err);
+                return next(null, null);
+            });
+    });
+}; //getPlayerLastWall
+
 
 module.exports.getExtPlayerWall = function (idExt, month, next) {
     database.getDb(function (err, db) {
         if (err) return next(err);
-        api.data.players.getByIdExt(idExt, function (err, idPlayer) {
+        api.data.players.getByIdExt(idExt, function (err, player) {
             if (err) return next(err);
-            if (idPlayer == null) return next(new Error("Ext Id not found"));
-            var imonth = Number(month);
-            return db.walls.findOne({ id_player: idPlayer._id, month: imonth },next);
+            if (player == null) return next(new Error("Ext Id not found"));
+           
+            return module.exports.getPlayerWall(player._id,month,next);
         })
     })
 }; //getPlayerWall
 
-
+module.exports.getExtPlayerLastWall = function (idExt,  next) {
+    database.getDb(function (err, db) {
+        if (err) return next(err);
+        api.data.players.getByIdExt(idExt, function (err, player) {
+            if (err) return next(err);
+            if (player == null) return next(new Error("Ext Id not found"));
+            return module.exports.getPlayerLastWall(player._id, next);
+        })
+    })
+}; //getExtPlayerLastWall
 
 module.exports.getLogById = function (idLog, next) {
     database.getDb(function (err, db) {
@@ -48,12 +88,7 @@ module.exports.getLogById = function (idLog, next) {
     });
 }; //getPlayerWall
 
-var getCurrentMonth = function () {
-    var d = new Date();
-    var m = d.getMonth() + 1;
-    var m2 = m < 10 ? "0" + m : "" + m;
-    return Number("" + d.getFullYear() + m2);
-}
+
 
 module.exports.postOnWall = function (playerFrom, playerTo, app, post,action, next) {
     var state = {
@@ -97,17 +132,24 @@ module.exports.postOnWall = function (playerFrom, playerTo, app, post,action, ne
         al.post = state.post;
         state.actionLog = al;
         state.db.social.insert(al, function (err) {
-            if (err) api.log("Failed to insert action log into mongo", 'error');
+            if (err) {
+                api.log("Failed to insert action log into mongo", 'error');
+                state.err = err;
+                return emitter.emit('error');
+            }
+            return emitter.emit('findwall');
         }); // don't wait for result, we already have the objectid
-        return emitter.emit('findwall');
+        
     });
 
 
 
-    emitter.on('findwall', function () {
+    emitter.on('findwall', function findWall() {
         var imonth = getCurrentMonth();
         state.db.walls.findOne({ id_player: state.playerTo._id, month: imonth }, { _id: 1 }, function (err, wall) {
-            if (wall == null) { return emitter.emit('createwall') }
+            if (wall == null) {
+                return emitter.emit('createwall')
+            }
             state.idWall = wall._id;
             return emitter.emit('addtowall');
         })
@@ -117,12 +159,21 @@ module.exports.postOnWall = function (playerFrom, playerTo, app, post,action, ne
         var wall = getWallProto(state.playerTo, getCurrentMonth());
         state.db.walls.insert(wall, function (err, res) {
             if (err) { state.err = err; return emitter.emit('error'); }
+            state.idWall = wall._id;
             return emitter.emit('addtowall');
         })
     });
 
     emitter.on('addtowall', function () {
         var wi = getWallItemProtoFromLog(state.actionLog);
+        //for a status, from an to are not needed
+        if (state.action == "status") {
+            delete wi.from;
+            delete wi.to;
+        }
+        if (state.action == "post") {
+            delete wi.to;
+        }
         state.db.walls.update(
             { _id: state.idWall },
             {
@@ -240,6 +291,8 @@ module.exports.socialAttack = function (playerFrom, playerTo, app, post, details
 
     emitter.on('addtowallto', function () {
         var wi = getWallItemProtoFromLog(state.actionLog);
+        //for an attack, to, is the person self, so not nedded
+        delete wi.to;
         state.db.walls.update(
             { _id: state.idWallTo },
             {

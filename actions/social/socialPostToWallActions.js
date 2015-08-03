@@ -49,8 +49,7 @@ exports.socialstatus = {
         //binding the events
         //   start -> getting players from player id's
         //            checkPlayerFrom - playerFrom -
-        //            checkPlayerTo   - playerTO -
-        //   post -> create task to post, reply
+         //   post -> create task to post, reply
         
         
         emitter.on('start', function () {
@@ -104,8 +103,9 @@ exports.socialstatus = {
                 state.post = {};
                 state.post.msg = msg;
             }
-            api.tasks.enqueue("postonwall", state, 'default', function (err, toRun) {
-                
+
+            api.data.social.postOnWall(state.playerFrom, state.playerTo, state.idApp, state.post, state.action, function(){
+                            
                 return emitter.emit('calc');
             });
             
@@ -299,7 +299,8 @@ exports.socialpost = {
                 state.post = {};
                 state.post.msg = msg;
             }
-            api.tasks.enqueue("postonwall", state, 'default', function (err, toRun) {
+            api.data.social.postOnWall(state.playerFrom, state.playerTo, state.idApp, state.post, state.action, function () {
+                       
                 
                 return emitter.emit('calc');
             });

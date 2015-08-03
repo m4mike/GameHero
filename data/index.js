@@ -220,6 +220,7 @@ var seedMongo = function (next) {
                             if (err) api.log("Failed to insert interests into mongo", 'error');
                         })
                     });
+                    seedresult.db.walls.createIndex({ "id_player": 1, "month": -1 });
                     api.log("Social wallw seeded");
                     return callback();
                 },
