@@ -1,5 +1,6 @@
 var fs = require('fs');
 var cluster = require('cluster');
+require('winston-mongodb').MongoDB;
 
 exports.default = { 
   logger: function(api){
@@ -18,19 +19,28 @@ exports.default = {
     //}
 
     // file logger
-    try{
-      fs.mkdirSync('./log');
-    } catch(e) {
-      if(e.code != 'EEXIST'){ console.log(e); process.exit(); }
-    }
-    logger.transports.push(function(api, winston) {
-      return new (winston.transports.File)({
-                filename: api.config.general.paths.log[0] + '/' + api.pids.title + '.log',
-                colorize: true,
-        level: 'info',
-        timestamp: true
-      });
-    });
+    //try{
+    //  fs.mkdirSync('./log');
+    //} catch(e) {
+    //  if(e.code != 'EEXIST'){ console.log(e); process.exit(); }
+    //}
+    //logger.transports.push(function(api, winston) {
+    //  return new (winston.transports.File)({
+    //            filename: api.config.general.paths.log[0] + '/' + api.pids.title + '.log',
+    //            colorize: true,
+    //    level: 'info',
+    //    timestamp: true
+    //  });
+    //});
+        
+        logger.transports.push(function (api, winston) {
+            return new (winston.transports.MongoDB)({
+                db: api.config.mongo.url,
+                collection: 'log',
+                capped: true,
+                cappedSize: 1000000
+            })
+        });    
 
     return logger;
   }

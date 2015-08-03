@@ -7,24 +7,12 @@ module.exports = {
         api.mongo = {};
         api.mongo.status = { open: false };
         
+        api.mongo.url = api.config.mongo.url;
+        //api.log('Mongo setup on ' + api.mongo.url);
         
-        api.mongo.url = "mongodb://localhost:27017/gami";
-        if (api.config.mongo != null) {
-            if (api.config.mongo.url != null)
-                api.mongo.url = api.config.mongo.url;
-        }
-        api.log('Mongo setup on ' + api.mongo.url);
-        if (process.env.MONGOLAB_URI !=  null ) {
-            // You can opt to use a real redis DB
-            // This is required for multi-server deployments
-            api.log("setting MONGOLAB_URI");
-            api.mongo.url = process.env.MONGOLAB_URI;
-    
-        }
        
         api.mongo.MongoClient = require('mongodb').MongoClient;
         //api.mongo.Db = require('mongodb').Db;
-        
         
         api.mongo.getDb = function (next) {
             try {
@@ -54,7 +42,7 @@ module.exports = {
 
         api.mongo.onOpen = function () {
             api.mongo.status.open = true;
-            api.log("Mongo connection open", 'info');
+            api.log("Mongo connection open on " + api.mongo.url, 'info');
         }
         next();
     }

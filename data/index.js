@@ -45,7 +45,8 @@ var initDb = function (next) {
                     apiusers: db.collection("apiusers"),
                     interests: db.collection("interests"),
                     social : db.collection("social"),
-                    walls : db.collection("walls")
+                    walls: db.collection("walls"),
+                    logs : db.collection("logs")
                 };
                 
                 return next(null, theDb);
@@ -244,7 +245,13 @@ var seedMongo = function (next) {
                       });
                       api.log("Api users seeded");
                       return callback();
+                  },
+                  function createLog(callback) {
+                      seedresult.db.db.createCollection("log", { capped: true, size: 5242880, max: 5000 });
+                      api.log("log collection created");
+                      return callback();
                   }
+
                 
             ],
                 function (err) { 
