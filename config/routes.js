@@ -60,7 +60,8 @@ exports.default = {
                 { path: '/games/byId', action: 'gameById' },
                 { path: '/games/all', action: 'allGames' },
                 { path: '/games/forApp/', action: 'gamesForApp' }, 
-        
+                { path: '/games/getData/player/:player/game/:game', action: 'getgamedata' }, 
+                { path: '/games/getData/extplayer/:extplayer/game/:game', action: 'getgamedataext' }, 
                 
                 { path: '/games/tictac/start', action: 'tictacCreate' }, 
                 { path: '/games/tictac/start/:x/:y', action: 'tictacCreateAndStart' },

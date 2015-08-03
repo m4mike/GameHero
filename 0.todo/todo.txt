@@ -1,4 +1,18 @@
-﻿v move social post on wall action creates a task, 
+﻿save gamedata for mylittleduel
+
+recalculate level when new counters have been calculated
+
+define badges 
+calculate badges when counters change
+
+first time something is written to a wall, an it needs created, the write is lost?
+
+- player notifications using websockets
+   when a player interacts with the api, perform a login for the player, the player id, travels along with the request
+   when an action is finished, postprocessor, attaches a notification to the reply..
+
+
+v move social post on wall action creates a task, 
 	v move log and wall post creation logic to the task
 
 v counter system:
@@ -8,16 +22,3 @@ v counter system:
 v new counters need to be calculated immediately
 
 v when wall oesn't exist for current month, look for the last wall that exists
-
-recalculate level when new counters have been calculated
-
-define badges 
-calculate badges when counters change
-
-calculate quests when new player is created
-
-first time something is written to a wall, an it needs created, the write is lost?
-
-- player notifications using websockets
-   when a player interacts with the api, perform a login for the player, the player id, travels along with the request
-   when an action is finished, postprocessor, attaches a notification to the reply..

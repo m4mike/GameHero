@@ -40,7 +40,8 @@ var initDb = function (next) {
                     quests: db.collection("quests"),
                     missions : db.collection("missions"),
                     players: db.collection("players"),
-                    games:db.collection("games"),
+                    games: db.collection("games"),
+                    gamedata: db.collection('gamedata'),
                     users: db.collection("users"),
                     apiusers: db.collection("apiusers"),
                     interests: db.collection("interests"),
@@ -233,6 +234,13 @@ var seedMongo = function (next) {
                             if (err) api.log("Failed to insert games into mongo", 'error');
                         })
                     });
+
+                    seedData.gamedata.forEach(function (item) {
+
+                        seedresult.db.gamedata.insert(item, function (err) {
+                            if (err) api.log("Failed to insert gamedata into mongo", 'error');
+                        })
+                    });
                     api.log("Games seeded");
                     return callback();
                 },
@@ -247,7 +255,7 @@ var seedMongo = function (next) {
                       return callback();
                   },
                   function createLog(callback) {
-                      seedresult.db.db.createCollection("log", { capped: true, size: 5242880, max: 5000 });
+                      seedresult.db.db.createCollection("logs", { capped: true, size: 1000000, max: 5000 });
                       api.log("log collection created");
                       return callback();
                   }

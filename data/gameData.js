@@ -43,15 +43,25 @@ module.exports.saveGameData = function (data, next) {
     database.getDb(function (err, db) {
         if (err) return next(err);
         //update game data into player profile
-        db.games.update({ _id: data.game + "_" + data.player._id }, data.data, function (err, nothing) {
+        db.gamedata.save( data, function (err, nothing) {
             if (err) return next(err);
             return next();
 
         });
 
     });
-};//gamesForApp
+};//saveGameData
 
 
+module.exports.getGameData = function (id_game, id_player, next) {
+    database.getDb(function (err, db) {
+        if (err) return next(err);
+        //update game data into player profile
+        db.gamedata.findOne({ _id: id_game + '_' + id_player }, function (err, res) {
+            if (err) return next(err);
+            return next(null, res);
+        });
 
+    });
+};//getGameData
 

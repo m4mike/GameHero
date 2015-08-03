@@ -36,7 +36,7 @@ exports.default = {
         logger.transports.push(function (api, winston) {
             return new (winston.transports.MongoDB)({
                 db: api.config.mongo.url,
-                collection: 'log',
+                collection: 'logs',
                 capped: true,
                 cappedSize: 1000000
             })

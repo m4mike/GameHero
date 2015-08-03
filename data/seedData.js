@@ -69,6 +69,7 @@
     ];
 
     seedData.games = [{ _id: "QUIZ" }, { _id: "IMAGEPUZZLE" }, { _id: "BOGGLE" }, { _id: "MEMORY" }, { _id: "MYLITTLEDUEL" }]
+    seedData.gamedata = [{ _id: 'MYLITTLEDUEL_p11' , id_app:'app_mlg',id_player:'p11',id_game:'MYLITTLEDUEL', data: {"defence" : "LMH", "attack": "HHH"}}];
 
     seedData.users = [
         {
@@ -253,13 +254,7 @@
           "defence": 0
       },
       "id_app": "app_mlg",
-      "games": [
-      {
-          "_id": "game-bf",
-          "attacks": "LLL",
-          "defences": "UUU"
-      }
-      ],
+     
       "items": [],
       "badges": [],
       "quests": []
@@ -285,13 +280,7 @@
           "defence": 0
       },
       "id_app": "app_mlg",
-      "games": [
-        {
-            "_id": "game-bf",
-            "attacks": "MML",
-            "defences": "MMM"
-        }
-      ],
+    
       "items": [],
       "badges": [],
       "quests": []
@@ -317,13 +306,7 @@
           "defence": 0
       },
       "id_app": "app_mlg",
-      "games": [
-        {
-            "_id": "game-bf",
-            "attacks": "UML",
-            "defences": "UUU"
-        }
-      ],
+     
       "items": [],
       "badges": [],
       "quests": []

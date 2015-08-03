@@ -94,7 +94,7 @@ exports.gamesForApp = {
 };
 
 
-exports.MLDSave = {
+exports.savegamedata = {
     name: 'savegamedata',
     description: 'Save a player data for a game. For example:  moves for MyLittleDuel: ( id can be replaced by id_ext)<br/> ' + JSON.stringify({
         "app": "app_mlg",
@@ -168,7 +168,7 @@ exports.MLDSave = {
                     state.player = p1;
                     state.playerCheck = true;
                 }
-                emitter.emit('post');
+                emitter.emit('save');
             });
         });
         
@@ -188,9 +188,10 @@ exports.MLDSave = {
                 state.err = new Error('player not found'); return emitter.emit('error');
             }
             api.data.games.saveGameData({
-                app:state.app,
-                game: state.game, 
-                player: state.player, 
+                _id: state.game + "_" + state.player._id,
+                id_app:state.app,
+                id_game: state.game, 
+                id_player: state.player._id, 
                 data: state.data,
             }, function (err, res) {
                 state.resp = res;
@@ -199,7 +200,7 @@ exports.MLDSave = {
         });
         
         emitter.on('ready', function () {
-            action.response = state.resp;
+            action.response = { ok: 1 };
             return next();
         });
         
@@ -216,3 +217,146 @@ exports.MLDSave = {
 
 };
 
+
+
+exports.getgamedata = {
+    name: 'getgamedata',
+    description: 'Get a player data for a game. For example:  moves for MyLittleDuel: ( id can be replaced by id_ext)',
+    inputs: {
+        player: {
+            description: 'the internal player to get',
+            required: true,
+            validator: null
+        },
+        game: {
+            description: "A string with the game id",
+            required: true,
+            validator: null
+        }
+    },
+    
+    
+    run: function (api, action, next) {
+        
+        var state = {
+            player: action.params.player, 
+            data: action.params.data, 
+            game: action.params.game,
+            playerCheck : false,
+            app: action.params.app, 
+            err: null
+        };
+        
+        var EventEmitter = require('events').EventEmitter;
+        var emitter = new EventEmitter();
+        
+        emitter.on('start', function () {
+            state.playerCheck = true;
+            emitter.emit('get');
+        });
+       
+        emitter.on('get', function () {
+            if (!state.playerCheck) {
+                state.err = new Error('player not found'); return emitter.emit('error');
+            }
+            api.data.games.getGameData(state.game, state.player, function (err, res) {
+                state.resp = res;
+                emitter.emit('ready');
+            })
+        });
+        
+        emitter.on('ready', function () {
+            action.response = { ok: 1, _result: state.resp };
+            return next();
+        });
+        
+        emitter.on('error', function () {
+            action.error = state.err;
+            action.connection.rawConnection.responseHttpCode = "500";
+            return next(state.err);
+        });
+        
+        
+        emitter.emit('start');
+
+    }
+
+};
+
+
+exports.getgamedataext = {
+    name: 'getgamedataext',
+    description: 'Get a player data for a game. For example:  moves for MyLittleDuel: ( id can be replaced by id_ext)',
+    inputs: {
+        extplayer: {
+            description: 'the external player ',
+            required: true,
+            validator: null
+        },
+        game: {
+            description: "A string with the game id",
+            required: true,
+            validator: null
+        }
+    },
+    
+    
+    run: function (api, action, next) {
+        
+        var state = {
+            player: action.params.extplayer, 
+            data: action.params.data, 
+            game: action.params.game,
+            playerCheck : false,
+            app: action.params.app, 
+            err: null
+        };
+        
+        var EventEmitter = require('events').EventEmitter;
+        var emitter = new EventEmitter();
+        
+        emitter.on('start', function () {
+          
+            emitter.emit('external');
+        });
+        
+      
+        
+        emitter.on('external', function () {
+            api.data.players.getBaseInfoByIdExt(state.player, function (err, p1) {
+                if (p1 == null) { state.playerCheck = false; }
+                else {
+                    state.player = p1;
+                    state.playerCheck = true;
+                }
+                emitter.emit('get');
+            })
+        });
+        
+        emitter.on('get', function () {
+            if (!state.playerCheck) {
+                state.err = new Error('player not found'); return emitter.emit('error');
+            }
+            api.data.games.getGameData(state.game, state.player._id, function (err, res) {
+                state.resp = res;
+                emitter.emit('ready');
+            })
+        });
+        
+        emitter.on('ready', function () {
+            action.response = { ok: 1, _result: state.resp };
+            return next();
+        });
+        
+        emitter.on('error', function () {
+            action.error = state.err;
+            action.connection.rawConnection.responseHttpCode = "500";
+            return next(state.err);
+        });
+        
+        
+        emitter.emit('start');
+
+    }
+
+};
