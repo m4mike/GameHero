@@ -170,7 +170,7 @@ fs.readdirSync(binary.paths.projectRoot + '/methods/').sort().forEach(function(f
 
 binary.mainAction = binary.argv._[0];
 if(!binary.mainAction){ 
-	binary.log('action missing, setting to: startCluster')
+	console.log('action missing, setting to: startCluster')
 	binary.mainAction = 'startCluster' 
 }
 
@@ -197,8 +197,9 @@ if(binary.actions[binary.mainAction]){
     binary.actions[binary.mainAction](binary, function(){});
   } else {
     binary.log('custom actionhero >> ' + binary.mainAction);
-    // binary.log('project_root >> ' + path.normalize(binary.paths.project_root + '/'));
-    // binary.log('actionheroRoot >> ' + path.normalize(binary.paths.actionheroRoot + '/'));
+    binary.log('project_root >> ' + path.normalize(binary.paths.project_root + '/'));
+        binary.log('actionheroRoot >> ' + path.normalize(binary.paths.actionheroRoot + '/'));
+        console.log('calling ' + binary.mainAction);
     binary.actions[binary.mainAction](binary, function(){});
   }
 } else {

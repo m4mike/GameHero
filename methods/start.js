@@ -16,6 +16,7 @@ exports.start = function(binary, next){
   var state;
 
   var startServer = function(next){
+
     state = 'starting';
     if(cluster.isWorker){ process.send(state); }
     actionhero.start(function(err, apiFromCallback){

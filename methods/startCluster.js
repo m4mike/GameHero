@@ -85,8 +85,7 @@ exports.startCluster = function (binary) {
         
         log: function (next) {
             var winston = require('winston');
-            //binary.logger.add(winston.transports.File, { filename: binary.clusterConfig.log });
-            //binary.logger.add(winston.transports.Console); console was allready added
+            binary.logger.add(winston.transports.File, { filename: binary.clusterConfig.log });
             next();
         },
         

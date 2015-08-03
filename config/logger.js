@@ -4,9 +4,10 @@ var cluster = require('cluster');
 exports.default = { 
   logger: function(api){
     var logger = { transports: [] };
-
+   
     // console logger
-    if(cluster.isMaster){
+    //    if (cluster.isMaster) {
+            
       logger.transports.push(function(api, winston){
         return new (winston.transports.Console)({
           colorize: true,
@@ -14,7 +15,7 @@ exports.default = {
           timestamp: api.utils.sqlDateTime
         });
       });
-    }
+    //}
 
     // file logger
     try{
@@ -24,7 +25,8 @@ exports.default = {
     }
     logger.transports.push(function(api, winston) {
       return new (winston.transports.File)({
-        filename: api.config.general.paths.log[0] + '/' + api.pids.title + '.log',
+                filename: api.config.general.paths.log[0] + '/' + api.pids.title + '.log',
+                colorize: true,
         level: 'info',
         timestamp: true
       });
@@ -41,5 +43,3 @@ exports.test = {
     }
   }
 }
-
- 

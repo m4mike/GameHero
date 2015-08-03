@@ -22,7 +22,7 @@
     </DebuggerPort>
     <NodeExeArguments>
     </NodeExeArguments>
-    <ScriptArguments>start</ScriptArguments>
+    <ScriptArguments>startCluster</ScriptArguments>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'" />
   <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
@@ -125,6 +125,8 @@
     <Compile Include="logic\counterLogic.js" />
     <Compile Include="methods\start.js" />
     <Compile Include="methods\startCluster.js" />
+    <Compile Include="node_modules\actionhero\actionhero.js" />
+    <Compile Include="node_modules\actionhero\initializers\logger.js" />
     <Compile Include="node_modules\actionhero\initializers\redis.js" />
     <Compile Include="initializers\mongo.js" />
     <Compile Include="initializers\tictacInitializer.js" />

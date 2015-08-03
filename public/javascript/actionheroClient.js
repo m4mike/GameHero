@@ -2797,6 +2797,19 @@ ActionheroClient.prototype.connect = function(callback){
     self.emit('disconnected');
   });
 
+  self.client.on('timeout', function(){
+    self.state = 'timeout';
+    self.emit('timeout');
+  });
+
+  self.client.on('close', function(){
+    self.messageCount = 0;
+    if(self.state !== 'disconnected'){
+      self.state = 'disconnected';
+      self.emit('disconnected');
+    }
+  });
+
   self.client.on('end', function(){
     self.messageCount = 0;
     if(self.state !== 'disconnected'){
@@ -2900,7 +2913,7 @@ ActionheroClient.prototype.actionWeb = function(params, callback) {
   var url = this.options.url + this.options.apiPath + '?action=' + params.action;
   xmlhttp.open(method, url, true);
   xmlhttp.setRequestHeader('Content-Type', 'application/json');
-  xmlhttp.send(JSON.stringify(params));	
+  xmlhttp.send(JSON.stringify(params)); 
 }
 
 
@@ -2931,7 +2944,7 @@ ActionheroClient.prototype.roomView = function(room, callback){
 ActionheroClient.prototype.roomAdd = function(room, callback){
   var self = this;
   self.send({event: 'roomAdd', room: room}, function(data){
-    self.configure(function(details){
+    self.configure(function(){
       if(typeof callback === 'function'){ callback(data); }
     });
   });
@@ -2942,7 +2955,7 @@ ActionheroClient.prototype.roomLeave = function(room, callback){
   var index = self.rooms.indexOf(room);
   if(index > -1){ self.rooms.splice(index, 1); }
   this.send({event: 'roomLeave', room: room}, function(data){
-    self.configure(function(details){
+    self.configure(function(){
       if(typeof callback === 'function'){ callback(data); }
     });
   });
