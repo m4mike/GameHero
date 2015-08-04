@@ -86,7 +86,7 @@ exports.test = {
         web: function (api) {
             return {
                 secure: false,
-                port: 8081,
+                port: 3000,
                 matchExtensionMime: true,
                 metadataOptions: {
                     serverInformation: true,

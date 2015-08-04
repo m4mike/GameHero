@@ -6,7 +6,7 @@
     <ProjectGuid>{673abd67-c6b4-4759-b32e-47d4cb9b4aa2}</ProjectGuid>
     <ProjectHome />
     <ProjectView>ShowAllFiles</ProjectView>
-    <StartupFile>ah.js</StartupFile>
+    <StartupFile>tt\_write.js</StartupFile>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
     <ProjectTypeGuids>{3AF33F2E-1136-4D97-BBB7-1795711AC8B8};{349c5851-65df-11da-9384-00065b846f21};{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}</ProjectTypeGuids>
@@ -60,19 +60,19 @@
     <Content Include="public\o2c.html" />
     <Content Include="public\swagger.html" />
     <Content Include="README.md" />
+    <Compile Include="utils\actionUtils.js" />
+    <Compile Include="actions\games\gameAttackAction.js" />
     <Compile Include="ah.js" />
     <Compile Include="actions\appActions.js" />
     <Compile Include="actions\authentication\apikeyActions.js" />
     <Compile Include="actions\connectActions.js" />
     <Compile Include="actions\games\gameActions.js" />
-    <Compile Include="actions\games\myLittleDuel.js" />
     <Compile Include="actions\missionActions.js" />
     <Compile Include="actions\interestActions.js" />
     <Compile Include="actions\player\playerCreateActions.js" />
     <Compile Include="actions\player\playerRetrievalActions.js" />
     <Compile Include="actions\social\socialAttackAction.js" />
     <Compile Include="actions\social\socialPostToWallActions.js" />
-    <Compile Include="actions\social\socialUtils.js" />
     <Compile Include="actions\social\socialGetWallActions.js" />
     <Compile Include="actions\swagger.js" />
     <Compile Include="actions\testActions\debugtest.js" />
@@ -92,7 +92,6 @@
     <Content Include="data\seedCounters.js" />
     <Content Include="data\gameData.js" />
     <Content Include="data\apiUserData.js" />
-    <Compile Include="index.js" />
     <Compile Include="config\mongo.js" />
     <Compile Include="config\redis.js" />
     <Compile Include="config\swagger.js" />
@@ -149,19 +148,24 @@
     <Compile Include="tasks\pingTask.js" />
     <Compile Include="tasks\postOnWall.js" />
     <Compile Include="tasks\socialAttack.js" />
-    <Compile Include="tt\general.js" />
-    <Compile Include="test\social\socialtest.js" />
-    <Compile Include="test\_setup.js" />
-    <Compile Include="tt\appDataTests.js" />
+    <Compile Include="tt\JavaScript.js">
+      <TestFramework>Mocha</TestFramework>
+    </Compile>
+    <Compile Include="test\social\socialtest.js">
+      <TestFramework>Mocha</TestFramework>
+    </Compile>
+    <Compile Include="tt\appDataTests.js">
+      <TestFramework>
+      </TestFramework>
+    </Compile>
     <Compile Include="tt\dataTests.js" />
     <Compile Include="tt\interestTests.js" />
     <Compile Include="tt\missionTests.js" />
     <Compile Include="tt\extractInterestsFromRedis.js" />
-    <Compile Include="tt\promisetests.js" />
     <Compile Include="tt\tictacTest.js" />
     <Compile Include="utils\HyperJson.js" />
     <Compile Include="utils\index.js" />
-    <Compile Include="tt\example.js" />
+    <Compile Include="tt\_write.js" />
     <Compile Include="config\servers\socket.js" />
     <Compile Include="config\servers\web.js" />
     <Compile Include="config\servers\websocket.js" />
@@ -188,6 +192,7 @@
     <Folder Include="datap\" />
     <Folder Include="0.todo\" />
     <Folder Include="methods\" />
+    <Folder Include="actionUtils\" />
     <Folder Include="node_modules\" />
     <Folder Include="node_modules\actionhero\" />
     <Folder Include="node_modules\actionhero\initializers\" />
@@ -204,7 +209,6 @@
     <Folder Include="data\" />
     <Folder Include="logic\" />
     <Folder Include="tasks\" />
-    <Folder Include="test\integration\" />
     <Folder Include="test\social\" />
     <Folder Include="tt\" />
     <Folder Include="utils\" />

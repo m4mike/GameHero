@@ -1,5 +1,16 @@
-﻿var utils = require("../../utils");
-var actionUtils = require("../../utils/actionUtils.js");
+﻿/*
+ * Attack types:
+-	Outside : [outside] only the result of the attack is sent to the system. 
+Ex: player 1 plays a puzzle game to steal an item from player2, after the game, the system is updated with the game result and the item is transferred from player1 to player 2.
+-	SingleAttack: [single]  the attacker, player1  receives a challenge from player 2 and tries to win the challenge without player2 to participate in the attack. 
+Ex: attacker tries to guess preferences from player 2. When the attack is initiated, a set of preferences from player 2 is extracted and player 1 tries to guess them. If he wins, the system is updated with the win, and the item is transfered.
+-	MultiAttack: [multi]the attacker and the defender play multiple turns to find out who will win. 
+Example: a game of tic tac toe against both players. The attacker initiates an attack with a tictactoe challenge and player 2 receives an invitation to defend. He does so by playing a move. Player 1 receives an invitation to continue until the game finishes and a winner is known.
+-	MultiAttack AI : [ai] tha attacker initiates an attack with a multiplayer game, but player 1 does not play this game and an ai adversary is available to play. The AI will defend player 1. 
+Example:  a game of tictactoe against an ai adversary. 
+*/
+
+var utils = require("../../utils")
 var events = require('events');
 var util = require('util');
 var async = require('async');
@@ -11,8 +22,8 @@ var async = require('async');
  * A player attacks another player
  * 
  */
-exports.socialattack = {
-    name: 'socialattack',
+exports.game_attack_single = {
+    name: 'game_attack_single',
     description: 'A player attacks another player: example with internal ids: (for external, replace id by id_ext)<br/> ' + JSON.stringify({
         "app": "app_mlg",
         "from": {
@@ -21,24 +32,12 @@ exports.socialattack = {
         "to": {
             "id": "p12",
         },
-        "winner": "from",
-        "detail": {
-            "game": "MYLITTLEDUEL",
-            "a_health": "10",
-            "d_health": "8",
-            "a_score": "6",
-            "d_score": "0",
-            "item_transfer": {
-                "id_item": "--MLG id of item -",
-                "name": "name of item to display"
-            }
-        },
+        "game":"MYLITTLEDUEL",
+        "data": {},
         "post": {
             "msg": "voila pour ta poire"
         }
-    })
-    
-    ,
+    }),
     
     inputs: {
         
@@ -114,11 +113,91 @@ exports.socialattack = {
         //   post -> create task to post, reply
         
         emitter.on('start', function () {
-            actionUtils.getPlayers(api,state, function (err) {
-                if (err) { state.err = err; emitter.emit('error') }
-                emitter.emit('post');
-            })
+            var nextEmit = 'internal';
+            
+            if (typeof state.playerFrom === 'object') {
+                if (state.playerFrom.id_ext != null) {
+                    nextEmit = 'external';
+                    state.playerFrom = state.playerFrom.id_ext;
+                    state.playerTo = state.playerTo.id_ext;
+                } else {
+                    
+                    state.playerFrom = state.playerFrom.id;
+                    state.playerTo = state.playerTo.id;
+                }
+            }
+            
+            
+            
+            emitter.emit(nextEmit);
         });
+        
+        emitter.on('internal', function () { emitter.emit('getplayers') });
+        emitter.on('external', function () { emitter.emit('getplayersext') });
+        emitter.on('getplayers', function () {
+            //check both players then emit post
+            
+            async.parallel([
+                function (cb) {
+                    api.data.players.getBaseInfoById(state.playerFrom, function (err, p1) {
+                        if (p1 == null) { state.playerFromCheck = false; }
+                        else {
+                            state.playerFrom = p1;
+                            state.playerFromCheck = true;
+                        }
+                        cb();
+                    })
+                },
+                function (cb) {
+                    api.data.players.getBaseInfoById(state.playerTo, function (err, p2) {
+                        if (p2 == null) { state.playerToCheck = false; }
+                        else {
+                            state.playerTo = p2;
+                            state.playerToCheck = true;
+                        }
+                        cb();
+                    })
+                }]
+                , function (err) {
+                emitter.emit('post');
+            
+            });
+            
+            
+        });
+        
+        emitter.on('getplayersext', function () {
+            //check both players from external id then emit post
+            
+            async.parallel([
+                function (cb) {
+                    api.data.players.getBaseInfoByIdExt(state.playerFrom, function (err, p1) {
+                        if (p1 == null) { state.playerFromCheck = false; }
+                        else {
+                            state.playerFrom = p1;
+                            state.playerFromCheck = true;
+                        }
+                        cb();
+                    })
+                },
+                function (cb) {
+                    api.data.players.getBaseInfoByIdExt(state.playerTo, function (err, p2) {
+                        if (p2 == null) { state.playerToCheck = false; }
+                        else {
+                            state.playerTo = p2;
+                            state.playerToCheck = true;
+                        }
+                        cb();
+                    })
+                }]
+                , function (err) {
+                emitter.emit('post');
+            
+            });
+            
+            
+        });
+        
         
         emitter.on('post', function () {
             if (!state.playerFromCheck) {

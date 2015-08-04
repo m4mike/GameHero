@@ -47,7 +47,7 @@ module.exports = {
           
         }
 
-        console.log('swagger init, baseurl  : ' + config.swagger.baseUrl);
+        //console.log('swagger init, baseurl  : ' + config.swagger.baseUrl);
         //console.log('swagger init, port  : ' + serverPort);   
 
     var theHost  = (config.swagger.baseUrl || bindIp);
@@ -55,7 +55,7 @@ module.exports = {
     if(serverPort != null)
     {
       theHost = theHost + ":" + serverPort;
-      console.log('Swagger host initialised to: ' + theHost);
+      //console.log('Swagger host initialised to: ' + theHost);
     }
      if (process.env.NODE_ENV == 'production' || process.env.NPM_CONFIG_PRODUCTION) {
        theSchemes = [ 'https' ];

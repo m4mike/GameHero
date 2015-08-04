@@ -1,4 +1,3 @@
-#!/usr/bin/env node
 
 var cluster = require('cluster');
 var fs = require('fs');
