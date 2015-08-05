@@ -15,10 +15,10 @@ var oKeys;
 
 var getMembers = function (key, doneCallback) {
     setTimeout(function () {
-        console.log('getting', key);
+        //console.log('getting', key);
         
         client.smembers(key, function (err2, members) {
-            console.log("members in for key ", key);
+            //console.log("members in for key ", key);
             return doneCallback(null, {"cat":key, "items":members});
         });
     }, 20 * Math.random());
@@ -29,7 +29,7 @@ async.series(
     [
         function (cb) {
             client.keys("urn:Cat*", function (err, keys) {
-                console.log('step1');
+                //console.log('step1');
 
                 oKeys = keys;
                 cb();

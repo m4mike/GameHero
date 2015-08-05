@@ -38,10 +38,10 @@ module.exports = {
       return info;
     };
         if(process.env.PORT){
-          console.log('ENV PORT = ' + process.env.PORT );
+          //console.log('ENV PORT = ' + process.env.PORT );
           if (process.env.NODE_ENV == 'production' || process.env.NPM_CONFIG_PRODUCTION) {
               serverPort = null;
-              console.log('heroku hack, port is empty' );
+              //console.log('heroku hack, port is empty' );
               
           }
           
@@ -59,7 +59,7 @@ module.exports = {
     }
      if (process.env.NODE_ENV == 'production' || process.env.NPM_CONFIG_PRODUCTION) {
        theSchemes = [ 'https' ];
-        console.log('Swagger schemes initialised to: https');
+        //console.log('Swagger schemes initialised to: https');
         api.serverUrl = 'https://' + theHost ;
         
      }else{
@@ -68,7 +68,7 @@ module.exports = {
 
       if (process.env.NODE_ENV == 'production' || process.env.NPM_CONFIG_PRODUCTION) {
         theSchemes = [ 'https' ];
-         console.log('Swagger schemes initialised to: https');
+         //console.log('Swagger schemes initialised to: https');
         api.serverUrl = 'https://' + theHost ;
        
     }else{

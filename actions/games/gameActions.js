@@ -10,7 +10,8 @@ exports.games = {
     run: function (api, action, next) {
         
         var collection = new utils.HyperJson();
-        collection.link("all games", api.serverUrl + "/api/games/all")
+        collection.link("get a game by id", api.serverUrl + "/api/games/byId/:id")
+            .link("all games", api.serverUrl + "/api/games/all")
             .link("list games for an app", api.serverUrl + "/api/games/forApp");
         
         action.response = collection.toObject();
@@ -20,6 +21,36 @@ exports.games = {
     }
     
 };
+
+
+exports.games = {
+    name: 'gameById',
+    description: 'get a game by its id:  ex g_mld',
+    outputExample: null,
+    inputs: {
+        id: {
+            description:'the game id ex g_mld',
+            required: true,
+            validator: null
+        }
+    },
+      
+    run: function (api, action, next) {
+        api.data.games.byId(action.params.id, function (err, result) {
+            if (err) return next(err);
+            if (result == null || result.length == 0) {
+                action.connection.rawConnection.responseHttpCode = "404";
+                next(new Error("not found"));
+            }                    
+            action.response = {
+                ok: 1,    
+                _result : result
+            };
+            return next();
+        }); 
+    }
+};
+
 
 exports.allGames = {
     name: 'allGames',
@@ -80,8 +111,8 @@ exports.gamesForApp = {
                     
                 }
                 var collection = new utils.HyperJson({
-                    _items : result
-                    
+                    _items : result, 
+                    ok:1
                 });
                 collection.addSelfIdsToItems(api.serverUrl + "/api/games/byId/" , "");
                 action.response = collection.toObject();
@@ -96,9 +127,9 @@ exports.gamesForApp = {
 
 exports.savegamedata = {
     name: 'savegamedata',
-    description: 'Save a player data for a game. For example:  moves for MyLittleDuel: ( id can be replaced by id_ext)<br/> ' + JSON.stringify({
+    description: 'Save a player data for a game. For example:  moves for g_mld: ( id can be replaced by id_ext)<br/> ' + JSON.stringify({
         "app": "app_mlg",
-        "game":"MYLITTLEDUEL",
+        "game":"g_mld",
         "player": {
             "id": "p11"
         },
@@ -221,7 +252,7 @@ exports.savegamedata = {
 
 exports.getgamedata = {
     name: 'getgamedata',
-    description: 'Get a player data for a game. For example:  moves for MyLittleDuel: ( id can be replaced by id_ext)',
+    description: 'Get a player data for a game. For example:  moves for g_mld: ( id can be replaced by id_ext)',
     inputs: {
         player: {
             description: 'the internal player to get',
@@ -286,7 +317,7 @@ exports.getgamedata = {
 
 exports.getgamedataext = {
     name: 'getgamedataext',
-    description: 'Get a player data for a game. For example:  moves for MyLittleDuel: ( id can be replaced by id_ext)',
+    description: 'Get a player data for a game. For example:  moves for g_mld: ( id can be replaced by id_ext)',
     inputs: {
         extplayer: {
             description: 'the external player ',

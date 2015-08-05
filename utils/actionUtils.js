@@ -18,7 +18,7 @@ module.exports.getPlayers = function getPlayers(api,state, next) {
         try {
             if (typeof state.playerFrom === 'object') {
                 if (typeof state.playerTo != 'object') {
-                    state.err = new Error('playerTo is not an object');
+                    state.err = new Error('playerTo is not the same format as playerFrom');
                     return emitter.emit('error');
                 }
                 if (state.playerFrom.id_ext != null) {

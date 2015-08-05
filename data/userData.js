@@ -91,7 +91,7 @@ module.exports.searchOne = function (search, projection, next) {
 module.exports.add = function (user, next) {
     database.getDb(function (err, db) {
         if (err) {
-            console.log("Failed to seed database: " + err);
+            api.log("Failed to seed database: " + err);
         } else {
             db.users.insert(user, next);
         }

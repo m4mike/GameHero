@@ -1,7 +1,7 @@
 ﻿(function (seedData) {
 
     seedData.apiUsers = [
-        {login:'laurent',psw:'',hash:''}
+        { login: 'laurent', psw: '', hash: '' }
     ];
 
     seedData.apps = [
@@ -26,7 +26,7 @@
           "attack": 0,
           "defence": 0
       },
-      "games": ["QUIZ", "IMAGEPUZZLE", "BOGGLE", "MEMORY", "MYLITTLEDUEL"],
+      "games": ["QUIZ", "IMAGEPUZZLE", "BOGGLE", "MEMORY", "g_mld"],
       "actions": [
           {
               "id": "status",
@@ -68,8 +68,15 @@
   }
     ];
 
-    seedData.games = [{ _id: "QUIZ" }, { _id: "IMAGEPUZZLE" }, { _id: "BOGGLE" }, { _id: "MEMORY" }, { _id: "MYLITTLEDUEL" }]
-    seedData.gamedata = [{ _id: 'MYLITTLEDUEL_p11' , id_app:'app_mlg',id_player:'p11',id_game:'MYLITTLEDUEL', data: {"defence" : "LMH", "attack": "HHH"}}];
+
+    seedData.games = [
+        { _id: "g_quiz", type: "outside" },
+        { _id: "g_ipuz", type: "outside" },
+        { _id: "g_boggle", type: "outside" },
+        { _id: "g_mem", type: 'outside' },
+        { _id: "g_mld", name:'My Little Duel', type: 'single' }
+    ]
+    seedData.gamedata = [{ _id: 'g_mld_p11', id_app: 'app_mlg', id_player: 'p11', id_game: 'g_mld', data: { "defence": "LMH", "attack": "HHH" } }];
 
     seedData.users = [
         {
@@ -254,7 +261,7 @@
           "defence": 0
       },
       "id_app": "app_mlg",
-     
+
       "items": [],
       "badges": [],
       "quests": []
@@ -280,7 +287,7 @@
           "defence": 0
       },
       "id_app": "app_mlg",
-    
+
       "items": [],
       "badges": [],
       "quests": []
@@ -306,7 +313,7 @@
           "defence": 0
       },
       "id_app": "app_mlg",
-     
+
       "items": [],
       "badges": [],
       "quests": []

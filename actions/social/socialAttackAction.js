@@ -23,7 +23,7 @@ exports.socialattack = {
         },
         "winner": "from",
         "detail": {
-            "game": "MYLITTLEDUEL",
+            "game": "g_mld",
             "a_health": "10",
             "d_health": "8",
             "a_score": "6",
@@ -65,7 +65,7 @@ exports.socialattack = {
         detail: {
             description: 'the details of the attack example :<br/>' + JSON.stringify({
                 "detail": {
-                    "game": "MYLITTLEDUEL",
+                    "game": "g_mld",
                     "a_health": "10",
                     "d_health": "8",
                     "a_score": "6",

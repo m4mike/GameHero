@@ -56,10 +56,10 @@ exports.default = {
                 { path: '/interestsForCat/:lang/:cat', action: 'interestsForCat' },
             
                 
-                { path: '/games', action: 'gameActions' },
-                { path: '/games/byId', action: 'gameById' },
+                { path: '/games/', action: 'gameActions' },
+                { path: '/games/byId/:id', action: 'gameById' },
                 { path: '/games/all', action: 'allGames' },
-                { path: '/games/forApp/', action: 'gamesForApp' }, 
+                { path: '/games/forApp/:idApp', action: 'gamesForApp' }, 
                 { path: '/games/getData/player/:player/game/:game', action: 'getgamedata' }, 
                 { path: '/games/getData/extplayer/:extplayer/game/:game', action: 'getgamedataext' }, 
                 

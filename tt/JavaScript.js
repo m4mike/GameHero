@@ -13,9 +13,9 @@ describe('Test Suite 1', function () {
 
 
     it('Test 1', function (done) {
-        console.log('starting');
+        //console.log('starting');
         actionhero.start(function (err, a) {
-            console.log('inside');
+            //console.log('inside');
             api = a;
             assert.ok(true, "This shouldn't fail");
            

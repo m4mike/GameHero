@@ -23,11 +23,14 @@ function assertNotification(response,body){
     assert(body['ok'] == 1);
 }
 
+function assertOk(response, body) {
+    assert(response.statusCode == 200);
+    assert(body['ok'] == 1);
+}
 describe('social', function () {
     
     before(function (done) {
-        console.log('starting ah');
-        actionhero.start(function (err, a) {
+            actionhero.start(function (err, a) {
             api = a;
             setTimeout( function () { done(); },1000);
            
@@ -41,23 +44,9 @@ describe('social', function () {
         });
     })
     
-    
-    it("the api should work in general", function (done) {
-       
-        api.log('getting : ' + setup.testUrl);
-        request.get(setup.testUrl + "/doesntexist", function (error, response, body) {
-            assert(response.statusCode == 404);
-           
-            return done();
-        });
-        
-    });
-    
-    
-    it("getting socal", function (done) {
+    it("getting socal actions", function (done) {
         request.get("social/", function (error, response, body) {
-            assert(response.statusCode == 200);
-           
+            assertOk(response, body);
             done();
         });
        
@@ -75,7 +64,7 @@ describe('social', function () {
         },
         "winner": "from",
         "detail": {
-            "game": "MYLITTLEDUEL",
+            "game": "g_mld",
             "winner": "from",
             "a_health": "10",
             "d_health": "8",

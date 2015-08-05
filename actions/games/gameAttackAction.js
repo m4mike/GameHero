@@ -10,20 +10,18 @@ Example: a game of tic tac toe against both players. The attacker initiates an a
 Example:  a game of tictactoe against an ai adversary. 
 */
 
-var utils = require("../../utils")
+var utils = require("../../utils");
+var actionUtils = require("../../utils/actionUtils.js");
 var events = require('events');
 var util = require('util');
 var async = require('async');
-
-
-
 
 /*
  * A player attacks another player
  * 
  */
-exports.game_attack_single = {
-    name: 'game_attack_single',
+exports.game_attack = {
+    name: 'game_attack',
     description: 'A player attacks another player: example with internal ids: (for external, replace id by id_ext)<br/> ' + JSON.stringify({
         "app": "app_mlg",
         "from": {
@@ -32,7 +30,7 @@ exports.game_attack_single = {
         "to": {
             "id": "p12",
         },
-        "game":"MYLITTLEDUEL",
+        "game": "g_mld",
         "data": {},
         "post": {
             "msg": "voila pour ta poire"
@@ -57,29 +55,31 @@ exports.game_attack_single = {
             validator: null
         },
         winner: {
-            description: "winner, can be 'from' or 'to'",
+            description: "winner, can be empty, 'from' or 'to'",
+            required: false,
+            validator: null
+        },
+        game: {
+            description: 'what game is played ex: g_mld ' ,
             required: true,
             validator: null
         },
         detail: {
-            description: 'the details of the attack example :<br/>' + JSON.stringify({
+            description: 'not required. the details of the attack<br/> example :<br/>' + JSON.stringify({
                 "detail": {
-                    "game": "MYLITTLEDUEL",
-                    "a_health": "10",
-                    "d_health": "8",
-                    "a_score": "6",
-                    "d_score": "0",
+                    "from": { health: 10, score: 6 },
+                    "to": { health: 10, score: 6 },
                     "item_transfer": {
                         "id_item": "--MLG id of item -",
                         "name": "name of item to display"
                     }
                 }
             }),
-            required: true,
+            required: false,
             validator: null
         },
         post: {
-            details: "An optional post to the wall : ex {msg:'i got you'} or a string with the message",
+            description: "An optional post to the wall : ex {msg:'i got you'} or 'i got you!'",
             required: false,
             validator: null
         },
@@ -99,105 +99,43 @@ exports.game_attack_single = {
             post: action.params.post, 
             detail : action.params.detail,
             winner : action.params.winner,
+            game : action.params.game,
             err: null
         };
         
         var EventEmitter = require('events').EventEmitter;
         var emitter = new EventEmitter();
         
-        
-        //binding the events
-        //   start -> getting players from player id's
-        //            checkPlayerFrom - playerFrom -
-        //            checkPlayerTo   - playerTO -
-        //   post -> create task to post, reply
-        
         emitter.on('start', function () {
-            var nextEmit = 'internal';
-            
-            if (typeof state.playerFrom === 'object') {
-                if (state.playerFrom.id_ext != null) {
-                    nextEmit = 'external';
-                    state.playerFrom = state.playerFrom.id_ext;
-                    state.playerTo = state.playerTo.id_ext;
-                } else {
-                    
-                    state.playerFrom = state.playerFrom.id;
-                    state.playerTo = state.playerTo.id;
-                }
+            //get players and game data
+            async.parallel([
+                function (cb) {
+                    actionUtils.getPlayers(api, state, function (err) {
+                        if (err) state.err = err; 
+                        return cb();
+                    })
+                },
+                function (cb) {
+                    api.data.games.byId(state.game, function (err, game) {
+                        if (err) state.err = err;
+                        state.game = game;
+                        return cb();
+                    })
+                }], 
+            function (err) {
+                if (err) { state.err = err; }
+                if (state.err) return emitter.emit('error');
+                return emitter.emit('post');
             }
+            );
             
             
             
-            emitter.emit(nextEmit);
+            
+            
+            
+           
         });
-        
-        emitter.on('internal', function () { emitter.emit('getplayers') });
-        emitter.on('external', function () { emitter.emit('getplayersext') });
-        emitter.on('getplayers', function () {
-            //check both players then emit post
-            
-            async.parallel([
-                function (cb) {
-                    api.data.players.getBaseInfoById(state.playerFrom, function (err, p1) {
-                        if (p1 == null) { state.playerFromCheck = false; }
-                        else {
-                            state.playerFrom = p1;
-                            state.playerFromCheck = true;
-                        }
-                        cb();
-                    })
-                },
-                function (cb) {
-                    api.data.players.getBaseInfoById(state.playerTo, function (err, p2) {
-                        if (p2 == null) { state.playerToCheck = false; }
-                        else {
-                            state.playerTo = p2;
-                            state.playerToCheck = true;
-                        }
-                        cb();
-                    })
-                }]
-                , function (err) {
-                emitter.emit('post');
-            
-            });
-            
-            
-        });
-        
-        emitter.on('getplayersext', function () {
-            //check both players from external id then emit post
-            
-            async.parallel([
-                function (cb) {
-                    api.data.players.getBaseInfoByIdExt(state.playerFrom, function (err, p1) {
-                        if (p1 == null) { state.playerFromCheck = false; }
-                        else {
-                            state.playerFrom = p1;
-                            state.playerFromCheck = true;
-                        }
-                        cb();
-                    })
-                },
-                function (cb) {
-                    api.data.players.getBaseInfoByIdExt(state.playerTo, function (err, p2) {
-                        if (p2 == null) { state.playerToCheck = false; }
-                        else {
-                            state.playerTo = p2;
-                            state.playerToCheck = true;
-                        }
-                        cb();
-                    })
-                }]
-                , function (err) {
-                emitter.emit('post');
-            
-            });
-            
-            
-        });
-        
         
         emitter.on('post', function () {
             if (!state.playerFromCheck) {
@@ -214,14 +152,8 @@ exports.game_attack_single = {
             }
             
             api.tasks.enqueue("socialattack", state, 'default', function (err, toRun) {
-                state.resp = {
-                    ok: 1,
-                    state: 'queued'
-                };
                 return emitter.emit('counters');
             });
-            
-            
         });
         
         emitter.on('counters', function () {
@@ -240,7 +172,7 @@ exports.game_attack_single = {
         
         emitter.on('error', function () {
             action.error = state.err;
-            action.connection.rawConnection.responseHttpCode = "404";
+            action.connection.rawConnection.responseHttpCode = "500";
             return next(state.err);
         });
         

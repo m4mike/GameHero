@@ -8,6 +8,18 @@ module.exports.init = function (theapi) {
     return module.exports;
 }
 
+
+module.exports.byId = function (id, next) {
+    database.getDb(function (err, db) {
+        if (err) return next(err);
+        db.games.findOne({ _id: id },  function (err, data) {
+            if (err) return next(err);
+            return next(null, data);
+        });
+    });
+};//byId
+
+
 module.exports.gamesForApp = function (id, next) {
     database.getDb(function (err, db) {
         if (err) return next(err);
@@ -35,7 +47,7 @@ module.exports.getAll = function (next) {
 };//gamesForApp
 
 /*saveDelayedGameMoves({
-    game: 'MYLITTLEDUEL', 
+    game: 'g_mld', 
     player: state.player, 
     data: { defence : state.defence, attack: state.attack }
     */
