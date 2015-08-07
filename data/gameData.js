@@ -85,7 +85,7 @@ module.exports.getGameData = function (id_game, id_player, next) {
 
 function gameDataProto(idGame, idPlayer, data) {
     return {
-        _id: idgame + "_" + idPlayer,
+        _id: idGame + "_" + idPlayer,
         id_game: idGame,
         id_player: idPlayer,
         data:data
