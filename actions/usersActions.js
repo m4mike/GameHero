@@ -56,8 +56,8 @@ exports.userAddInterest = {
                                    action.params.interest, function (err, data) {
             //var collection = new utils.HyperJson(data);
             //collection.addSelfId();
-            api.data.users.getById(action.params.idUser, function (err, uu) {
-                action.response = { ok: 1, _result: uu };
+            api.data.users.byId(action.params.idUser, function (err, uu) {
+                action.response = { ok: 1, result: uu };
                 next(err);
             });
         });
@@ -92,8 +92,8 @@ exports.userRemoveInterest = {
                                    action.params.lang, 
                                    action.params.cat, 
                                    action.params.interest, function (err, data) {
-            api.data.users.getById(action.params.idUser, function (err, uu) {
-                action.response = { ok: 1, _result: uu };
+            api.data.users.byId(action.params.idUser, function (err, uu) {
+                action.response = { ok: 1, result: uu };
                 next(err);
             });
         });
@@ -128,7 +128,7 @@ exports.userHasInterest = {
                                    action.params.lang, 
                                    action.params.cat, 
                                    action.params.interest, function (err, data) {
-            action.response = { ok: 1, _result: data };
+            action.response = { ok: 1, result: data };
             next();
         });
     }
@@ -147,14 +147,14 @@ exports.userById = {
 
     run: function (api, action, next) {
 
-        api.data.users.getById(action.params.idUser, function (err, result) {
+        api.data.users.byId(action.params.idUser, function (err, result) {
             if (err || result == null || result.length == 0) {
 
                 action.connection.rawConnection.responseHttpCode = "404";
                 return next(new Error("not found"));
             } else {
 
-                action.response = { ok: 1, _result: result };
+                action.response = { ok: 1, result: result };
                 next();
             }
 
@@ -237,8 +237,8 @@ exports.userDelete = {
                     //    _items : result
                     
                     //});
-                    //collection.addSelfIdsToItems(api.serverUrl + "/api/users/getById/" , "_id");
-                    action.response = { ok: 1, _result: result.result };
+                    //collection.addSelfIdsToItems(api.serverUrl + "/api/users/byId/" , "_id");
+                    action.response = { ok: 1, result: result.result };
                     next();
                 }
             }

@@ -44,7 +44,7 @@ exports.gamebyId = {
             }                    
             action.response = {
                 ok: 1,    
-                _result : result
+                result : result
             };
             return next();
         }); 
@@ -282,7 +282,7 @@ exports.getgamedata = {
         });
         
         emitter.on('ready', function () {
-            action.response = { ok: 1, _result: state.resp };
+            action.response = { ok: 1, result: state.resp };
             return next();
         });
         
@@ -360,7 +360,7 @@ exports.getgamedataext = {
         });
         
         emitter.on('ready', function () {
-            action.response = { ok: 1, _result: state.resp };
+            action.response = { ok: 1, result: state.resp };
             return next();
         });
         

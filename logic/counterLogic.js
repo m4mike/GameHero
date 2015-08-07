@@ -34,7 +34,7 @@ module.exports.updateCounters = function (idPlayer, idApp, actions, next) {
             }
             else {
                 //get app and counters
-                api.data.apps.getById(idApp, function (err, app) {
+                api.data.apps.byId(idApp, function (err, app) {
                     if (err) { state.err = err; return emitter.emit('error') }
                     else {
                         state.counters = app.actions;
@@ -69,7 +69,7 @@ module.exports.updateCounters = function (idPlayer, idApp, actions, next) {
         }           
         
         //filtered contains counters that need an update
-        api.data.players.getById(idPlayer, function (err, player) {
+        api.data.players.byId(idPlayer, function (err, player) {
             if (player.counters == null) player.counters = {};
             var modified = [];
             //foreach action, update the player counters

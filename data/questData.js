@@ -6,7 +6,7 @@ module.exports.init = function (db) {
 }
 
 
-module.exports.getById = function (iqQuest, next) {
+module.exports.byId = function (iqQuest, next) {
     database.getDb(function (err, db) {
         if (err) {
             next(err);

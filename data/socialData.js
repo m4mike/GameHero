@@ -59,7 +59,7 @@ module.exports.getPlayerLastWall = function (idPlayer, next) {
 module.exports.getExtPlayerWall = function (idExt, month, next) {
     database.getDb(function (err, db) {
         if (err) return next(err);
-        api.data.players.getByIdExt(idExt, function (err, player) {
+        api.data.players.byIdExt(idExt, function (err, player) {
             if (err) return next(err);
             if (player == null) return next(new Error("Ext Id not found"));
            
@@ -71,7 +71,7 @@ module.exports.getExtPlayerWall = function (idExt, month, next) {
 module.exports.getExtPlayerLastWall = function (idExt,  next) {
     database.getDb(function (err, db) {
         if (err) return next(err);
-        api.data.players.getByIdExt(idExt, function (err, player) {
+        api.data.players.byIdExt(idExt, function (err, player) {
             if (err) return next(err);
             if (player == null) return next(new Error("Ext Id not found"));
             return module.exports.getPlayerLastWall(player._id, next);

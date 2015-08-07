@@ -47,7 +47,7 @@ exports.missionsForApp = {
                 }
                 if (typeof result == 'object') result = [result];
                 var collection = new utils.HyperJson({
-                    ok:1, _result : result
+                    ok:1, result : result
                             
                 });
                 collection.addSelfIdsToItems(api.serverUrl + "/api/mission/byId/" , "_id");
@@ -72,7 +72,7 @@ exports.missionById = {
     
     run: function (api, action, next) {
         
-        api.data.missions.getById(action.params.idMission, function (err, result) {
+        api.data.missions.byId(action.params.idMission, function (err, result) {
             if (err) {
                 next(err);
             } else {
@@ -81,7 +81,7 @@ exports.missionById = {
                     next(new Error("not found"));
                     return;
                 }
-                action.response = { ok: 1, _result: result };
+                action.response = { ok: 1, result: result };
                 next();
             }
         });

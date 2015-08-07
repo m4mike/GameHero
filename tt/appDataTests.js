@@ -40,7 +40,7 @@ describe('data tests', function () {
         
         describe("There should be apps", function () {
             it("i can find app_follow", function (done) {
-                api.data.apps.getById("app_follow", function (err, data) {
+                api.data.apps.byId("app_follow", function (err, data) {
                     data.should.not.be.null();
                     done();
                 })
@@ -56,7 +56,7 @@ describe('data tests', function () {
            
             it("i can add a player to an app", function (done) {
                 api.data.apps.addPlayerToApp("app_follow", "p1", function (err, res) {
-                    api.data.apps.getById("app_follow", function (err, theApp) {
+                    api.data.apps.byId("app_follow", function (err, theApp) {
                         assert(theApp.players.indexOf("p1") > -1);
                         done();
                     })
@@ -65,7 +65,7 @@ describe('data tests', function () {
 
             it("i can remove a player to an app", function (done) {
                 api.data.apps.removePlayerFromApp("app_follow", "p1", function (err, res) {
-                    api.data.apps.getById("app_follow", function (err, theApp) {
+                    api.data.apps.byId("app_follow", function (err, theApp) {
                         assert(theApp.players.indexOf("p1") < 0);
                         done();
                     })
@@ -74,7 +74,7 @@ describe('data tests', function () {
 
             it("and readd it", function (done) {
                 api.data.apps.addPlayerToApp("app_follow", "p1", function (err, res) {
-                    api.data.apps.getById("app_follow", function (err, theApp) {
+                    api.data.apps.byId("app_follow", function (err, theApp) {
                         assert(theApp.players.indexOf("p1") > -1);
                         done();
                     })

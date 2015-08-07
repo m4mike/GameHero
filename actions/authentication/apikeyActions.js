@@ -20,7 +20,7 @@ exports.apiKeyGet = {
         
         apiusers.getApiKey(action.params.api_user,action.params.api_pasw,function(err,key){
             if (err) { action.error = err; return done(err); }
-            action.response = { ok: 1, _result: key }
+            action.response = { ok: 1, result: key }
             done()
          })
     }
@@ -41,7 +41,7 @@ exports.apiKeyTest = {
                 return done();
             }
 
-            action.response = { ok: 1, _result: "api user = " + action.connection.apiuser };
+            action.response = { ok: 1, result: "api user = " + action.connection.apiuser };
             done();
         });
     }

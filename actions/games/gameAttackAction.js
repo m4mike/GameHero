@@ -111,9 +111,9 @@ exports.game_attack = {
         var emitter = new EventEmitter();
         
         emitter.on('start', function () {
-            //get players and game 
+            //get players and game and test app
             async.parallel([
-                function (cb) {
+                function (cb) { 
                     actionUtils.getPlayers(api, state, function (err) {
                         if (err) state.err = err; 
                         return cb();
@@ -128,7 +128,15 @@ exports.game_attack = {
                         state.game = game;
                         return cb();
                     })
+                },
+                function (cb) {
+                    api.data.apps.byId(state.idApp, function (err, app) {
+                        if (err) state.err = err;
+                        if (app == null) state.err = "unknown app";
+                        cb();
+                    })
                 }], 
+
                 function (err) {
                     if (err) { state.err = err; }
                     if (state.err) return emitter.emit('error');
@@ -233,7 +241,7 @@ exports.game_attack = {
         emitter.on('ready', function () {
             
             state.resp.ok = 1;
-            state.resp._result = {
+            state.resp.result = {
                 winner: state.winner,
                 moves: state.moves
             };

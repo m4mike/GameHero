@@ -50,7 +50,7 @@ exports.playerById = {
     run: function (api, action, next) {
         var id = action.params.playerId;
         
-        api.data.players.getById(id, function (err, result) {
+        api.data.players.byId(id, function (err, result) {
             if (err) {
                 next(err);
             } else {
@@ -66,10 +66,10 @@ exports.playerById = {
                     
                     var hj = new utils.HyperJson({
                         ok:1,    
-                        _result : result
+                        result : result
                     
                     });
-                    hj.link(api.serverUrl + "/api/players/getByIdFull/" + result._id);
+                    hj.link(api.serverUrl + "/api/players/byIdFull/" + result._id);
                     action.response = hj.toObject();
                     next();
                 }
@@ -92,7 +92,7 @@ exports.playerByIdExt = {
     run: function (api, action, next) {
         var id = action.params.playerId;
         
-        api.data.players.getByIdExt(id, function (err, result) {
+        api.data.players.byIdExt(id, function (err, result) {
             if (err) {
                 next(err);
             } else {
@@ -107,10 +107,10 @@ exports.playerByIdExt = {
                     }
                     var hj = new utils.HyperJson({
                        ok:1, 
-                        _result : result
+                        result : result
                     
                     });
-                    hj.link(api.serverUrl + "/api/players/getByIdExtFull/" + result._id);
+                    hj.link(api.serverUrl + "/api/players/byIdExtFull/" + result._id);
                     action.response = hj.toObject();
                     next();
                 }
@@ -134,7 +134,7 @@ exports.playerByIdFull = {
     run: function (api, action, next) {
         var id = action.params.playerId;
         
-        api.data.players.getByIdFull(id, function (err, result) {
+        api.data.players.byIdFull(id, function (err, result) {
             if (err) {
                 next(err);
             } else {
@@ -149,7 +149,7 @@ exports.playerByIdFull = {
                     }
                     var hj = new utils.HyperJson({
                         ok:1,
-                        _result : result
+                        result : result
                     
                     });
                     action.response = hj.toObject();
@@ -175,7 +175,7 @@ exports.playerByExtIdFull = {
     run: function (api, action, next) {
         var id = action.params.playerId;
         
-        api.data.players.getByIdExtFull(id, function (err, result) {
+        api.data.players.byIdExtFull(id, function (err, result) {
             if (err) {
                 next(err);
             } else {
@@ -190,7 +190,7 @@ exports.playerByExtIdFull = {
                     }
                     var hj = new utils.HyperJson({
                         ok:1,
-                        _result : result
+                        result : result
                     
                     });
                     action.response = hj.toObject();
@@ -229,7 +229,7 @@ exports.playersForApp = {
                 }
                 var collection = new utils.HyperJson({
                     ok: 1, 
-                    _result : result
+                    result : result
                     
                 });
                 collection.addSelfIdsToItems(api.serverUrl + "/api/players/byId/" , "_id");
@@ -271,7 +271,7 @@ exports.playerDelete = {
                         next(new Error("not found: " + id));
                         return;
                     }
-                    action.response = { ok: 1, _result: 'deleted' };
+                    action.response = { ok: 1, result: 'deleted' };
                     next();
                 }
             }

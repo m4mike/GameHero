@@ -39,19 +39,19 @@ describe('data tests', function () {
     
     describe("There should be users",function(){
       it("i can find u1",function(done){
-        api.data.users.getById("u1",function(err,user){
+        api.data.users.byId("u1",function(err,user){
           user.should.not.be.null();
           done();
         })
       });
       it("i can find p1",function(done){
-                api.data.players.getById("p1",function(err,user){
+                api.data.players.byId("p1",function(err,user){
           user.should.not.be.null();
           done();
         })
       });
       it("i can find followers mission",function(done){
-                api.data.missions.getById("mfollowers",function(err,res){
+                api.data.missions.byId("mfollowers",function(err,res){
           res.should.not.be.null();
           done();
         })

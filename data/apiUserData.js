@@ -8,12 +8,12 @@ module.exports.init = function (theapi) {
     return module.exports;
 }
 
-module.exports.getById = function (id, next) {
+module.exports.byId = function (id, next) {
     database.getDb(function (err, db) {
         if (err) return next(err);
         db.apiusers.findOne({ _id: id }, { _id: 1, id_user: 1, id_ext: 1, dispname: 1, id_app: 1, counters: 1 }, next);
     });
-};//getById
+};//byId
 
 module.exports.getByUserName = function (search, next) {
     database.getDb(function (err, db) {

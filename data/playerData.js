@@ -45,7 +45,7 @@ module.exports.addPlayer = function (player, next) {
 }; //addplayer
 
 
-module.exports.getByIdExt = function (idExt, next) {
+module.exports.byIdExt = function (idExt, next) {
     database.getDb(function (err, db) {
         if (err) {
             next(err);
@@ -55,7 +55,7 @@ module.exports.getByIdExt = function (idExt, next) {
     });
 };//getplayer
 
-module.exports.getByIdExtFull = function (idExt, next) {
+module.exports.byIdExtFull = function (idExt, next) {
     database.getDb(function (err, db) {
         if (err) {
             next(err);
@@ -65,14 +65,14 @@ module.exports.getByIdExtFull = function (idExt, next) {
     });
 };//getplayer
 
-module.exports.getById = function (id, next) {
+module.exports.byId = function (id, next) {
     database.getDb(function (err, db) {
         if (err) return next(err);
         db.players.findOne({ _id: id },{_id:1,id_user:1,id_ext:1,dispname:1,id_app:1,counters:1}, next);
     });
-};//getById
+};//byId
 
-module.exports.getByIdFull = function (playerId, next) {
+module.exports.byIdFull = function (playerId, next) {
     database.getDb(function (err, db) {
         if (err) {
             next(err);

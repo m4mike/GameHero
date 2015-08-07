@@ -35,7 +35,7 @@ exports.sociallastwallplayer = {
     },
     run: function (api, action, next) {
             api.data.social.getPlayerLastWall(action.params.playerId, function (err, res) {
-            action.response = { ok: 1, _result: res };
+            action.response = { ok: 1, result: res };
             action.response.error = null;
             next(null, res);
         })
@@ -57,11 +57,11 @@ exports.lastwallextplayer = {
         
         api.data.social.getExtPlayerLastWall(action.params.ext_playerId, function (err, res) {
             if (err) {
-                action.response = { ok: 0, _result: null, error:err };
+                action.response = { ok: 0, result: null, error:err };
                 action.response.error = err;
                 return next(err);
             } else {
-                action.response = { ok: 1, _result: res };
+                action.response = { ok: 1, result: res };
                 action.response.error = null;
                 return next(null, res);
             }
@@ -98,7 +98,7 @@ exports.socialwallplayer = {
             action.params.month = getCurrentMonth();
         }
         api.data.social.getPlayerWall(action.params.playerId,action.params.month,  function (err, res) {
-            action.response = { ok: 1, _result: res };
+            action.response = { ok: 1, result: res };
             action.response.error = null;
             next(null, res);
        })
@@ -126,7 +126,7 @@ exports.socialwallExtPlayer = {
             action.params.month = getCurrentMonth();
         }
         api.data.social.getExtPlayerWall(action.params.ext_playerId,action.params.month, function (err, res) {
-            action.response = { ok: 1, _result: res };
+            action.response = { ok: 1, result: res };
             action.response.error = null;
             next(null, res);
         })

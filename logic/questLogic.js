@@ -35,7 +35,7 @@
             },
                 //get player
             function (callback) {
-                data.players.getById(locals.playerId, function (err, res) {
+                data.players.byId(locals.playerId, function (err, res) {
                     if (err) return callback(err);
                     locals.player = res;
                     callback();

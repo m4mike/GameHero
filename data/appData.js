@@ -22,7 +22,7 @@ module.exports.list = function (next) {
     });
 };
 
-module.exports.getById = function (id, next) {
+module.exports.byId = function (id, next) {
     database.getDb(function (err, db) {
         if (err) {
             next(err);

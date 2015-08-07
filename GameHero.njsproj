@@ -6,7 +6,7 @@
     <ProjectGuid>{673abd67-c6b4-4759-b32e-47d4cb9b4aa2}</ProjectGuid>
     <ProjectHome />
     <ProjectView>ShowAllFiles</ProjectView>
-    <StartupFile>ah.js</StartupFile>
+    <StartupFile>tt\_write.js</StartupFile>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
     <ProjectTypeGuids>{3AF33F2E-1136-4D97-BBB7-1795711AC8B8};{349c5851-65df-11da-9384-00065b846f21};{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}</ProjectTypeGuids>
@@ -65,7 +65,7 @@
     <Compile Include="node_modules\actionhero\initializers\exceptions.js" />
     <Compile Include="node_modules\actionhero\initializers\specHelper.js" />
     <Compile Include="test\gamePlay.js" />
-    <Compile Include="test\gameTests.js" />
+    <Compile Include="tt\gameTests.js" />
     <Compile Include="utils\actionUtils.js" />
     <Compile Include="actions\games\gameAttackAction.js" />
     <Compile Include="ah.js" />
@@ -154,7 +154,7 @@
     <Compile Include="tasks\pingTask.js" />
     <Compile Include="tasks\postOnWall.js" />
     <Compile Include="tasks\socialAttack.js" />
-    <Compile Include="test\socialtest.js">
+    <Compile Include="tt\socialtest.js">
       <TestFramework>Mocha</TestFramework>
     </Compile>
     <Compile Include="tt\appDataTests.js">

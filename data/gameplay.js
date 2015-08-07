@@ -68,7 +68,7 @@ module.exports.g_mld = function mld(api, state, next) {
 
     }
     if (state.winner == null) {
-        state.winner = 'draw';
+        state.winner = 'to';
     }
     next(null, state);
 }

@@ -67,7 +67,7 @@ HyperJson.prototype.link = function (rel, href, options) {
 
 HyperJson.prototype.addSelfIdsToItems = function (host , itemId) {
     var ref = "_items";
-    if (this.obj._items == null || ! Array.isArray(this.obj._items)) ref = "_result";
+    if (this.obj._items == null || ! Array.isArray(this.obj._items)) ref = "result";
     if(this.obj[ref] != null && Array.isArray(this.obj[ref]))
         for (var index in this.obj[ref]) {
             var item = this.obj[ref][index];

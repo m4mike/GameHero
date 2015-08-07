@@ -53,7 +53,7 @@ exports.createPlayerExt = {
         
         //test: maybe the player exists
         emitter.on('maybeplayer', function () {
-            api.data.players.getByIdExt(state.idExt, function (err, player) {
+            api.data.players.byIdExt(state.idExt, function (err, player) {
                 if (!err && player != null) {
                     if (player.id_ext === state.idExt) {
                         state.player = player;
@@ -72,7 +72,7 @@ exports.createPlayerExt = {
         // find the app: it has to exist
         emitter.on('getapp', function () {
             
-            api.data.apps.getById(state.idApp, function (err, theApp) {
+            api.data.apps.byId(state.idApp, function (err, theApp) {
                 if (err || theApp == null) {
                     state.err = new Error('App not found');
                     state.abort = true; emitter.emit('error');
@@ -138,7 +138,7 @@ exports.createPlayerExt = {
         
         emitter.on('ready', function () {
             
-            action.response = { ok: 1, _result : state.player };
+            action.response = { ok: 1, result : state.player };
             next();
         });
         

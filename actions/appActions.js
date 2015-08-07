@@ -59,7 +59,7 @@ exports.appById = {
     run: function (api, action, next) {
         var id = action.params.id;
         
-        api.data.apps.getById(id, function (err, result) {
+        api.data.apps.byId(id, function (err, result) {
             if (err) next(err);
             else {
                 if (result == null) {
@@ -74,7 +74,7 @@ exports.appById = {
                     
                     var hj = new utils.HyperJson({
                         ok: 1,    
-                        _result : result
+                        result : result
                     
                     });
                     
@@ -136,7 +136,7 @@ exports.appById = {
         
 //        emitter.on('getApp', function () {
 //            if (state.abort) return;
-//            api.data.apps.getById(state.idApp, function (err, theApp) {
+//            api.data.apps.byId(state.idApp, function (err, theApp) {
 //                if (err) {
 //                    state.err = new Error('App not found');
 //                    state.abort = true; emitter.emit('error');
@@ -172,7 +172,7 @@ exports.appById = {
 //            var selected = _.where(state.user.apps, { "id_app": state.idApp });
 //            if (selected.length > 0) {
 //                state.idPlayer = selected[0].id_player;
-//                api.data.players.getById(state.idPlayer, function (err, result) {
+//                api.data.players.byId(state.idPlayer, function (err, result) {
 //                    // check if player has that app
 //                    state.player = result;
 //                    if (state.player.id_app != state.idApp) {
@@ -239,7 +239,7 @@ exports.appById = {
         
         
 //        emitter.on('ready', function () {
-//            action.response = { ok: 1 , _result: state.player };
+//            action.response = { ok: 1 , result: state.player };
 //            next(null, state.player);
 //        });
         

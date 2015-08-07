@@ -76,7 +76,7 @@ exports.tictacView = {
         var idGame = action.params.idGame;
         api.tictac.loadGame(idGame, function (error, game) {
             action.error = error;
-            action.response.game = { ok: 1, _result: game };
+            action.response.game = { ok: 1, result: game };
             next();
         });
     }
@@ -118,7 +118,7 @@ exports.tictacMove = {
                 game.state = api.tictac.determineGameState(game);
                 game.turn++;
                 api.tictac.saveGame(game, function () {
-                    action.response.game = { ok: 1, _result: game };
+                    action.response.game = { ok: 1, result: game };
                     next();
                 });
             }
@@ -137,7 +137,7 @@ exports.tictacCreate = {
         var game = new api.tictac.gamePrototype();
         api.tictac.saveGame(game, function (error, result) {
             action.error = error;
-            action.response.game = { ok: 1, _result: result };
+            action.response.game = { ok: 1, result: result };
             next();
         });
     }
@@ -163,7 +163,7 @@ exports.tictacCreateAndStart = {
         game.state = api.tictac.determineGameState(game);
         game.turn++;
         api.tictac.saveGame(game, function () {
-            action.response.game = { ok: 1, _result: game };
+            action.response.game = { ok: 1, result: game };
             next();
             return;
         });

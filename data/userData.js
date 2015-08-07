@@ -99,7 +99,7 @@ module.exports.add = function (user, next) {
 }; //adduser
 
 
-module.exports.getById = function (idUser, next) {
+module.exports.byId = function (idUser, next) {
     database.getDb(function (err, db) {
         if (err) {
             next(err);
