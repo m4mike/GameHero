@@ -60,6 +60,11 @@
     <Content Include="public\o2c.html" />
     <Content Include="public\swagger.html" />
     <Content Include="README.md" />
+    <Content Include="data\gameplay.js" />
+    <Compile Include="node_modules\actionhero\initializers\configLoader.js" />
+    <Compile Include="node_modules\actionhero\initializers\exceptions.js" />
+    <Compile Include="node_modules\actionhero\initializers\specHelper.js" />
+    <Compile Include="test\gamePlay.js" />
     <Compile Include="test\gameTests.js" />
     <Compile Include="utils\actionUtils.js" />
     <Compile Include="actions\games\gameAttackAction.js" />
@@ -149,9 +154,6 @@
     <Compile Include="tasks\pingTask.js" />
     <Compile Include="tasks\postOnWall.js" />
     <Compile Include="tasks\socialAttack.js" />
-    <Compile Include="tt\JavaScript.js">
-      <TestFramework>Mocha</TestFramework>
-    </Compile>
     <Compile Include="test\socialtest.js">
       <TestFramework>Mocha</TestFramework>
     </Compile>

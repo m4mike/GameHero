@@ -62,9 +62,9 @@ exports.socialattack = {
             required: true,
             validator: null
         },
-        detail: {
+        data: {
             description: 'the details of the attack example :<br/>' + JSON.stringify({
-                "detail": {
+                "data": {
                     "game": "g_mld",
                     "a_health": "10",
                     "d_health": "8",
@@ -98,8 +98,9 @@ exports.socialattack = {
             playerToCheck : false,
             idApp: action.params.app, 
             post: action.params.post, 
-            detail : action.params.detail,
+            data : action.params.data,
             winner : action.params.winner,
+            resp: {},
             err: null
         };
         
@@ -149,7 +150,7 @@ exports.socialattack = {
             var actions = [state.action];
             if (state.winner == 'from') actions.push('attack-win');
             api.logic.counters.updateCounters(state.playerFrom._id, state.idApp, actions, function (err, update) {
-                state.resp = update;
+                state.resp.notification = update;
                 emitter.emit('ready');
             })
         });

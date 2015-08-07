@@ -23,7 +23,7 @@ exports.games = {
 };
 
 
-exports.games = {
+exports.gamebyId = {
     name: 'gameById',
     description: 'get a game by its id:  ex g_mld',
     outputExample: null,
@@ -128,7 +128,6 @@ exports.gamesForApp = {
 exports.savegamedata = {
     name: 'savegamedata',
     description: 'Save a player data for a game. For example:  moves for g_mld: ( id can be replaced by id_ext)<br/> ' + JSON.stringify({
-        "app": "app_mlg",
         "game":"g_mld",
         "player": {
             "id": "p11"
@@ -141,11 +140,6 @@ exports.savegamedata = {
     
     inputs: {
         
-        app: {
-            required: true,
-            validator: null,
-            description: 'the application, ex app_mlg',
-        },
         player: {
             description: 'the player to save, either a sting: internal player, either an object {id_ext: external id } or {id:internal id}',
             required: true,
@@ -171,7 +165,6 @@ exports.savegamedata = {
             data: action.params.data, 
             game:action.params.game,
             playerCheck : false,
-            app: action.params.app, 
             err: null
         };
         
@@ -218,13 +211,7 @@ exports.savegamedata = {
             if (!state.playerCheck) {
                 state.err = new Error('player not found'); return emitter.emit('error');
             }
-            api.data.games.saveGameData({
-                _id: state.game + "_" + state.player._id,
-                id_app:state.app,
-                id_game: state.game, 
-                id_player: state.player._id, 
-                data: state.data,
-            }, function (err, res) {
+            api.data.games.saveGameData(state.game,state.player._id,state.data, function (err, res) {
                 state.resp = res;
                 emitter.emit('ready');
             })
@@ -265,8 +252,6 @@ exports.getgamedata = {
             validator: null
         }
     },
-    
-    
     run: function (api, action, next) {
         
         var state = {

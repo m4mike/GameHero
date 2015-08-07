@@ -40,6 +40,7 @@ exports.socialstatus = {
             playerFromCheck : false,
             idApp: action.params.app, 
             post: action.params.post, 
+            resp: {},
             err: null
         };
         
@@ -114,7 +115,7 @@ exports.socialstatus = {
         
         emitter.on('calc', function () {
             api.logic.counters.updateCounters(state.playerFrom._id, state.idApp, state.action, function (err, update) {
-                state.resp = update;
+                state.resp.notification = update;
                 emitter.emit('ready');
             })
             
@@ -190,6 +191,7 @@ exports.socialpost = {
             playerToCheck : false,
             idApp: action.params.app, 
             post: action.params.post, 
+            resp: {},
             err: null
         };
         
@@ -310,7 +312,7 @@ exports.socialpost = {
         
         emitter.on('calc', function () {
             api.logic.counters.updateCounters(state.playerFrom._id, state.idApp, state.action, function (err, update) {
-                state.resp = update;
+                state.resp.notification = update;
                 emitter.emit('ready');
             })
             

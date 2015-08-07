@@ -34,16 +34,20 @@ describe('game tests', function () {
         request.get("games/all", function (error, response, body) {
             assertOk(response,body);
             return done();
-        });    });
+        });
+    });
     
     it("is possible to get all games for an app", function (done) {
         request.get("games/forApp/app_mlg", function (error, response, body) {
             assertOk(response,body);
             return done();
-        });    });
+        });
+    });
 
     it("is possible to get a game details", function (done) {
         request.get("games/byId/g_mld", function (error, response, body) {
             assertOk(response,body);
             return done();
-        });    });})
+        });
+    });
+})

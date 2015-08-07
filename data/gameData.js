@@ -46,21 +46,27 @@ module.exports.getAll = function (next) {
     });
 };//gamesForApp
 
+module.exports.playGame = function playGame( state,next){
+    var gp = require('./gameplay.js');
+    var fun = gp[state.game._id];
+    fun(api, state, next);
+}
+
+
 /*saveDelayedGameMoves({
     game: 'g_mld', 
     player: state.player, 
     data: { defence : state.defence, attack: state.attack }
     */
-module.exports.saveGameData = function (data, next) {
+module.exports.saveGameData = function (idGame, idPlayer, data, next) {
     database.getDb(function (err, db) {
         if (err) return next(err);
         //update game data into player profile
-        db.gamedata.save( data, function (err, nothing) {
-            if (err) return next(err);
-            return next();
-
+        //todo: won't work
+        db.gamedata.save( gameDataProto(idGame,idPlayer,data), function (err, nothing) {
+            if(err && next) return next(err);
+            if(next) return next();
         });
-
     });
 };//saveGameData
 
@@ -77,3 +83,11 @@ module.exports.getGameData = function (id_game, id_player, next) {
     });
 };//getGameData
 
+function gameDataProto(idGame, idPlayer, data) {
+    return {
+        _id: idgame + "_" + idPlayer,
+        id_game: idGame,
+        id_player: idPlayer,
+        data:data
+    }
+}

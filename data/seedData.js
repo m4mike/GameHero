@@ -76,7 +76,10 @@
         { _id: "g_mem", type: 'outside' },
         { _id: "g_mld", name:'My Little Duel', type: 'single' }
     ]
-    seedData.gamedata = [{ _id: 'g_mld_p11', id_app: 'app_mlg', id_player: 'p11', id_game: 'g_mld', data: { "defence": "LMH", "attack": "HHH" } }];
+    seedData.gamedata = [
+        { _id: 'g_mld_p11', id_app: 'app_mlg', id_player: 'p11', id_game: 'g_mld', data: { "defence": "LMH", "attack": "HHH" } },
+        { _id: 'g_mld_p12', id_app: 'app_mlg', id_player: 'p12', id_game: 'g_mld', data: { "defence": "LLMH", "attack": "HHLMHHH" } }
+    ];
 
     seedData.users = [
         {

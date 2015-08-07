@@ -76,9 +76,8 @@ exports.default = {
                 { path: '/social/post', action: 'socialpost' },
                 { path: '/social/status', action: 'socialstatus' },
                 
-                { path: '/games/save', action: 'savegamedata' } ,        
-             
-
+                { path: '/games/save', action: 'savegamedata' } ,
+                { path: '/games/attack', action: 'game_attack' } , 
             ],
             delete: [
                 //{ path: "/players/:playerId", action: "playerDelete" },

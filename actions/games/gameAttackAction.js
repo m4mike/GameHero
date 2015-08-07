@@ -55,7 +55,7 @@ exports.game_attack = {
             validator: null
         },
         winner: {
-            description: "winner, can be empty, 'from' or 'to'",
+            description: "winner, can be empty, 'from' , 'to' or 'draw' ",
             required: false,
             validator: null
         },
@@ -64,9 +64,9 @@ exports.game_attack = {
             required: true,
             validator: null
         },
-        detail: {
+        data: {
             description: 'not required. the details of the attack<br/> example :<br/>' + JSON.stringify({
-                "detail": {
+                "data": {
                     "from": { health: 10, score: 6 },
                     "to": { health: 10, score: 6 },
                     "item_transfer": {
@@ -97,9 +97,13 @@ exports.game_attack = {
             playerToCheck : false,
             idApp: action.params.app, 
             post: action.params.post, 
-            detail : action.params.detail,
+            data : action.params.data,
             winner : action.params.winner,
             game : action.params.game,
+            hasPosted:false,
+            fromData: null,
+            toData : null,
+            resp:{},
             err: null
         };
         
@@ -107,7 +111,7 @@ exports.game_attack = {
         var emitter = new EventEmitter();
         
         emitter.on('start', function () {
-            //get players and game data
+            //get players and game 
             async.parallel([
                 function (cb) {
                     actionUtils.getPlayers(api, state, function (err) {
@@ -118,54 +122,121 @@ exports.game_attack = {
                 function (cb) {
                     api.data.games.byId(state.game, function (err, game) {
                         if (err) state.err = err;
+                        if (game == null) state.err = "unknown game";
+                        if (state.err)
+                            return cb();
                         state.game = game;
                         return cb();
                     })
                 }], 
-            function (err) {
-                if (err) { state.err = err; }
-                if (state.err) return emitter.emit('error');
-                return emitter.emit('post');
-            }
-            );
-            
-            
-            
-            
-            
-            
-           
+                function (err) {
+                    if (err) { state.err = err; }
+                    if (state.err) return emitter.emit('error');
+                    if (!state.playerFromCheck) {
+                        state.err = new Error('player from not found'); return emitter.emit('error');
+                    }
+                    if (!state.playerToCheck) {
+                        state.err = new Error('player to not found'); return emitter.emit('error');
+                    }
+                    if (state.winner == 'from' || state.winner == 'to') {
+                        emitter.emit('post');
+                        state.hasPosted = true;
+                    } 
+                    return emitter.emit('getgamedata');
+                });
         });
         
+        emitter.on('getgamedata', function getGames() {
+            async.parallel({
+                one:function(cb) {
+                    if (state.data == null || state.data['from'] == null) {
+                        api.data.games.getGameData(state.game._id, state.playerFrom._id, function (err, res) {
+                            if (err) { state.err = err }
+                            if (res == null) state.err = new Error('from player has no data for the attack');
+                            if (state.err) return cb() 
+                            state.fromData = res.data;
+                            return cb();
+                        });
+                    } else {
+                        state.fromData = state.detail.from;
+                        api.data.games.saveGameData(state.game._id, state.playerFrom._id, state.fromData);
+                        return cb();
+                    };
+                   
+                },
+                two:  function (cb) {
+                    if (state.data == null || state.data['to'] == null) {
+                        api.data.games.getGameData(state.game._id, state.playerTo._id, function (err, res) {
+                            if (err) { state.err = err }
+                            if (res == null) state.err = new Error('to player has no data for the attack');
+                            if (state.err)
+                                return cb() 
+                            state.toData = res.data;
+                            return cb();
+                        });
+                    } else {
+                        state.toData = state.detail.to;
+                        api.data.games.saveGameData(state.game._id, state.playerto._id, state.toData);
+                        return cb();
+                    };
+                    
+                }}, 
+                function (err,result) {
+                    if (err) { state.err = err; }
+                    if (state.err) return emitter.emit('error');
+                    if (!state.fromData) {
+                        state.err = new Error('no game date for from player'); return emitter.emit('error');
+                    }
+                    if (!state.toData) {
+                        state.err = new Error('no game data for to player'); return emitter.emit('error');
+                    }
+                    return emitter.emit('game');
+                });
+        });
+        
+
+        emitter.on('game', function doGame() {
+            if (state.winner == 'from' || state.winner == 'to') { // winner is allready known
+                return emitter.emit('counters');
+            } 
+            api.data.games.playGame(state
+                , function (err, newState) {
+                    if (err) { state.err = err; emitter.emit('error') }
+                    //state = newState;
+                    if (!state.hasPosted) emitter.emit('post');
+                    emitter.emit('counters');
+                }
+            );
+        });
+
+        
+
         emitter.on('post', function () {
-            if (!state.playerFromCheck) {
-                state.err = new Error('player from not found'); return emitter.emit('error');
-            }
-            if (!state.playerToCheck) {
-                state.err = new Error('player to not found'); return emitter.emit('error');
-            }
-            
             if (typeof state.post == 'string') {
                 var msg = state.post
                 state.post = {};
                 state.post.msg = msg;
             }
-            
-            api.tasks.enqueue("socialattack", state, 'default', function (err, toRun) {
-                return emitter.emit('counters');
-            });
+            // enqueues the writing to the walls
+            api.tasks.enqueue("socialattack", state, 'default', function (err, toRun) {});
         });
         
         emitter.on('counters', function () {
             var actions = [state.action];
             if (state.winner == 'from') actions.push('attack-win');
             api.logic.counters.updateCounters(state.playerFrom._id, state.idApp, actions, function (err, update) {
-                state.resp = update;
+                state.resp.notification = update;
                 emitter.emit('ready');
             })
         });
         
         emitter.on('ready', function () {
+            
+            state.resp.ok = 1;
+            state.resp._result = {
+                winner: state.winner,
+                moves: state.moves
+            };
             action.response = state.resp;
             return next();
         });
