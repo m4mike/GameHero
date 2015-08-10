@@ -94,9 +94,21 @@ describe('My little duel tests', function (done) {
             });
         });
         it("it is a draw", function (done) {
-            console.log(JSON.stringify( state));
+            //console.log(JSON.stringify(state));
             assert(state.winner == 'draw');
             done();
         });
+    });
+    describe('Possible errors:', function (done) {
+        it("an unknown app", function (done) {
+            state.app = 'applkjlj';
+           
+            gp.g_mld(api, state, function (err, result) {
+                assert(state.error != null);
+                state.app = 'app_mlg';
+                done();
+            });
+        });
+       
     })
 })
