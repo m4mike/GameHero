@@ -6,7 +6,7 @@
     <ProjectGuid>{673abd67-c6b4-4759-b32e-47d4cb9b4aa2}</ProjectGuid>
     <ProjectHome />
     <ProjectView>ShowAllFiles</ProjectView>
-    <StartupFile>tt\_write.js</StartupFile>
+    <StartupFile>ah.js</StartupFile>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
     <ProjectTypeGuids>{3AF33F2E-1136-4D97-BBB7-1795711AC8B8};{349c5851-65df-11da-9384-00065b846f21};{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}</ProjectTypeGuids>
@@ -61,9 +61,28 @@
     <Content Include="public\swagger.html" />
     <Content Include="README.md" />
     <Content Include="data\gameplay.js" />
+    <Compile Include="node_modules\actionhero\initializers\actionProcessor.js" />
+    <Compile Include="node_modules\actionhero\initializers\actions.js" />
+    <Compile Include="node_modules\actionhero\initializers\cache.js" />
+    <Compile Include="node_modules\actionhero\initializers\chatRoom.js" />
     <Compile Include="node_modules\actionhero\initializers\configLoader.js" />
+    <Compile Include="node_modules\actionhero\initializers\connections.js" />
+    <Compile Include="node_modules\actionhero\initializers\documentation.js" />
     <Compile Include="node_modules\actionhero\initializers\exceptions.js" />
+    <Compile Include="node_modules\actionhero\initializers\genericServer.js" />
+    <Compile Include="node_modules\actionhero\initializers\id.js" />
+    <Compile Include="node_modules\actionhero\initializers\logger.js" />
+    <Compile Include="node_modules\actionhero\initializers\params.js" />
+    <Compile Include="node_modules\actionhero\initializers\pids.js" />
+    <Compile Include="node_modules\actionhero\initializers\redis.js" />
+    <Compile Include="node_modules\actionhero\initializers\resque.js" />
+    <Compile Include="node_modules\actionhero\initializers\routes.js" />
+    <Compile Include="node_modules\actionhero\initializers\servers.js" />
     <Compile Include="node_modules\actionhero\initializers\specHelper.js" />
+    <Compile Include="node_modules\actionhero\initializers\staticFile.js" />
+    <Compile Include="node_modules\actionhero\initializers\stats.js" />
+    <Compile Include="node_modules\actionhero\initializers\tasks.js" />
+    <Compile Include="node_modules\actionhero\initializers\utils.js" />
     <Compile Include="test\gamePlay.js" />
     <Compile Include="tt\gameTests.js" />
     <Compile Include="utils\actionUtils.js" />
@@ -131,8 +150,6 @@
     <Compile Include="methods\start.js" />
     <Compile Include="methods\startCluster.js" />
     <Compile Include="node_modules\actionhero\actionhero.js" />
-    <Compile Include="node_modules\actionhero\initializers\logger.js" />
-    <Compile Include="node_modules\actionhero\initializers\redis.js" />
     <Compile Include="initializers\mongo.js" />
     <Compile Include="initializers\tictacInitializer.js" />
     <Compile Include="logic\index.js" />
@@ -195,7 +212,6 @@
     <Folder Include="datap\" />
     <Folder Include="0.todo\" />
     <Folder Include="methods\" />
-    <Folder Include="actionUtils\" />
     <Folder Include="node_modules\" />
     <Folder Include="node_modules\actionhero\" />
     <Folder Include="node_modules\actionhero\initializers\" />

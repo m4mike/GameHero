@@ -31,9 +31,9 @@
                         <h4>Server Information:</h4>
                         <pre>
 Server Name:        <span class="right" id="serverName"></span>
-API Version:        <span class="right" id="serverVersion"></span>
-Actionhero Version  <span class="right" id="actionheroVersion"></span>
-Updtime (min):      <span class="right" id="uptime"></span>
+API Version:        <span class="right" id="apiVersion"></span>
+Framework Version  <span class="right" id="actionheroVersion"></span>
+Uptime    :      <span class="right" id="uptime"></span>
             </pre>
                     </div>
                     <div class="col-6 col-sm-6 col-lg-6">
@@ -64,13 +64,14 @@ Updtime (min):      <span class="right" id="uptime"></span>
     </section>
     <script type="text/javascript">
         var populateStatus = function (data) {
-            if (data.serverInformation) {
-                document.getElementById('serverVersion').innerHTML = data.serverInformation.apiVersion;
-                document.getElementById('serverName').innerHTML = data.serverInformation.serverName;
-            }
-            document.getElementById('actionheroVersion').innerHTML = data.actionheroVersion;
-            document.getElementById('uptime').innerHTML = Math.round(data.uptime / 1000 / 60);
+            if (data) {
+                document.getElementById('serverName').innerHTML = data.serverName;
+                document.getElementById('actionheroVersion').innerHTML = data.actionheroVersion;
+                document.getElementById('apiVersion').innerHTML = data.apiVersion;
+                document.getElementById('uptime').innerHTML = data.uptime;
 
+            }
+         
             var statWordLength = 0;
             for (var stat in data.stats['actionhero:stats']) {
                 if (stat.length > statWordLength) { statWordLength = stat.length + 4; }
@@ -82,39 +83,39 @@ Updtime (min):      <span class="right" id="uptime"></span>
                 var row = '';
                 var spaces = Array.apply(null, new Array(statWordLength - stat.length)).map(String.prototype.valueOf, "&nbsp;");
                 row += stat + spaces.join('');
-                row += v;
+                row += v
                 row += '<br />';
                 html += row;
             }
             document.getElementById('stats').innerHTML = html
         }
 
-        var populateDocumentation = function (data) {
-            for (var actionName in data.documentation) {
-                for (var version in data.documentation[actionName]) {
-                    var action = data.documentation[actionName][version];
-                    var row = '';
-                    row += '<h4><a href="/api/' + action.name + '?apiVersion=' + version + '">' + action.name + ' (v' + version + ')</a></h4>';
-                    row += '<pre>';
-                    row += '<strong>Description</strong>: ' + action.description;
-                    row += '<br /><br />';
-                    row += '<strong>inputs</strong>: ' + JSON.stringify(action.inputs, null, 4);
-                    row += '<br /><br />';
-                    row += '<strong>output example</strong>: ' + JSON.stringify(action.outputExample, null, 4);
-                    row += '</pre>';
-                    row += '<br/>';
-                    row += '<br/>';
-                    document.getElementById('actions').innerHTML += row;
-                }
-            }
-        }
+        //var populateDocumentation = function (data) {
+        //    for (var actionName in data.documentation) {
+        //        for (var version in data.documentation[actionName]) {
+        //            var action = data.documentation[actionName][version];
+        //            var row = '';
+        //            row += '<h4><a href="/api/' + action.name + '?apiVersion=' + version + '">' + action.name + ' (v' + version + ')</a></h4>';
+        //            row += '<pre>';
+        //            row += '<strong>Description</strong>: ' + action.description;
+        //            row += '<br /><br />';
+        //            row += '<strong>inputs</strong>: ' + JSON.stringify(action.inputs, null, 4);
+        //            row += '<br /><br />';
+        //            row += '<strong>output example</strong>: ' + JSON.stringify(action.outputExample, null, 4);
+        //            row += '</pre>';
+        //            row += '<br/>';
+        //            row += '<br/>';
+        //            document.getElementById('actions').innerHTML += row;
+        //        }
+        //    }
+        //}
 
         var client = new ActionheroClient();
-        client.action('showDocumentation', function (err, data) {
-            populateDocumentation(data)
-        });
+        //client.action('showDocumentation', function (data) {
+        //    populateDocumentation(data)
+        //});
 
-        client.action('status', function (err, data) {
+        client.action('status', function (data) {
             populateStatus(data)
         });
     </script>

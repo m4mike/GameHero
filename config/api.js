@@ -1,5 +1,6 @@
 exports.default = {
-  general: function(api){
+    general: function (api){
+        api.environment = 'development';
     return {
       apiVersion: '0.5',
       serverName: 'GameHero API',
@@ -56,11 +57,13 @@ exports.default = {
   }
 }
 
-exports.test = { 
-  general: function(api){
+exports.test = {
+    general: function (api){
+        api.environment = 'test';
     return {
       id: 'test-server',
-      developmentMode: true,
+            developmentMode: true,
+
       startingChatRooms: {
         'defaultRoom': {},
         'otherRoom': {},
@@ -72,7 +75,9 @@ exports.test = {
 }
 
 exports.production = { 
-  general: function(api){
+    
+    general: function (api){
+        api.environment = 'production';
     return {  
       developmentMode: false
     }

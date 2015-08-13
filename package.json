@@ -7,10 +7,9 @@
     "node": ">=0.10.0"
   },
   "dependencies": {
-    "actionhero": "latest",
+    "actionhero": "^11.4.3",
     "async": "^1.4.0",
     "bluebird": "^2.9.34",
-    "chakram": "^1.0.1",
     "grunt": "0.4.5",
     "grunt-cli": "0.1.13",
     "jsonwebtoken": "^5.0.4",

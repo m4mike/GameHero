@@ -1,11 +1,6 @@
 ﻿
 
-recalculate level when new counters have been calculated
-
-- mylittleduel game
-  and tests
-
-- when posting/attacking/.. return the log _id , so we can delete it afterwards for testing 
+- recalculate level when new counters have been calculated
 
 - player notifications using websockets
    when a player interacts with the api, perform a login for the player, the player id, travels along with the request
@@ -13,6 +8,9 @@ recalculate level when new counters have been calculated
 
 define badges 
 calculate badges when counters change
+
+v mylittleduel game
+  and tests
 
 v save / get gamedata for mylittleduel
 

@@ -83,6 +83,6 @@ exports.showDocumentation = {
 
   run: function(api, data, next){    
     data.response.documentation = api.documentation.documentation;
-    next();
+    next(null,data.response);
   }
 };
