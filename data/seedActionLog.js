@@ -5,6 +5,7 @@
         "a": "status",
         "ts": "2015-07-15T13-00-00Z",
         "id_app": "app_mlg",
+        "api_user": "apilaurent",
         "from": {
             "id_player": "p11",
             "id_user": "u1",
@@ -17,6 +18,7 @@
     },
     {
         "_id": "log2",
+        "api_user": "apilaurent",
         "a": "post",
         "ts": "2015-07-15T13-00-00Z",
         "id_app": "app_mlg",
@@ -37,6 +39,7 @@
 
     {
         "_id": "log3",
+        "api_user": "apilaurent",
         "a": "attack",
         "ts": "2015-07-15T13-00-00Z",
         "id_app": "app_mlg",
@@ -74,6 +77,7 @@
 module.exports.walls = [
     {
         _id: 'wall_p11_201507',
+        "api_user": "apilaurent",
         id_player: "p11",
         id_user: "u1",
         id_ext:"mlg11",
@@ -147,6 +151,7 @@ module.exports.walls = [
     },
     {
         _id: 'wall_p12_201507',
+        "api_user": "apilaurent",
         id_player: "p12",
         id_user: "u2",
         id_ext:"mlg12",

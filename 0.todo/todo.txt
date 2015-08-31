@@ -1,4 +1,21 @@
-﻿
+﻿- badges
+    an app defines badges
+	  badge is defined by rules
+	    rule : counter : a counter is highrer than ..
+		rule : has
+- create an app for apiDemo that 
+  when using apiDemo, a player is created that is the user.
+    apidemo players are the api users
+	apidemo has an api-app
+	  the app^has quests
+	     - q_api_start : enter a player name
+	  the app has badges : 
+	     - bad_starter : the player has clicked findout 
+		     counter action_playername > 0
+
+
+
+
 
 - recalculate level when new counters have been calculated
 

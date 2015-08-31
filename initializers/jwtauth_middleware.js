@@ -10,10 +10,12 @@ module.exports = {
             global: true,
             priority: 1000,
             preProcessor: function (data, next) {
-                if (data.actionTemplate.authenticated === true && api.config.jwtauth.enabled[data.connection.type] 
+                if (data.actionTemplate.authenticated === true 
+                    && api.config.jwtauth.enabled[data.connection.type] 
                     && api.config.jwtauth.enabled[data.connection.type] === true) {
                     //get api-key from headers or params
                     var api_key = '';
+                    if (data.connection.params['key'] != null) api_key = data.connection.params['key'];
                     if (data.connection.params['apikey'] != null) api_key = data.connection.params['apikey'];
                     if (data.connection.params['api_key'] != null) api_key = data.connection.params['api_key'];
 

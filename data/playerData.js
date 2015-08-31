@@ -189,6 +189,7 @@ module.exports.getProto = function () {
     return {
         _id : "p"+utils.randomId(7),
         id_ext: null,
+        id_api:null,
         counters: {
            
             "exp": 0,

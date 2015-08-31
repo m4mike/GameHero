@@ -1,20 +1,59 @@
 ﻿(function (seedData) {
 
     seedData.apiUsers = [
-        { login: 'laurent', psw: '', hash: '' }
+        {
+            "_id": "apilaurent",
+            "login": "laurent",
+            "hash": "$2a$10$nn9oiNpZ2bb0A2Y3d59m0O62BtaPSw6cXfSSWeMtTPiHyxW3IoZXS",
+            "deleted": null
+        },
+        {
+            "_id": "apiAdmin",
+            "login": "admin",
+            "hash": "$2a$10$MBBGwaui.lIqpprafZy4b.sXsP5.e72UW5vq.ma/IqoM85w7QxMrK",
+            "deleted": null
+        },
+        {
+            "_id": "apidemo",
+            "login": "demo",
+            "hash": "$2a$10$OT/OhwfxwKdnHe0ydEd4bepIG5V9ekdoKg3DzgY18XgVhqFG6pija",
+            "deleted": null
+        }
     ];
 
     seedData.apps = [
-  {
-      "_id": "app_follow",
-      "counters": {
-          "exp": 0,
-          "level": 1
-      },
-      "profile": {}
-  },
+    {
+        "_id": "app_demo",
+        "api_user": "apidemo",
+        "counters": {
+            "exp": 0,
+            "level": 1
+        },
+        "profile": {},
+        "actions": [
+            {
+                "id": "createPlayer",
+                "counters": [
+                  [
+                    "exp",
+                    1
+                  ]
+                ]
+            }
+        ]
+    },
+    {
+        "_id": "app_follow",
+        "api_user": "apiAdmin",
+        "counters": {
+            "exp": 0,
+            "level": 1
+        },
+        "profile": {}
+    },
   {
       "_id": "app_mlg",
+      "api_user": "apilaurent",
       "counters": {
           "exp": 0,
           "level": 1
@@ -70,11 +109,11 @@
 
 
     seedData.games = [
-        { _id: "g_quiz", type: "outside" },
-        { _id: "g_ipuz", type: "outside" },
-        { _id: "g_boggle", type: "outside" },
-        { _id: "g_mem", type: 'outside' },
-        { _id: "g_mld", name:'My Little Duel', type: 'single' }
+        { _id: "g_quiz", "api_user": "apilaurent", type: "outside" },
+        { _id: "g_ipuz", "api_user": "apilaurent", type: "outside" },
+        { _id: "g_boggle", "api_user": "apilaurent", type: "outside" },
+        { _id: "g_mem", "api_user": "apilaurent", type: 'outside' },
+        { _id: "g_mld", "api_user": "apilaurent", name: 'My Little Duel', type: 'single' }
     ]
     seedData.gamedata = [
         { _id: 'g_mld_p11', id_app: 'app_mlg', id_player: 'p11', id_game: 'g_mld', data: { "defence": "LMH", "attack": "HHH" } },
@@ -84,15 +123,12 @@
     seedData.users = [
         {
             "_id": "u1",
+            "api_user": "apilaurent",
             "apps": [
-                {
-                    "id_app": "app_follow",
-                    "id_player": "p1"
-                },
-                {
-                    "id_app": "app_mlg",
-                    "id_player": "p10"
-                }
+               {
+                   "id_app": "app_mlg",
+                   "id_player": "p10"
+               }
             ],
             "interests": [
                     {
@@ -105,11 +141,9 @@
         },
         {
             "_id": "u2",
+            "api_user": "apilaurent",
             "apps": [
-                {
-                    "id_app": "app_follow",
-                    "id_player": "p2"
-                },
+
                 {
                     "id_app": "app_mlg",
                     "id_player": "p12"
@@ -119,10 +153,21 @@
         },
         {
             "_id": "u3",
+            "api_user": "apilaurent",
             "apps": [
                 {
                     "id_app": "app_follow",
                     "id_player": "p3"
+                }
+            ], "interests": []
+        },
+        {
+            "_id": "udemo1",
+            "api_user": "apidemo",
+            "apps": [
+                {
+                    "id_app": "app_demo",
+                    "id_player": "pdemo1"
                 }
             ], "interests": []
         }
@@ -131,6 +176,7 @@
     seedData.players = [
   {
       "_id": "p1",
+      "api_user": "apiAdmin",
       "id_user": "u1",
       "id_ext": "mlg1",
       "dispname": "Amanda",
@@ -166,6 +212,7 @@
   },
   {
       "_id": "p2",
+      "api_user": "apiAdmin",
       "id_user": "u2",
       "id_ext": "mlg2",
       "dispname": "Beatrice",
@@ -205,6 +252,7 @@
   },
   {
       "_id": "p3",
+      "api_user": "apiAdmin",
       "id_user": "u3",
       "id_ext": "mlg3",
       "dispname": "Monica",
@@ -245,6 +293,7 @@
   },
   {
       "_id": "p11",
+      "api_user": "apilaurent",
       "id_user": "u1",
       "id_ext": "mlg11",
       "dispname": "Amanda",
@@ -271,6 +320,7 @@
   },
   {
       "_id": "p12",
+      "api_user": "apilaurent",
       "id_user": "u2",
       "dispname": "Beatrice",
       "id_ext": "mlg12",
@@ -297,6 +347,7 @@
   },
   {
       "_id": "p13",
+      "api_user": "apilaurent",
       "id_user": "u3",
       "dispname": "Clara",
       "id_ext": "mlg13",
@@ -320,6 +371,33 @@
       "items": [],
       "badges": [],
       "quests": []
+  },
+  {
+      "_id": "pdemo1",
+      "api_user": "apidemo",
+      "id_user": "udemo1",
+      "dispname": "GameHero",
+      "id_ext": "",
+      "id_app": "app_demo",
+      "counters": {
+          "diamonds": 10,
+          "exp": 2100,
+          "level": 10,
+          "energy": 20,
+          "money": 100,
+          "health": 10
+      },
+      "profile": {
+          "energy": 20,
+          "health": 10,
+          "skillpoints": 0,
+          "attack": 0,
+          "defence": 0
+      },
+
+      "items": [],
+      "badges": [],
+      "quests": []
   }
     ];
 
@@ -327,6 +405,7 @@
         {
             "_id": "mmacarons",
             "id_app": "app_mlg",
+            "api_user": "apilaurent",
             "name": "Visitéz 5 lieux de macarons de Paris",
             "slug": ",mmacarons,",
             "timing": "10d",
@@ -341,11 +420,21 @@
         {
             "_id": "mfollowers",
             "id_app": "app_follow",
+            "api_user": "apilaurent",
             "name": "3 quests 1 after another",
             "slug": ",mfollowers,",
             "timing": null,
             "needed": null
-        }
+        },
+         {
+             "_id": "mapidemo",
+             "id_app": "app_demo",
+             "api_user": "apidemo",
+             "name": "Quests to learn about Gamehero",
+             "slug": ",mapidemo,",
+             "timing": null,
+             "needed": null
+         }
     ];
     seedData.quests = [
         {
@@ -495,6 +584,44 @@
                     [
                         "exp",
                         100
+                    ]
+                ],
+                "items": null
+            }
+        },
+        {
+            "_id": "qdemostart",
+            "id_app": "app_demo",
+            "display": "Lear about apps and players",
+            "id_mission": "mapidemo",
+            "slug": ",mapidemo,qdemostart,",
+            "mastering": null,
+            "timing": null,
+            "needed": null,
+            "wins": {
+                "counters": [
+                    [
+                        "exp",
+                        10
+                    ]
+                ],
+                "items": null
+            }
+        },
+        {
+            "_id": "qdemomissions",
+            "id_app": "app_demo",
+            "display": "Lear about missions and quests",
+            "id_mission": "mapidemo",
+            "slug": ",mapidemo,qdemomissions,",
+            "mastering": 1,
+            "timing": null,
+            "needed": null,
+            "wins": {
+                "counters": [
+                    [
+                        "exp",
+                        10
                     ]
                 ],
                 "items": null

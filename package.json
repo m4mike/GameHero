@@ -9,6 +9,7 @@
   "dependencies": {
     "actionhero": "^11.4.3",
     "async": "^1.4.0",
+    "bcryptjs": "^2.2.1",
     "bluebird": "^2.9.34",
     "grunt": "0.4.5",
     "grunt-cli": "0.1.13",
@@ -22,6 +23,7 @@
     "request": "^2.60.0",
     "request-json": "^0.5.3",
     "should": "^7.0.2",
+    "ultron": "^1.0.2",
     "winston": "^1.0.1",
     "winston-mongodb": "^1.1.1",
     "ws": "latest"

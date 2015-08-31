@@ -12,7 +12,8 @@ exports.games = {
         var collection = new utils.HyperJson();
         collection.link("get a game by id", api.serverUrl + "/api/games/byId/:id")
             .link("all games", api.serverUrl + "/api/games/all")
-            .link("list games for an app", api.serverUrl + "/api/games/forApp");
+            .link("list games for an app", api.serverUrl + "/api/games/forApp")
+            .link("create a game for an app", api.serverUrl + "/api/games/create/:name");
         
         action.response = collection.toObject();
         action.response.error = null;

@@ -1,9 +1,12 @@
 ﻿var apiusers = require('../../data/apiUserData.js');
+var utils = require('../../utils');
 
-exports.apiKeyGet = {
-    name: 'getapikey',
-    description: 'Get an api key',
-    outputExample: null,
+/////////////////////////////////////////////////////////////
+exports.createApiUser = {
+    name: 'createApiUser',
+    description: 'Create an api user, returns an api key',
+    authenticated: true,
+    authenticatedRole : "administrator",
     inputs: {
         api_user: {
             required: true,
@@ -16,33 +19,46 @@ exports.apiKeyGet = {
     },
     
     run: function (api, action, done) {
-        var id = action.params.api_user;
-        
-        apiusers.getApiKey(action.params.api_user,action.params.api_pasw,function(err,key){
+        apiusers.createApiUser(action.params.api_user, action.params.api_pasw, function (err, key) {
             if (err) { action.error = err; return done(err); }
-            action.response = { ok: 1, result: key }
+            action.response = { ok: 1, api_key: key }
+            done()
+        })
+    }
+}
+/////////////////////////////////////////////////////////////
+exports.apiKeyGet = {
+    name: 'getapikey',
+    description: 'Log in to get your api key',
+    
+    inputs: {
+        api_user: {
+            required: true,
+            validator: null
+        },
+        api_pasw: {
+            required: true,
+            validator: null
+        }
+    },
+    
+    run: function (api, action, done) {
+       apiusers.getApiKey(action.params.api_user,action.params.api_pasw,function(err,key){
+            if (err) { action.error = err; return done(err); }
+            action.response = { ok: 1, api_key: key }
             done()
          })
     }
 }
-
+/////////////////////////////////////////////////////////////
 exports.apiKeyTest = {
     name: 'testapikey',
     description: 'Test an api key',
-    outputExample: null,
     authenticated: true,
    
     
     run: function (api, action, done) {
-        
-        api.jwtauth.generateToken(action.params.api_user, function (err, data) {
-            if (err) {
-                action.error = err;
-                return done();
-            }
-
-            action.response = { ok: 1, result: "api user = " + action.connection.apiuser };
-            done();
-        });
-    }
+            action.response = { ok: 1, result: "api user id  = " + action.connection.apiuser };
+            return done();
+   }
 };

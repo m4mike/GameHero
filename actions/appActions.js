@@ -1,21 +1,19 @@
 var utils = require("../utils")
-var async = require('async');
 var _ = require('lodash');
+var apps = require('../data/appData.js');
 
 exports.appActions = {
     name: 'appActions',
     description: 'List possible actions on apps',
     domain: "App",
-    outputExample: null,
+    authenticated: true,
     
     run: function (api, action, next) {
-        
-        
         var collection = new utils.HyperJson();
         collection
-            .link("List all apps", api.serverUrl + "/api/apps/all")
-            .link("Find app by id", api.serverUrl + "/api/apps/byId/:idApp")
-            .link("Find app by id", api.serverUrl + "api/apps/byId/:idApp")
+            .link("List all apps for this api user", api.serverUrl + "/api/apps/list")
+            .link("Find an app by id", api.serverUrl + "/api/apps/byId/:idApp")
+            .link("Create an app", api.serverUrl + "/api/apps/create/:name")
         
         action.response = collection.toObject();
         action.response.error = null;
@@ -25,14 +23,14 @@ exports.appActions = {
 
 };
 
+/////////////////////////////////////////////////////////////
 exports.appList = {
     name: 'appList', //todo
-    description: 'Get a list of applications',
+    description: 'Get a list of applications for this api user',
+    authenticated: true,
     
     run: function (api, action, next) {
-        
-        api.data.apps.list(function (err, result) {
-            
+        api.data.apps.list(action.connection.apiuser,function (err, result) {
             var collection = new utils.HyperJson({
                 _items: result
 
@@ -46,6 +44,29 @@ exports.appList = {
     }
 };
 
+
+/////////////////////////////////////////////////////////////
+exports.appCreate = {
+    name: 'appCreate',
+    description: 'Create an app for an api user, returns the app id',
+    authenticated: true,
+    
+    inputs: {
+        name: {
+            required: true,
+            validator: null
+        }
+    },
+    
+    run: function (api, action, done) {
+        apps.createApp(action.connection.apiuser, action.params.name, function (err, app) {
+            if (err) { action.error = err; return done(err); }
+            action.response = { ok: 1 , app: app}
+            done()
+        })
+    }
+}
+/////////////////////////////////////////////////////////////
 exports.appById = {
     name: 'appById',
     description: 'Get an App by Id, try app_mlg',

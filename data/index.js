@@ -43,7 +43,7 @@ var initDb = function (next) {
                     games: db.collection("games"),
                     gamedata: db.collection('gamedata'),
                     users: db.collection("users"),
-                    apiusers: db.collection("apiusers"),
+                    apiUsers: db.collection("apiusers"),
                     interests: db.collection("interests"),
                     social : db.collection("social"),
                     walls: db.collection("walls"),
@@ -70,7 +70,7 @@ module.exports.init = function (a) {
         module.exports.social = require("./socialData.js").init(api);
         module.exports.interests = require("./interestData.js").init(api);
         module.exports.games = require("./gameData.js").init(api);
-        module.exports.apiusers = require("./apiUserData.js").init(api);
+        module.exports.apiUsers = require("./apiUserData.js").init(api);
 
     }
     return module.exports;
@@ -247,7 +247,7 @@ var seedMongo = function (next) {
                   function (callback) {
                       seedData.apiUsers.forEach(function (item) {
 
-                          seedresult.db.apiusers.insert(item, function (err) {
+                          seedresult.db.apiUsers.insert(item, function (err) {
                               if (err) api.log("Failed to insert apiusers into mongo", 'error');
                           })
                       });

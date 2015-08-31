@@ -5,13 +5,15 @@ exports.default = {
             get: [
                 { path: '/status', action: 'status' }, 
                 { path: '/debug', action: 'debugtest' }, 
-                { path: '/auth/getToken/', action: 'getapikey' }, 
-                { path: '/auth/testToken/', action: 'testapikey' }, 
+                { path: '/auth/createApiUser/:api_user/:api_pasw', action: 'createApiUser' }, 
+                { path: '/auth/getApiKey/:api_user/:api_pasw', action: 'getapikey' }, 
+                { path: '/auth/testApiKey/', action: 'testapikey' }, 
                 
                 { path: '/apps', action: 'appActions' },
-                //{ path: '/apps/:idApp/createPlayerForUser/:idUser', action: 'appCreatePlayer' },
-                { path: '/apps/list', action: 'appList' },
-                { path: '/apps/byId/', action: 'appById' },
+                { path: '/apps/list', action: 'appList' },                                          //api
+                { path: '/apps/byId/:id', action: 'appById' },                                      //api
+                { path: '/apps/create/:name', action : 'appCreate'},
+
                
                
                 { path: '/users', action: 'userActions' },
