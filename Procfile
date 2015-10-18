@@ -1,1 +1,1 @@
-﻿web: node ah.js start
+﻿web: node ah.js startCluster
