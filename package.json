@@ -7,26 +7,26 @@
     "node": ">=0.10.0"
   },
   "dependencies": {
-    "actionhero": "^11.4.3",
-    "async": "^1.4.0",
-    "bcryptjs": "^2.2.1",
-    "bluebird": "^2.9.34",
+    "actionhero": "^11.6.0",
+    "async": "^1.4.2",
+    "bcryptjs": "^2.3.0",
+    "bluebird": "^2.10.2",
     "grunt": "0.4.5",
     "grunt-cli": "0.1.13",
-    "jsonwebtoken": "^5.0.4",
-    "lodash": "^3.10.0",
-    "moment": "^2.10.3",
-    "mongodb": "^2.0.39",
+    "jsonwebtoken": "^5.4.0",
+    "lodash": "^3.10.1",
+    "moment": "^2.10.6",
+    "mongodb": "^2.0.46",
     "optimist": "^0.6.1",
     "redis": "^0.12.1",
-    "redis-url": "^1.2.0",
-    "request": "^2.60.0",
+    "redis-url": "^1.2.1",
+    "request": "^2.65.0",
     "request-json": "^0.5.3",
-    "should": "^7.0.2",
+    "should": "^7.1.0",
     "ultron": "^1.0.2",
-    "winston": "^1.0.1",
-    "winston-mongodb": "^1.1.1",
-    "ws": "latest"
+    "winston": "^1.1.0",
+    "winston-mongodb": "^1.1.2",
+    "ws": "^0.8.0"
   },
   "devDependencies": {
     "grunt": "latest",
@@ -41,7 +41,7 @@
     "help": "actionhero start",
     "start": "ah start",
     "actionhero": "ah",
-    "startCluster": "ah startCluster",
+    "startCluster": "ah start",
     "test": "mocha"
   }
 }
