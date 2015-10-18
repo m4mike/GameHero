@@ -39,7 +39,7 @@
   },
   "scripts": {
     "help": "actionhero start",
-    "start": "ah startCluster",
+    "start": "ah start",
     "actionhero": "ah",
     "startCluster": "ah startCluster",
     "test": "mocha"
