@@ -169,8 +169,8 @@ fs.readdirSync(binary.paths.projectRoot + '/methods/').sort().forEach(function(f
 
 binary.mainAction = binary.argv._[0];
 if(!binary.mainAction){ 
-	console.log('action missing, setting to: startCluster')
-	binary.mainAction = 'startCluster' 
+	console.log('action missing, setting to: start')
+	binary.mainAction = 'start' 
 }
 
 binary.isDaemon = (binary.argv.isDaemon === 'true');

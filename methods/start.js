@@ -22,7 +22,7 @@ exports.start = function(binary, next){
     actionhero.start(function(err, apiFromCallback){
       if(err){
         binary.log(err);
-        process.exit(1);
+        //process.exit(1);
       } else {
         state = 'started';
         if(cluster.isWorker){ process.send(state); }

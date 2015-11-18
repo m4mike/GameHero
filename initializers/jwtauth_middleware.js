@@ -18,6 +18,7 @@ module.exports = {
                     if (data.connection.params['key'] != null) api_key = data.connection.params['key'];
                     if (data.connection.params['apikey'] != null) api_key = data.connection.params['apikey'];
                     if (data.connection.params['api_key'] != null) api_key = data.connection.params['api_key'];
+						  if (data.connection.params['api-key'] != null) api_key = data.connection.params['api-key'];
 
                     if(api_key=='') {
                         
@@ -34,7 +35,7 @@ module.exports = {
                     
                     if (api_key == '') {
                         data.connection.rawConnection.responseHttpCode = 500;
-                        next(new Error('Authorization Header Not Set'));
+                        return next(new Error('Authorization Header Not Set'));
                     };
                     
                     api.jwtauth.processToken(api_key, function (err,res) {

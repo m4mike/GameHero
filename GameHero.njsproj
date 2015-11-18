@@ -101,6 +101,17 @@
     <Content Include="public\swagger.html" />
     <Content Include="README.md" />
     <Content Include="data\gameplay.js" />
+    <Compile Include="node_modules\actionhero\config\api.js" />
+    <Compile Include="node_modules\actionhero\config\errors.js" />
+    <Compile Include="node_modules\actionhero\config\logger.js" />
+    <Compile Include="node_modules\actionhero\config\plugins.js" />
+    <Compile Include="node_modules\actionhero\config\redis.js" />
+    <Compile Include="node_modules\actionhero\config\routes.js" />
+    <Compile Include="node_modules\actionhero\config\servers\socket.js" />
+    <Compile Include="node_modules\actionhero\config\servers\web.js" />
+    <Compile Include="node_modules\actionhero\config\servers\websocket.js" />
+    <Compile Include="node_modules\actionhero\config\stats.js" />
+    <Compile Include="node_modules\actionhero\config\tasks.js" />
     <Compile Include="node_modules\actionhero\initializers\actionProcessor.js" />
     <Compile Include="node_modules\actionhero\initializers\actions.js" />
     <Compile Include="node_modules\actionhero\initializers\cache.js" />
@@ -171,7 +182,6 @@
     <Compile Include="gruntfile.js" />
     <Compile Include="actions\status.js" />
     <Compile Include="config\api.js" />
-    <Compile Include="config\errors.js" />
     <Compile Include="config\logger.js" />
     <Compile Include="config\routes.js" />
     <Compile Include="config\stats.js" />
@@ -257,6 +267,8 @@
     <Folder Include="methods\" />
     <Folder Include="node_modules\" />
     <Folder Include="node_modules\actionhero\" />
+    <Folder Include="node_modules\actionhero\config\" />
+    <Folder Include="node_modules\actionhero\config\servers\" />
     <Folder Include="node_modules\actionhero\initializers\" />
     <Folder Include="node_modules\actionhero\public\" />
     <Folder Include="node_modules\actionhero\servers\" />
